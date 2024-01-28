@@ -14,7 +14,7 @@ export default function HomepageIconLink({ href, src, alt }: HomepageIconLinkPro
       href={href}
       className="border-b-2 border-b-transparent px-2 pb-1 transition duration-300 hover:border-b-2 hover:border-b-white"
     >
-      <Image src={src} alt={alt} width={32} height={32} className="h-8 w-8" />
+      <Image src={src} alt={alt} title={alt} width={32} height={32} className="h-8 w-8" loading="eager" />
     </ExternalLink>
   );
 }
