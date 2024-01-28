@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 import HomepageIconLink from '@/components/HomepageIconLink';
 
@@ -18,12 +18,12 @@ export default function Home() {
         </h1>
         <div className="mt-5 flex flex-row items-center space-x-8">
           <HomepageIconLink
+            alt="LinkedIn"
             href="https://www.linkedin.com/in/leonid-svyatov/"
             src="/linkedin-icon.png"
-            alt="LinkedIn"
           />
-          <HomepageIconLink href="https://github.com/svyatov" src="/github-icon.png" alt="GitHub" />
-          <HomepageIconLink href="https://leetcode.com/svyatov/" src="/leetcode-icon.png" alt="LeetCode" />
+          <HomepageIconLink alt="GitHub" href="https://github.com/svyatov" src="/github-icon.png" />
+          <HomepageIconLink alt="LeetCode" href="https://leetcode.com/svyatov/" src="/leetcode-icon.png" />
         </div>
       </div>
     </main>

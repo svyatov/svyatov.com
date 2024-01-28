@@ -6,7 +6,7 @@ export type ExternalLinkProps = Readonly<{
 
 export default function ExternalLink({ href, children, className }: ExternalLinkProps) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+    <a className={className} href={href} rel="noopener noreferrer" target="_blank">
       {children}
     </a>
   );
