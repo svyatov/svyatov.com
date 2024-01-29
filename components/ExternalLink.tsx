@@ -1,3 +1,5 @@
+import A from './A';
+
 export type ExternalLinkProps = Readonly<{
   href: string;
   children: React.ReactNode;
@@ -6,8 +8,8 @@ export type ExternalLinkProps = Readonly<{
 
 export default function ExternalLink({ href, children, className }: ExternalLinkProps) {
   return (
-    <a className={className} href={href} rel="noopener noreferrer" target="_blank">
+    <A className={className} href={href} rel="noopener noreferrer" target="_blank">
       {children}
-    </a>
+    </A>
   );
 }
