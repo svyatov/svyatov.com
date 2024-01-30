@@ -1,18 +1,22 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Glory } from 'next/font/google';
+
+import { TITLE, DESCRIPTION } from '@/app/data';
 
 import './globals.css';
 
 const font = Glory({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Leonid Svyatov | Full-Stack Developer & AI Enthusiast',
-  description:
-    'Ruby on Rails and Next.js specialist, passionate about crafting clean and' +
-    'efficient code that drives business value. Currently exploring the exciting' +
-    'world of AI.',
+  metadataBase: new URL('https://www.svyatov.com'),
+  title: TITLE,
+  description: DESCRIPTION,
+};
+
+export const viewport: Viewport = {
+  themeColor: 'black',
 };
 
 export default function RootLayout({
