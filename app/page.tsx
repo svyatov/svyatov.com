@@ -26,7 +26,7 @@ export default function Home() {
         <div className="mt-9 flex flex-row items-center space-x-8 px-5 sm:space-x-10">
           <HeaderLink href="https://www.linkedin.com/in/leonid-svyatov/">LinkedIn</HeaderLink>
           <HeaderLink href="https://github.com/svyatov">GitHub</HeaderLink>
-          <HeaderLink href="https://leetcode.com/svyatov/">LeetCode</HeaderLink>
+          <HeaderLink href="https://www.youtube.com/@FullStackMagic">YouTube</HeaderLink>
         </div>
       </header>
     </main>
