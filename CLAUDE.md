@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal portfolio/landing page for Leonid Svyatov built with Next.js 14, TypeScript, and Tailwind CSS. Single-page static site deployed on Vercel.
+Personal portfolio/landing page for Leonid Svyatov built with Next.js 16, TypeScript, and Tailwind CSS 4. Single-page static site deployed on Vercel.
 
 ## Commands
 
 ```bash
 npm run dev      # Start development server (localhost:3000)
-npm run build    # Production build
+npm run build    # Production build (uses Turbopack by default)
 npm run lint     # Run ESLint
 ```
 
@@ -18,7 +18,7 @@ No test suite is configured.
 
 ## Architecture
 
-### App Router Structure (Next.js 14)
+### App Router Structure (Next.js 16)
 
 - `app/page.tsx` - Main landing page content
 - `app/layout.tsx` - Root layout with metadata, fonts, and Vercel analytics
@@ -34,7 +34,7 @@ All component props use `Readonly<>` TypeScript types.
 
 ## Code Style
 
-ESLint enforces:
+ESLint 9 flat config (`eslint.config.mjs`) enforces:
 - Import ordering: builtin → external → parent → sibling → index (alphabetical within groups)
 - JSX prop sorting: reserved first, shorthand first, callbacks last, alphabetical
 
@@ -45,4 +45,4 @@ Prettier configured with:
 
 ## Styling
 
-Tailwind CSS with custom gradient utilities defined in `tailwind.config.ts`. Dark theme with amber-200 accent color for interactive elements. Mobile-first responsive design using `sm:` breakpoint.
+Tailwind CSS 4 with CSS-first configuration in `app/globals.css` using `@theme` directive. Custom gradient utilities defined there. Dark theme with amber-200 accent color for interactive elements. Mobile-first responsive design using `sm:` breakpoint.

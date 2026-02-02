@@ -8,5 +8,6 @@
   "arrowParens": "always",
   "printWidth": 120,
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindFunctions": ["clsx"]
+  "tailwindFunctions": ["clsx"],
+  "tailwindStylesheet": "./app/globals.css"
 }
