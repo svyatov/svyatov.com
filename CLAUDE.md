@@ -9,9 +9,9 @@ Personal portfolio/landing page for Leonid Svyatov built with Next.js 16, TypeSc
 ## Commands
 
 ```bash
-npm run dev      # Start development server (localhost:3000)
-npm run build    # Production build (uses Turbopack by default)
-npm run lint     # Run ESLint
+bun run dev      # Start development server (localhost:3000)
+bun run build    # Production build (uses Turbopack by default)
+bun run lint     # Run ESLint
 ```
 
 No test suite is configured.
@@ -31,6 +31,12 @@ Components are layered for reuse:
 - `A.tsx` (base anchor) → `ExternalLink.tsx` (external link behavior) → `HeaderLink.tsx` (styled header link)
 
 All component props use `Readonly<>` TypeScript types.
+
+## Git Conventions
+
+Use [Conventional Commits](https://www.conventionalcommits.org/): `type(scope): description`
+
+Common types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`
 
 ## Code Style
 
