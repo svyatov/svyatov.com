@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import Banner from '../components/Banner.astro';
+import PostRow from '../components/PostRow.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SectionRule from '../components/SectionRule.astro';
+import { banners } from '../data/banners';
+import Base from '../layouts/Base.astro';
+import { byDateDesc } from '../lib/posts';
+import { site } from '../site';
+
+const posts = (await getCollection('blog')).sort(byDateDesc).slice(0, 3);
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const selected = projects.slice(0, 3);
+const socials = [...site.socials, { label: 'email', href: `mailto:${site.email}` }];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: `${site.url}/`,
+      name: site.title,
+      description: site.description,
+      inLanguage: 'en',
+      author: { '@id': `${site.url}/#person` },
+    },
+    {
+      '@type': 'Person',
+      '@id': `${site.url}/#person`,
+      name: site.name,
+      url: `${site.url}/`,
+      jobTitle: site.jobTitle,
+      email: site.email,
+      sameAs: site.socials.map((s) => s.href),
+    },
+  ],
+};
+---
+
+<Base jsonLd={jsonLd}>
+  <section class="flex flex-col gap-5 px-4 pt-10 pb-8 md:gap-7 md:px-20 md:pt-22 md:pb-18">
+    <Banner text={banners.connect} hero />
+    <div class="flex max-w-hero flex-col text-prose leading-card md:gap-1.5 md:text-2xl md:leading-hero">
+      <p class="text-dim">$ whoami</p>
+      <h1>{site.description}<span class="cursor-blink"></span></h1>
+    </div>
+    {
+      site.openToWork && (
+        <div class="flex items-center gap-2 text-2xs text-teal tracking-badge md:hidden">
+          <span class="size-2 rounded-full bg-teal shadow-glow" />
+          OPEN TO SENIOR / LEAD ROLES
+        </div>
+      )
+    }
+    <div class="flex flex-wrap gap-3 text-sm md:gap-5">
+      {
+        socials.map((s) => (
+          <a href={s.href} rel={s.label === 'email' ? undefined : 'me'} class:list={[s.label === 'email' && 'hidden md:inline']}>
+            [ {s.label} ]
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <SectionRule title="STACK"><span class="hidden md:inline">uptime: </span>10+ yrs</SectionRule>
+  <ul class="grid grid-cols-2 gap-3 px-4 pt-5 pb-10 md:gap-5 md:px-20 md:pt-7 md:pb-18 lg:grid-cols-5">
+    {
+      site.stack.map((s) => (
+        <li class="flex flex-col gap-1 border border-line p-3.5 md:gap-2 md:p-5">
+          <span class="font-semibold text-accent text-sm md:text-base">{s.name}</span>
+          <span class="text-dim text-xs md:hidden">{s.short}</span>
+          <span class="hidden text-dim text-sm md:inline">{s.long}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <SectionRule title="LATEST FROM THE BLOG" short="BLOG">
+    <a href="/blog/"><span class="md:hidden">all →</span><span class="hidden md:inline">tail -f →</span></a>
+  </SectionRule>
+  <div class="flex flex-col px-4 pt-2 pb-8 md:px-20 md:pt-4 md:pb-18">
+    {posts.map((post, i) => <PostRow post={post} compact class={i === 2 ? 'max-md:hidden' : undefined} />)}
+  </div>
+
+  <SectionRule title="SELECTED PROJECTS" short="PROJECTS">
+    <span class="hidden md:inline">{selected.length} of {projects.length} · </span>
+    <a href="/projects/"><span class="md:hidden">all →</span><span class="hidden md:inline">ls -la →</span></a>
+  </SectionRule>
+  <div class="flex flex-col gap-3 px-4 pt-5 pb-10 md:grid md:grid-cols-3 md:gap-6 md:px-20 md:pt-7 md:pb-18">
+    {selected.map((p, i) => <ProjectCard project={p} class={i === 2 ? 'max-md:hidden' : undefined} />)}
+  </div>
+
+  <SectionRule title="PREVIOUSLY"><a href="/cv/">cat cv.md →</a></SectionRule>
+  <div class="flex flex-wrap px-4 pt-5 pb-10 text-md md:px-20 md:pt-7 md:pb-16">
+    {
+      site.employers.map((name, i) => (
+        <>
+          {i > 0 && <span class="px-4 text-dim">│</span>}
+          <a href="/cv/" class="text-dim">{name}</a>
+        </>
+      ))
+    }
+  </div>
+</Base>

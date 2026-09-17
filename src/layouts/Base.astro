@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import type { ComponentProps } from 'astro/types';
+import Footer from '../components/Footer.astro';
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import { site } from '../site';
+
+type Props = ComponentProps<typeof Head>;
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="bg-bg text-fg font-mono antialiased">
+  <head>
+    <Head {...props} />
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <Header path={Astro.url.pathname} />
+    <main class="flex flex-col"><slot /></main>
+    <Footer />
+    {site.scanlines && <div aria-hidden="true" class="scanlines fixed inset-0 z-20 print:hidden" />}
+    <dialog
+      id="keys"
+      class="m-auto min-w-64 border border-line bg-surface p-5 text-fg text-sm backdrop:bg-bg/70"
+    >
+      <p class="mb-3 font-semibold text-2xs text-accent tracking-label">KEYS</p>
+      <ul class="flex flex-col gap-1.5">
+        {
+          site.nav.map((item) => (
+            <li>
+              <span class="text-accent">{item.key}</span> <span class="text-dim">{item.key}{item.rest}</span>
+            </li>
+          ))
+        }
+        <li><span class="text-accent">?</span> <span class="text-dim">this list</span></li>
+        <li><span class="text-accent">esc</span> <span class="text-dim">close</span></li>
+      </ul>
+    </dialog>
+    <script>
+      const dialog = document.querySelector<HTMLDialogElement>('#keys');
+      const keys = new Map<string, string>();
+      for (const a of document.querySelectorAll<HTMLAnchorElement>('header nav a')) {
+        keys.set(a.querySelector('u')?.textContent ?? '', a.href);
+      }
+      document.querySelector('[data-keys-open]')?.addEventListener('click', () => dialog?.showModal());
+      document.addEventListener('keydown', (e) => {
+        const target = e.target as Element;
+        if (e.metaKey || e.ctrlKey || e.altKey || target.closest?.('input, textarea, [contenteditable]')) return;
+        if (e.key === '?' || (e.key === '/' && e.shiftKey)) return dialog?.open ? dialog.close() : dialog?.showModal();
+        const href = keys.get(e.key);
+        if (href) location.assign(href);
+      });
+    </script>
+  </body>
+</html>

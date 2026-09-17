@@ -1,0 +1,109 @@
+---
+import Banner from '../components/Banner.astro';
+import SectionRule from '../components/SectionRule.astro';
+import { banners } from '../data/banners';
+import { cv } from '../data/cv';
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+
+const contacts = [
+  { label: site.email, href: `mailto:${site.email}` },
+  { label: cv.phone, href: `tel:${cv.phone.replace(/\s/g, '')}` },
+  { label: 'linkedin.com/in/leonid-svyatov', href: 'https://www.linkedin.com/in/leonid-svyatov' },
+  { label: 'github.com/svyatov', href: 'https://github.com/svyatov' },
+];
+---
+
+<Base title="CV" description={cv.summary}>
+  <section class="flex flex-col gap-6 px-4 pt-10 pb-8 md:px-20 md:pt-18 md:pb-10">
+    <div class="flex flex-wrap items-end justify-between gap-8">
+      <div class="flex flex-col gap-4">
+        <Banner text={banners.cv} />
+        <div class="text-lg">
+          <p class="text-dim">$ cat ~/cv.md</p>
+          <h1 class="inline font-semibold text-3xl">{site.name}</h1><span class="text-dim"> · {cv.title}</span>
+        </div>
+        <div class="flex flex-wrap gap-5 text-sm">
+          {contacts.map((c) => <a href={c.href}>{c.label}</a>)}
+          <span class="text-dim">{cv.location}</span>
+        </div>
+      </div>
+      <div class="flex gap-3 print:hidden">
+        <a
+          href="/cv.pdf"
+          class="inline-flex h-11.5 items-center border border-accent px-5 font-medium text-accent tracking-btn hover:bg-accent hover:text-bg hover:no-underline"
+        >
+          [ download pdf ]
+        </a>
+        <button
+          type="button"
+          onclick="window.print()"
+          class="inline-flex h-11.5 cursor-pointer items-center border border-line px-5 font-medium text-fg tracking-btn hover:bg-surface"
+        >
+          [ print ]
+        </button>
+      </div>
+    </div>
+    <p class="max-w-summary border border-line bg-surface px-6 py-5 leading-summary">{cv.summary}</p>
+  </section>
+
+  <SectionRule title="WORK EXPERIENCE">{cv.span}</SectionRule>
+  <div class="flex flex-col px-4 pt-2 pb-10 md:px-20 md:pb-14">
+    {
+      cv.experience.map((job) => (
+        <article class="flex flex-col gap-3 border-line border-b py-7 md:grid md:grid-cols-[12.5rem_minmax(0,1fr)] md:gap-8">
+          <p class="text-dim text-sm">{job.period}</p>
+          <div class="flex flex-col gap-3.5">
+            <h3 class="flex flex-wrap items-baseline gap-3">
+              <span class="font-semibold text-accent text-xl">{job.company}</span>
+              <span class="text-dim">·</span>
+              <span class="font-medium">{job.role}</span>
+            </h3>
+            <ul class="flex flex-col gap-2 text-md leading-list">
+              {job.highlights.map((h) => (
+                <li class="flex gap-3">
+                  <span class="shrink-0 text-accent">-</span>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <SectionRule title="CORE SKILLS">{cv.skills.length}</SectionRule>
+  <ul class="grid max-w-skills gap-x-10 gap-y-2.5 px-4 pt-7 pb-10 md:grid-cols-2 md:px-20 md:pb-14">
+    {
+      cv.skills.map((s) => (
+        <li class="flex gap-2.5 text-sm">
+          <span class="text-accent">+</span>
+          <span>{s}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="grid gap-10 px-4 pb-10 md:grid-cols-2 md:px-20 md:pb-14">
+    <div class="flex flex-col gap-4">
+      <SectionRule title="EDUCATION" padded={false} />
+      <div class="flex flex-col gap-1 text-md">
+        <span class="font-semibold">{cv.education.school}</span>
+        <span class="text-dim">{cv.education.where}</span>
+        <span>{cv.education.degree}</span>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4">
+      <SectionRule title="LANGUAGES" padded={false} />
+      <div class="flex gap-3 text-md">
+        {cv.languages.map((l, i) => (
+          <>
+            {i > 0 && <span class="text-dim">·</span>}
+            <span>{l}</span>
+          </>
+        ))}
+      </div>
+    </div>
+  </div>
+</Base>

@@ -1,33 +1,33 @@
 {
-  "name": "scom",
-  "version": "0.1.0",
-  "private": true,
+  "name": "svyatov.com",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint ."
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "biome ci .",
+    "format": "biome check --write .",
+    "check": "astro check",
+    "test": "vitest run",
+    "verify": "bun run lint && bun run check && bun run build && bun run test"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.6.1",
-    "@vercel/speed-insights": "^1.3.1",
-    "clsx": "^2.1.0",
-    "next": "^16",
-    "react": "^19",
-    "react-dom": "^19"
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@resvg/resvg-js": "^2.6.2",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.3.2",
+    "satori": "^0.33.4",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^25.2.0",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "^16",
-    "eslint-config-prettier": "^10",
-    "postcss": "^8",
-    "prettier": "^3",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@astrojs/check": "^0.9.10",
+    "@biomejs/biome": "2.5.13",
+    "typescript": "^6",
+    "vitest": "^5.0.0"
   }
 }

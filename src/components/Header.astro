@@ -1,0 +1,67 @@
+---
+import { site } from '../site';
+
+interface Props {
+  path: string;
+  openToWork?: boolean;
+}
+
+const { path, openToWork = site.openToWork } = Astro.props;
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<header
+  class="relative flex h-14 items-center justify-between gap-6 border-line border-b px-4 text-sm print:hidden md:h-16 md:px-20 md:text-md"
+>
+  <a href="/" class="flex items-center gap-2 text-fg hover:no-underline md:gap-2.5">
+    <span class="inline-flex items-center gap-1.5 font-semibold text-accent text-lg tracking-logo">
+      <span>&gt;</span><span>ls</span><span class="inline-block h-[1.05em] w-[0.55em] bg-accent"></span>
+    </span>
+    <span class="text-dim text-sm">{site.title}</span>
+  </a>
+  <nav aria-label="Main" class="hidden items-center gap-6 md:flex">
+    {
+      site.nav.map((item) => (
+        <a
+          href={item.href}
+          aria-current={isActive(item.href) ? 'page' : undefined}
+          class:list={['px-1 hover:text-accent hover:no-underline', isActive(item.href) ? 'text-accent' : 'text-fg']}
+        >
+          [<u class="text-accent no-underline">{item.key}</u>]{item.rest}
+        </a>
+      ))
+    }
+  </nav>
+  {
+    openToWork && (
+      <div class="hidden items-center gap-2 text-teal text-xs tracking-badge md:flex">
+        <span class="size-2 rounded-full bg-teal shadow-glow" />
+        OPEN TO SENIOR / LEAD ROLES
+      </div>
+    )
+  }
+  <details class="group md:hidden">
+    <summary
+      aria-label="Open menu"
+      class="flex size-11 cursor-pointer list-none items-center justify-center border border-line text-accent text-sm select-none"
+    >
+      [≡]
+    </summary>
+    <nav
+      aria-label="Main"
+      class="absolute inset-x-0 top-full z-10 flex flex-col border-line border-b bg-bg px-4 py-2"
+    >
+      {
+        site.nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={['py-2.5 hover:text-accent hover:no-underline', isActive(item.href) ? 'text-accent' : 'text-fg']}
+          >
+            [<u class="text-accent no-underline">{item.key}</u>]{item.rest}
+          </a>
+        ))
+      }
+    </nav>
+  </details>
+</header>

@@ -1,0 +1,173 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import AuthorCard from '../../components/AuthorCard.astro';
+import Tag from '../../components/Tag.astro';
+import Base from '../../layouts/Base.astro';
+import { byDateDesc, formatDate, postUrl, readingTime, tagUrl } from '../../lib/posts';
+import { site } from '../../site';
+
+export const getStaticPaths = (async () => {
+  const posts = (await getCollection('blog')).sort(byDateDesc);
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post, newer, older } = Astro.props;
+const { title, description, date, updated, tags } = post.data;
+const { Content, headings } = await render(post);
+const toc = headings.filter((h) => h.depth === 2);
+const url = new URL(postUrl(post), Astro.site).href;
+const encoded = encodeURIComponent(`${title} ${url}`);
+const share = [
+  { label: 'x', href: `https://x.com/intent/post?text=${encoded}` },
+  { label: 'bluesky', href: `https://bsky.app/intent/compose?text=${encoded}` },
+  { label: 'hn', href: `https://news.ycombinator.com/submitlink?u=${encodeURIComponent(url)}&t=${encodeURIComponent(title)}` },
+];
+const editUrl = `${site.repo}/edit/main/src/content/blog/${post.filePath?.replace(/^src\/content\/blog\//, '')}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': url,
+  headline: title,
+  description,
+  image: new URL(`/og/${post.id}.png`, Astro.site).href,
+  datePublished: date.toISOString(),
+  dateModified: (updated ?? date).toISOString(),
+  author: { '@type': 'Person', '@id': `${site.url}/#person`, name: site.name, url: `${site.url}/` },
+  publisher: { '@type': 'Person', '@id': `${site.url}/#person`, name: site.name },
+  mainEntityOfPage: url,
+  url,
+  keywords: tags.join(', '),
+  isPartOf: { '@id': `${site.url}/#website` },
+};
+---
+
+<Base
+  title={title}
+  description={description}
+  image={`/og/${post.id}.png`}
+  article={{ published: date, updated, tags }}
+  jsonLd={jsonLd}
+>
+  <div
+    class="flex flex-col gap-10 px-4 pt-10 pb-10 md:px-20 md:pt-14 md:pb-16 lg:grid lg:max-w-post lg:grid-cols-[minmax(0,1fr)_16.25rem] lg:gap-16"
+  >
+    <article class="flex min-w-0 max-w-article flex-col gap-7">
+      <nav aria-label="Breadcrumb" class="flex gap-2 text-sm">
+        <a href="/" class="text-dim">~</a><span class="text-dim">/</span><a href="/blog/" class="text-dim">blog</a
+        ><span class="text-dim">/</span><span class="truncate">{post.id}.md</span>
+      </nav>
+      <h1 class="font-semibold text-3xl text-accent leading-banner tracking-h1 md:text-4xl">{title}</h1>
+      <div class="flex flex-wrap items-center gap-4 text-sm">
+        <time datetime={date.toISOString()} class="text-dim">[{formatDate(date)}]</time>
+        <span class="text-dim">·</span>
+        <span class="text-dim">{readingTime(post.body)} min read</span>
+        {
+          tags.length > 0 && (
+            <>
+              <span class="text-dim">·</span>
+              <div class="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <Tag href={tagUrl(tag)}>{tag}</Tag>
+                ))}
+              </div>
+            </>
+          )
+        }
+      </div>
+      <hr class="border-line border-t" />
+      <div class="prose"><Content /></div>
+      <hr class="border-line border-t" />
+      <AuthorCard />
+      <nav aria-label="Older and newer posts" class="grid grid-cols-2 gap-4 text-sm">
+        {
+          older ? (
+            <a href={postUrl(older)} class="flex flex-col gap-1 border border-line p-4 text-fg hover:border-accent hover:no-underline">
+              <span class="text-dim">← older</span>
+              <span class="font-medium">{older.data.title}</span>
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          newer && (
+            <a
+              href={postUrl(newer)}
+              class="flex flex-col gap-1 border border-line p-4 text-right text-fg hover:border-accent hover:no-underline"
+            >
+              <span class="text-dim">newer →</span>
+              <span class="font-medium">{newer.data.title}</span>
+            </a>
+          )
+        }
+      </nav>
+    </article>
+    <aside class="flex flex-col gap-8 text-sm print:hidden lg:sticky lg:top-8 lg:self-start lg:pt-32">
+      {
+        toc.length > 0 && (
+          <nav aria-label="On this page" class="flex flex-col gap-2.5" data-toc>
+            <h2 class="font-semibold text-2xs text-accent tracking-label">ON THIS PAGE</h2>
+            {toc.map((h) => (
+              <a href={`#${h.slug}`} class="text-dim aria-[current=true]:text-fg">
+                {h.text}
+              </a>
+            ))}
+          </nav>
+        )
+      }
+      <div class="flex flex-col gap-2.5">
+        <h2 class="font-semibold text-2xs text-accent tracking-label">SHARE</h2>
+        <div class="flex flex-wrap gap-2.5">
+          {share.map((s) => <a href={s.href} rel="noopener">[ {s.label} ]</a>)}
+          <button type="button" data-copy={url} class="cursor-pointer text-accent hover:text-accent-hover hover:underline">
+            [ copy link ]
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2.5">
+        <h2 class="font-semibold text-2xs text-accent tracking-label">SOURCE</h2>
+        <a href={editUrl} class="text-dim">edit this post on github →</a>
+        {post.data.devto && <a href={post.data.devto} class="text-dim">originally on dev.to →</a>}
+      </div>
+    </aside>
+  </div>
+  <script>
+    const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-toc] a')];
+    const headings = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const hit = entries.find((e) => e.isIntersecting);
+        if (!hit) return;
+        for (const [i, h] of headings.entries()) {
+          links[i]?.setAttribute('aria-current', h === hit.target ? 'true' : 'false');
+        }
+      },
+      { rootMargin: '0px 0px -70% 0px' },
+    );
+    for (const h of headings) if (h) observer.observe(h);
+
+    document.querySelector<HTMLButtonElement>('[data-copy]')?.addEventListener('click', async (e) => {
+      const btn = e.currentTarget as HTMLButtonElement;
+      await navigator.clipboard.writeText(btn.dataset.copy ?? location.href);
+      btn.textContent = '[ copied ]';
+    });
+
+    for (const pre of document.querySelectorAll('.prose pre')) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = 'copy';
+      btn.className = 'absolute top-2 right-4 cursor-pointer text-dim text-2xs tracking-code hover:text-accent';
+      pre.classList.add('relative');
+      pre.append(btn);
+      btn.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(pre.querySelector('code')?.textContent ?? '');
+        btn.textContent = 'copied';
+      });
+    }
+  </script>
+</Base>

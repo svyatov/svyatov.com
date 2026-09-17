@@ -1,0 +1,11 @@
+---
+import { languageColors } from '../data/projects';
+
+interface Props {
+  language: string;
+}
+
+const { language } = Astro.props;
+---
+
+<span class:list={['inline-block size-2.5 shrink-0', languageColors[language] ?? 'bg-dim']} title={language}></span>

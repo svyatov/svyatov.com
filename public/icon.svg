@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="svyatov.com"><title>svyatov.com</title>
+  <rect width="512" height="512" fill="#111"/>
+  <g fill="none" stroke="#f0a63a" stroke-width="20">
+    <path d="M52 221 100 255.5 52 290"/>
+    <path d="M163 202h43v103h43"/>
+    <path d="M338 246c-10-18-54-18-54 0s54 16 52 46c0 20-52 20-62 4"/>
+  </g>
+  <rect x="372" y="175" width="76" height="157" fill="#f0a63a"/>
+</svg>

@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import Banner from '../components/Banner.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import Tag from '../components/Tag.astro';
+import { banners } from '../data/banners';
+import Base from '../layouts/Base.astro';
+import { countBy } from '../lib/posts';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.pushedAt.getTime() - a.data.pushedAt.getTime(),
+);
+const languages = [...countBy(projects, (p) => [p.data.language])].sort(
+  (a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0])),
+);
+---
+
+<Base title="Projects" description="Open-source libraries and tools by Leonid Svyatov: Ruby gems, TypeScript, Go.">
+  <section class="flex flex-col gap-5 px-4 pt-10 pb-8 md:px-20 md:pt-18 md:pb-10">
+    <Banner text={banners.projects} />
+    <div class="max-w-intro text-lg">
+      <p class="text-dim">$ ls -la ~/oss</p>
+      <h1>Open-source libraries and tools I maintain. Descriptions and languages pulled from GitHub at build time.</h1>
+    </div>
+    <div class="flex flex-wrap items-center gap-2.5 text-sm" data-filter>
+      <span class="text-dim">filter:</span>
+      <Tag href="#all" active data-language="">all ({projects.length})</Tag>
+      {
+        languages.map(([lang, n]) => (
+          <Tag href={`#${String(lang).toLowerCase()}`} data-language={lang}>
+            {String(lang).toLowerCase()} ({n})
+          </Tag>
+        ))
+      }
+      <span class="ml-auto text-dim">sort: updated ▾</span>
+    </div>
+  </section>
+  <div class="flex flex-col px-4 pb-10 md:px-20 md:pb-14">
+    <div
+      class="hidden grid-cols-[13.75rem_9.375rem_minmax(0,1fr)_5.625rem] gap-6 border-accent border-b px-3 py-2 text-2xs text-dim tracking-label md:grid"
+    >
+      <span>NAME</span><span>LANG</span><span>DESCRIPTION</span><span class="text-right">LINK</span>
+    </div>
+    {projects.map((p) => <ProjectRow project={p} />)}
+    <p class="px-3 py-4 text-dim text-xs">
+      total {projects.length} · also: <a href="https://rubygems.org/profiles/svyatov">gems on rubygems.org</a> ·
+      <a href="https://www.npmjs.com/~svyatov">packages on npm</a>
+    </p>
+  </div>
+  <script>
+    const filter = document.querySelector<HTMLElement>('[data-filter]');
+    const rows = document.querySelectorAll<HTMLElement>('a[data-language]:not([data-filter] a)');
+    filter?.addEventListener('click', (e) => {
+      const tag = (e.target as HTMLElement).closest<HTMLElement>('a[data-language]');
+      if (!tag) return;
+      e.preventDefault();
+      const lang = tag.dataset.language ?? '';
+      for (const t of filter.querySelectorAll<HTMLElement>('a[data-language]')) {
+        const on = t === tag;
+        t.classList.toggle('border-accent', on);
+        t.classList.toggle('text-accent', on);
+        t.classList.toggle('border-line', !on);
+        t.classList.toggle('text-dim', !on);
+      }
+      for (const row of rows) row.classList.toggle('hidden!', lang !== '' && row.dataset.language !== lang);
+    });
+  </script>
+</Base>

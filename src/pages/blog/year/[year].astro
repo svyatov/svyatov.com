@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BlogList from '../../../components/BlogList.astro';
+import Base from '../../../layouts/Base.astro';
+import { byDateDesc, yearOf } from '../../../lib/posts';
+
+export const getStaticPaths = (async () => {
+  const posts = (await getCollection('blog')).sort(byDateDesc);
+  const years = new Set(posts.map((p) => yearOf(p.data.date)));
+  return [...years].map((year) => ({
+    params: { year: String(year) },
+    props: { year, posts: posts.filter((p) => yearOf(p.data.date) === year) },
+  }));
+}) satisfies GetStaticPaths;
+
+const { year, posts } = Astro.props;
+---
+
+<Base title={`Blog · ${year}`} description={`Posts from ${year} by Leonid Svyatov.`}>
+  <BlogList posts={posts} heading={String(year)} />
+</Base>

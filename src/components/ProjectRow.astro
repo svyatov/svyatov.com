@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import LangDot from './LangDot.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { name, description, language, url } = Astro.props.project.data;
+---
+
+<a
+  href={url}
+  data-language={language}
+  class="flex flex-col gap-2 border-line border-b px-3 py-4 text-fg hover:bg-surface hover:no-underline md:grid md:grid-cols-[13.75rem_9.375rem_minmax(0,1fr)_5.625rem] md:items-center md:gap-6"
+>
+  <span class="font-semibold text-accent">{name}/</span>
+  <span class="flex items-center gap-2 text-sm"><LangDot language={language} /><span class="text-dim">{language}</span></span>
+  <span class="text-md">{description}</span>
+  <span class="text-dim text-xs md:text-right">github →</span>
+</a>

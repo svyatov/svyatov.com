@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  short?: string;
+  padded?: boolean;
+}
+
+const { title, short, padded = true } = Astro.props;
+---
+
+<div class:list={['flex items-center gap-3.5 text-sm', padded && 'px-4 md:px-20']}>
+  <span class="text-dim">──┤</span>
+  <h2 class="font-semibold text-accent tracking-rule">
+    {short ? <><span class="md:hidden">{short}</span><span class="hidden md:inline">{title}</span></> : title}
+  </h2>
+  <span class="text-dim">├</span>
+  <span class="grow border-line border-t"></span>
+  <span class="text-dim"><slot /></span>
+</div>
