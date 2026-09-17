@@ -1,15 +1,9 @@
 ---
 interface Props {
   text: string;
-  hero?: boolean;
 }
 
-const { text, hero = false } = Astro.props;
+const { text } = Astro.props;
 ---
 
-<pre
-  aria-hidden="true"
-  class:list={[
-    'font-mono text-accent leading-banner',
-    hero ? 'text-3xs text-shadow-banner-sm md:text-lg md:text-shadow-banner' : 'text-3xs md:text-sm',
-  ]}>{text}</pre>
+<pre aria-hidden="true" class="font-mono text-3xs text-accent leading-banner md:text-md md:leading-none">{text}</pre>

@@ -32,7 +32,7 @@
   --text-4xl: 2.75rem;
 
   --leading-*: initial;
-  --leading-banner: 1.15;
+  --leading-banner: 1.1;
   --leading-hero: 1.5;
   --leading-card: 1.55;
   --leading-body: 1.6;
@@ -58,8 +58,6 @@
   --container-skills: 68.75rem;
 
   --shadow-glow: 0 0 0.5rem var(--color-teal);
-  --text-shadow-banner: 0 0 1.125rem --alpha(var(--color-accent) / 35%);
-  --text-shadow-banner-sm: 0 0 0.875rem --alpha(var(--color-accent) / 35%);
 
   --animate-blink: blink 1s steps(2) infinite;
   @keyframes blink {

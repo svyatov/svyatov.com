@@ -5,8 +5,8 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base title="404" description="Page not found.">
-  <section class="flex flex-col gap-5 px-4 pt-10 pb-10 md:gap-7 md:px-20 md:pt-22 md:pb-18">
-    <Banner text={banners.notFound} hero />
+  <section class="flex flex-col gap-5 px-4 pt-10 pb-10 md:px-20 md:pt-18 md:pb-18">
+    <Banner text={banners.notFound} />
     <div class="flex max-w-hero flex-col gap-1.5 text-prose md:text-2xl md:leading-hero">
       <p class="text-dim">$ cat {Astro.url.pathname}</p>
       <h1>cat: no such file or directory<span class="cursor-blink"></span></h1>
