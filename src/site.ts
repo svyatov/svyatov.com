@@ -40,17 +40,9 @@ export const site = {
     { name: 'go', long: 'CLI tooling. See oz.', short: 'CLI tooling' },
     {
       name: 'agentic ai',
-      long: 'Agent skills, workflows and tooling for real delivery, not demos.',
+      long: 'Agent skills, workflows and tooling for real delivery.',
       short: 'skills, workflows',
     },
-  ],
-  employers: [
-    'Independent',
-    'Halo',
-    'Ourea Systems',
-    'TodayTix Group',
-    'InputHealth',
-    'Show-Score',
   ],
   blogTagline: 'Notes on shipping software with Rails, TypeScript and agents in the loop.',
 } as const;

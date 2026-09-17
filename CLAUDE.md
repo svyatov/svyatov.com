@@ -11,7 +11,7 @@ Personal site of Leonid Svyatov. Astro 7 static site, Tailwind CSS 4, hosted on 
 ## Layout
 
 - `src/content/blog/*.md`: posts. Frontmatter: `title`, `description`, `date`, `tags`, optional `updated` and `devto`. A post with images lives in its own folder as `index.md`.
-- `src/site.ts`: name, socials, nav, stack cards, employers. `src/data/cv.ts`: CV content. `src/data/projects.ts`: GitHub repo allowlist with optional copy overrides.
+- `src/site.ts`: name, socials, nav, stack cards. `src/data/cv.ts`: CV content. `src/data/projects.ts`: GitHub repo allowlist with optional copy overrides.
 - `src/loaders/github.ts`: content loader that fetches repo metadata at build time (`GITHUB_TOKEN` optional, raises the rate limit in CI).
 - `src/components/*.astro`: one component per design element, tests next to them as `*.test.ts`.
 - `src/pages/`: routes. `blog/[...page]` paginates 10 per page; `og/[slug].png.ts` renders OG cards with satori + resvg using the TTFs in `src/assets/fonts/`.

@@ -92,16 +92,4 @@ const jsonLd = {
   <div class="flex flex-col gap-3 px-4 pt-5 pb-10 md:grid md:grid-cols-3 md:gap-6 md:px-20 md:pt-7 md:pb-18">
     {selected.map((p, i) => <ProjectCard project={p} class={i === 2 ? 'max-md:hidden' : undefined} />)}
   </div>
-
-  <SectionRule title="PREVIOUSLY"><a href="/cv/">cat cv.md →</a></SectionRule>
-  <div class="flex flex-wrap px-4 pt-5 pb-10 text-md md:px-20 md:pt-7 md:pb-16">
-    {
-      site.employers.map((name, i) => (
-        <>
-          {i > 0 && <span class="px-4 text-dim">│</span>}
-          <a href="/cv/" class="text-dim">{name}</a>
-        </>
-      ))
-    }
-  </div>
 </Base>
