@@ -10,7 +10,7 @@ export const projects: { name: string; description?: string; language?: string }
     description:
       'The fastest conditional CSS class builder for Rails. 2-4x faster than class_names.',
   },
-  { name: 'oss-kit' },
+  { name: 'oss-kit', language: 'Skills' },
   {
     name: 'hacker_news_sorted',
     description:
@@ -19,6 +19,26 @@ export const projects: { name: string; description?: string; language?: string }
   },
   { name: 'oz', description: 'Config-driven CLI wizard framework.' },
   { name: 'briefly' },
+  { name: 'handrail' },
+  {
+    name: 'agent-toolkit',
+    description: 'Reusable skills and plugins for Claude Code, Cursor, Codex and Gemini CLI.',
+    language: 'Skills',
+  },
+  { name: 'agentskills-lint' },
+  { name: 'botchart' },
+  { name: 'devto-client' },
+  { name: 'tailwind-merge-typography' },
+  { name: 'clsx-ruby' },
+  { name: 'create-rails-app' },
+  {
+    name: 'create-ruby-gem',
+    description: 'Interactive CLI wizard for creating Ruby gems that remembers your choices.',
+  },
+  { name: 'http_wrapper' },
+  { name: 'smsru-ruby' },
+  { name: 'candor' },
+  { name: 'database-transactions' },
 ];
 
 export const languageColors: Record<string, string> = {
@@ -27,4 +47,5 @@ export const languageColors: Record<string, string> = {
   TypeScript: 'bg-lang-typescript',
   Go: 'bg-lang-go',
   HTML: 'bg-lang-html',
+  Skills: 'bg-lang-skills',
 };
