@@ -13,7 +13,6 @@ export const site = {
   socials: [
     { label: 'github', href: 'https://github.com/svyatov' },
     { label: 'linkedin', href: 'https://www.linkedin.com/in/leonid-svyatov' },
-    { label: 'dev.to', href: 'https://dev.to/svyatov' },
     { label: 'bluesky', href: 'https://bsky.app/profile/svyatov.bsky.social' },
   ],
   nav: [
