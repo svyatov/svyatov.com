@@ -40,9 +40,9 @@ const jsonLd = {
 ---
 
 <Base jsonLd={jsonLd}>
-  <section class="flex flex-col gap-5 px-4 pt-10 pb-8 md:gap-7 md:px-20 md:pt-22 md:pb-18">
-    <Banner text={banners.connect} hero />
-    <div class="flex max-w-hero flex-col text-prose leading-card md:gap-1.5 md:text-2xl md:leading-hero">
+  <section class="flex flex-col gap-5 px-4 pt-10 pb-8 md:px-20 md:pt-18 md:pb-18">
+    <Banner text={banners.connect} />
+    <div class="flex flex-col text-prose leading-card md:gap-1.5 md:text-2xl md:leading-hero">
       <p class="text-dim">$ whoami</p>
       <h1>{site.description}<span class="cursor-blink"></span></h1>
     </div>
@@ -65,7 +65,7 @@ const jsonLd = {
     </div>
   </section>
 
-  <SectionRule title="STACK"><span class="hidden md:inline">uptime: </span>10+ yrs</SectionRule>
+  <SectionRule title="STACK"><span class="hidden md:inline">uptime: </span>15+ yrs</SectionRule>
   <ul class="grid grid-cols-2 gap-3 px-4 pt-5 pb-10 md:gap-5 md:px-20 md:pt-7 md:pb-18 lg:grid-cols-5">
     {
       site.stack.map((s) => (
@@ -78,14 +78,14 @@ const jsonLd = {
     }
   </ul>
 
-  <SectionRule title="LATEST FROM THE BLOG" short="BLOG">
+  <SectionRule title="POSTS">
     <a href="/blog/"><span class="md:hidden">all →</span><span class="hidden md:inline">tail -f →</span></a>
   </SectionRule>
   <div class="flex flex-col px-4 pt-2 pb-8 md:px-20 md:pt-4 md:pb-18">
     {posts.map((post, i) => <PostRow post={post} compact class={i === 2 ? 'max-md:hidden' : undefined} />)}
   </div>
 
-  <SectionRule title="SELECTED PROJECTS" short="PROJECTS">
+  <SectionRule title="PROJECTS">
     <span class="hidden md:inline">{selected.length} of {projects.length} · </span>
     <a href="/projects/"><span class="md:hidden">all →</span><span class="hidden md:inline">ls -la →</span></a>
   </SectionRule>

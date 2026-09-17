@@ -6,16 +6,16 @@ export const projects: { name: string; description?: string; language?: string }
       'Ruby toolkit for securities identifiers: ISIN, CUSIP, SEDOL, FIGI, LEI and 10 more schemes.',
   },
   {
-    name: 'clsx-rails',
-    description:
-      'The fastest conditional CSS class builder for Rails. 2-4x faster than class_names.',
-  },
-  { name: 'oss-kit', language: 'Skills' },
-  {
     name: 'hacker_news_sorted',
     description:
       'Chrome extension that sorts Hacker News by points, time, comments, velocity or heat.',
     language: 'TypeScript',
+  },
+  { name: 'oss-kit', language: 'Skills' },
+  {
+    name: 'clsx-rails',
+    description:
+      'The fastest conditional CSS class builder for Rails. 2-4x faster than class_names.',
   },
   { name: 'oz', description: 'Config-driven CLI wizard framework.' },
   { name: 'briefly' },

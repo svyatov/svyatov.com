@@ -3,7 +3,7 @@ export const site = {
   title: 'Leonid Svyatov',
   jobTitle: 'Lead Software Engineer',
   description:
-    'Leonid Svyatov. Software engineer. I design, build and ship end-to-end features, backend, frontend and infra, with agentic AI in the loop.',
+    'Leonid Svyatov. Full-Stack Software Engineer. I turn ideas into working software, from backend to browser to production. I build with AI agents and contribute to open source as a maintainer and developer.',
   bio: 'Software engineer. Ships end-to-end features with agentic AI in the loop. Open to senior / lead roles.',
   url: 'https://svyatov.com',
   email: 'leonid@svyatov.com',
