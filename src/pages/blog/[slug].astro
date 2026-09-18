@@ -63,7 +63,7 @@ const jsonLd = {
       </nav>
       <h1 class="font-semibold text-3xl text-accent leading-banner tracking-h1 md:text-4xl">{title}</h1>
       <div class="flex flex-wrap items-center gap-4 text-sm">
-        <time datetime={date.toISOString()} class="text-dim">[{formatDate(date)}]</time>
+        <time datetime={date.toISOString()} class="text-dim">{formatDate(date)}</time>
         <span class="text-dim">·</span>
         <span class="text-dim">{readingTime(post.body)} min read</span>
         {

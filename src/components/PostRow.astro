@@ -19,7 +19,7 @@ const { title, description, date, tags } = post.data;
         'flex flex-col gap-0.5 border-line border-b py-3 text-fg hover:bg-surface hover:no-underline md:grid md:grid-cols-[8.75rem_minmax(0,1fr)_7.5rem] md:items-baseline md:gap-6 md:px-3 md:py-3.5',
       ]}
     >
-      <span class="text-dim text-xs md:text-sm">[{formatDate(date)}]</span>
+      <span class="text-dim text-xs md:text-sm">{formatDate(date)}</span>
       <span class="flex flex-col gap-0.5">
         <span class="font-medium">{title}</span>
         <span class="hidden truncate text-dim text-sm md:inline">{description}</span>
@@ -34,8 +34,8 @@ const { title, description, date, tags } = post.data;
         'flex flex-col gap-3 border-line border-b py-6 text-fg lg:px-3 hover:bg-surface hover:no-underline md:grid md:grid-cols-[minmax(0,1fr)_8.75rem] md:gap-8',
       ]}
     >
-      <span class="flex gap-3 md:order-last md:flex-col md:items-end md:gap-1">
-        <span class="text-dim text-sm">[{formatDate(date)}]</span>
+      <span class="flex items-baseline gap-3 md:order-last md:flex-col md:items-end md:gap-1">
+        <span class="text-dim text-sm">{formatDate(date)}</span> <span class="text-dim text-sm md:hidden">·</span>
         <span class="text-2xs text-dim">{readingTime(post.body)} min read</span>
       </span>
       <span class="flex flex-col gap-2">

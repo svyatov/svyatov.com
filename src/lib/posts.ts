@@ -8,7 +8,7 @@ export const postUrl = (post: Pick<Post, 'id'>) => `/blog/${post.id}/`;
 
 export const tagUrl = (tag: string) => `/blog/tag/${encodeURIComponent(tag)}/`;
 
-/** ISO date, the way the design prints it: [YYYY-MM-DD]. */
+/** ISO date, YYYY-MM-DD. */
 export const formatDate = (date: Date) => date.toISOString().slice(0, 10);
 
 export const yearOf = (date: Date) => date.getUTCFullYear();

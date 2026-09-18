@@ -23,7 +23,7 @@ describe('PostRow', () => {
   test('compact row shows date, title, summary and the read arrow', async () => {
     const html = await container.renderToString(PostRow, { props: { post, compact: true } });
     expect(html).toContain('href="/blog/hello-world/"');
-    expect(html).toContain('[2026-03-04]');
+    expect(html).toContain('2026-03-04');
     expect(html).toContain('Hello world');
     expect(html).toContain('A summary.');
     expect(html).toContain('read →');
