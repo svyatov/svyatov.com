@@ -3,15 +3,14 @@ export const cv = {
   location: 'Yerevan, Armenia',
   summary:
     'Lead software engineer with extensive experience managing open-source projects and delivering scalable web applications using Ruby, TypeScript, Python and Go. Skilled in SDLC automation, API design, cloud infrastructure, and mentoring teams to enforce code quality and optimize performance. Uses an AI-first development approach, directing AI agents to write code while retaining ownership of architecture, review, and delivery.',
-  span: '2015 – present',
   experience: [
     {
       period: 'Jan 2026 – Present',
       company: 'Independent Consultant',
       story:
         'I split my time between client products and open source. Recent work includes a timber marketplace built for weak rural connections and a Telegram matching bot with payments. I also maintain more than 20 open-source projects and build tools for working with coding agents.',
-      type: 'Freelance',
-      location: 'Remote',
+      type: 'Freelance · Remote',
+      location: '',
       role: 'Lead Software Engineer',
       highlights: [
         'Managed the release and maintenance of over 20 open-source projects in Ruby, TypeScript, and Go, including oz (Go CLI wizard framework), handrail (zero-dependency Go guardrail engine with dual agent harness native hooks), botik (fully typed Ruby Telegram Bot API client), sec_id (ISIN, CUSIP, SEDOL, CIK, FIGI validation), clsx-rails, devto-client, and Hacker News Sorted (Chrome extension)',
@@ -25,8 +24,8 @@ export const cv = {
       company: 'Halo',
       story:
         'I built tools that turn academic papers and research data into researcher profiles, using AI to match authors and extract information. I also worked on the foundations: shared API rate limits and type checks that catch errors before release.',
-      type: 'Full-time',
-      location: 'Chicago, US · Remote',
+      type: 'Full-time · Remote',
+      location: 'Chicago, US',
       role: 'Senior Software Engineer',
       highlights: [
         'Designed and implemented an AI-powered data enrichment pipeline using OpenAlex academic data, incorporating LLM-assisted author disambiguation, profile creation, and automated keyword inference via the OpenAI API',
@@ -41,8 +40,8 @@ export const cv = {
       company: 'Ourea Systems',
       story:
         'I led an MVP from requirements through deployment, working directly with stakeholders. The work combined Rails, WhatsApp and SMS messaging, and AI-assisted customer service. I also handled the production setup and kept test coverage above 90%.',
-      type: 'Contract',
-      location: 'Dubai, UAE · Remote',
+      type: 'Contract · Remote',
+      location: 'Dubai, UAE',
       role: 'Lead Software Engineer',
       highlights: [
         'Led the development and scaling of a pioneering MVP project, emphasizing innovative solutions and positioning for future growth',
@@ -60,8 +59,8 @@ export const cv = {
       company: 'TodayTix Group',
       story:
         'I returned to Show-Score to restore features and clear out years of technical debt. We redesigned the main pages, improved their performance by more than 37%, and brought Show-Score reviews to other TodayTix platforms. I also automated testing and releases.',
-      type: 'Full-time',
-      location: 'New York, US · Remote',
+      type: 'Full-time · Remote',
+      location: 'New York, US',
       role: 'Tech Lead',
       highlights: [
         'Revived and expanded the Show-Score project by restoring all key functionalities, significantly enhancing its utility and user engagement',
@@ -80,8 +79,8 @@ export const cv = {
       company: 'InputHealth',
       story:
         'I worked on healthcare software and the tools our team used to build it. One project used database snapshots to cut branch-switching time by 95%. Alongside product work, I helped other engineers through code reviews and pair programming.',
-      type: 'Full-time',
-      location: 'Vancouver, CA · Remote',
+      type: 'Full-time · Remote',
+      location: 'Vancouver, CA',
       role: 'Senior Software Engineer',
       highlights: [
         'Designed and launched a GitHub Branch Transition Tool using PostgreSQL snapshots, reducing developer branch management time by 95%',
@@ -97,17 +96,17 @@ export const cv = {
       period: 'Oct 2015 – Mar 2020',
       company: 'Show-Score',
       story:
-        'I wrote more than half of Show-Score, a community for Broadway fans, and helped build the engineering team. My work covered the architecture, ticketing and payment integrations, and AWS infrastructure. As the team grew, I hired and mentored engineers across New York and Southeast Asia.',
-      type: 'Full-time',
-      location: 'New York, US · Remote',
+        'I wrote more than half of Show-Score, a community for Broadway fans, and helped build the engineering team. My work covered the architecture, ticketing and payment integrations, and Digital Ocean and AWS infrastructures. As the team grew, I hired and mentored the engineers and worked with colleagues spread across New York and Southeast Asia.',
+      type: 'Full-time · Remote',
+      location: 'New York, US',
       role: 'Lead Software Engineer',
       highlights: [
         'Engineered and personally coded over 50% of Show-Score, a leading online community for Broadway fans, integrating real-time APIs from major ticketing systems, Stripe, and Mandrill',
         "Led all critical architectural decisions, shaping the platform's infrastructure to ensure scalability and robust performance",
         'Defined technical roadmaps in collaboration with product owners to align engineering efforts with evolving business objectives',
-        'Built and led a dynamic developer team by interviewing, hiring, and mentoring; conducted code reviews and fostered a collaborative work environment across NYC and Southeast Asia',
+        'Built and led a dynamic developer team by interviewing, hiring, and mentoring; conducted code reviews and collaborated with a distributed company across NYC and Southeast Asia',
         'Established, documented, and enforced coding standards and testing protocols to enhance code quality and maintainability across multiple client projects',
-        'Established and managed comprehensive infrastructure using AWS services, ensuring high availability and implementing effective monitoring systems',
+        'Established and managed comprehensive infrastructure using Digital Ocean and AWS services, ensuring high availability and implementing effective monitoring systems',
         'Led integration of advanced observability solutions to enhance system monitoring and enable proactive incident response',
         'Conducted security audits and integrated automated vulnerability scanning tools to reduce potential risks in production systems',
         'Led performance tuning initiatives that improved application response times by optimizing database queries and caching strategies',
@@ -144,5 +143,5 @@ export const cv = {
     where: 'St Petersburg, Russia · 2005',
     degree: "Bachelor's in Missile and Space Systems Technology",
   },
-  languages: ['English', 'Russian'],
+  languages: ['English (fluent)', 'Russian (native)'],
 } as const;

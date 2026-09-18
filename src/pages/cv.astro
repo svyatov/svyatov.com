@@ -20,38 +20,37 @@ const contacts = [
       <Banner fonts={banners.cv} />
       <div class="text-lg">
         <p class="text-dim">$ cat ~/cv.md</p>
-        <h1 class="inline font-semibold text-3xl">{site.name}</h1><span class="text-dim"> · {cv.title}</span>
+        <h1 class="inline font-semibold text-3xl">{site.name}</h1><span class="text-dim"><span class="hidden md:inline"> · </span><span class="block md:inline">{cv.title}</span></span>
       </div>
-      <div class="flex flex-wrap gap-5 text-sm">
+      <div class="flex flex-col gap-2 text-sm md:flex-row md:flex-wrap md:gap-5">
         {contacts.map((c) => <a href={c.href}>{c.label}</a>)}
         <span class="text-dim">{cv.location}</span>
       </div>
     </div>
     <div class="flex flex-col items-start gap-6 md:flex-row md:justify-between">
-      <p class="max-w-summary border border-line bg-surface px-6 py-5 leading-summary">{cv.summary}</p>
+      <p class="max-w-summary border border-line bg-surface px-4 py-4 leading-summary md:px-6 md:py-5">{cv.summary}</p>
       <a
         href="/cv.pdf"
-        class="inline-flex h-11.5 shrink-0 items-center border border-accent px-5 font-medium text-accent tracking-btn print:hidden hover:bg-accent hover:text-bg hover:no-underline"
+        class="inline-flex h-9 shrink-0 items-center self-center border border-accent px-4 font-medium text-accent text-sm tracking-btn md:h-11.5 md:self-auto md:px-5 md:text-base print:hidden hover:bg-accent hover:text-bg hover:no-underline"
       >
         [ download pdf ]
       </a>
     </div>
   </section>
 
-  <SectionRule title="WORK EXPERIENCE">{cv.span}</SectionRule>
-  <div class="flex flex-col px-4 pb-10 md:px-20 md:pb-14">
+  <SectionRule title="WORK EXPERIENCE" short="EXPERIENCE" />
+  <div class="flex flex-col divide-y divide-line px-4 pb-10 md:px-20 md:pb-14">
     {
       cv.experience.map((job) => (
-        <article class="flex flex-col gap-3 border-line border-b py-7 md:grid md:grid-cols-[12.5rem_minmax(0,1fr)] md:items-baseline md:gap-8">
+        <article class="flex flex-col gap-3 py-7 md:grid md:grid-cols-[18rem_minmax(0,1fr)] md:items-baseline md:gap-8">
           <div class="flex flex-col gap-1 text-dim text-sm">
-            <p>{job.period}</p>
-            <p class="text-xs">{duration(job.period)} · {job.type}</p>
-            <p class="text-xs">{job.location}</p>
+            <p>{job.period} · {duration(job.period)}</p>
+            <p class="text-xs">{[job.location, job.type].filter(Boolean).join(' · ')}</p>
           </div>
           <div class="flex flex-col gap-3.5">
-            <h3 class="flex flex-wrap items-baseline gap-3">
+            <h3 class="flex flex-col gap-1 md:flex-row md:flex-wrap md:items-baseline md:gap-3">
               <span class="font-semibold text-accent text-xl">{job.company}</span>
-              <span class="text-dim">·</span>
+              <span class="hidden text-dim md:inline">·</span>
               <span class="font-medium">{job.role}</span>
             </h3>
             <p class="text-md leading-summary">{job.story}</p>
