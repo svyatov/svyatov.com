@@ -33,10 +33,10 @@ const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Num
   </section>
   <div class="flex flex-col gap-10 lg:grid lg:grid-cols-[18.75rem_minmax(0,1fr)] lg:gap-16">
     <section class="flex flex-col lg:-mx-3 lg:max-w-list" data-vt="content">
-      <div class="flex flex-col">{posts.map((post) => <PostRow post={post} />)}</div>
+      <div class="flex flex-col max-lg:-mt-6">{posts.map((post) => <PostRow post={post} />)}</div>
       {
         page && (
-          <nav aria-label="Pagination" class="flex justify-between px-3 py-2 text-sm">
+          <nav aria-label="Pagination" class="flex justify-between py-2 text-sm lg:px-3">
             {next ? <a href={next} rel="next" data-key="," class="text-fg hover:text-accent hover:no-underline">[<u class="text-accent no-underline">,</u>] older</a> : <span class="text-dim">[,] older</span>}
             <span class="text-dim">page {page.current} / {page.total}</span>
             {prev ? <a href={prev} rel="prev" data-key="." class="text-fg hover:text-accent hover:no-underline">newer [<u class="text-accent no-underline">.</u>]</a> : <span class="text-dim">newer [.]</span>}

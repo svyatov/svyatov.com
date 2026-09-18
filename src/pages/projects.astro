@@ -16,7 +16,7 @@ const languages = [...countBy(projects, (p) => [p.data.language])].sort(
 ---
 
 <Base title="Projects" description="Open-source libraries and tools by Leonid Svyatov: Ruby gems, TypeScript, Go.">
-  <section class="flex flex-col gap-5 px-4 pt-10 pb-8 md:px-20 md:pt-18 md:pb-10">
+  <section class="flex flex-col gap-5 px-4 pt-10 pb-4 md:px-20 md:pt-18 md:pb-10">
     <Banner fonts={banners.projects} />
     <div class="text-lg">
       <p class="text-dim">$ ls -la ~/oss</p>
@@ -42,7 +42,7 @@ const languages = [...countBy(projects, (p) => [p.data.language])].sort(
       <span>NAME</span><span>LANG</span><span>DESCRIPTION</span><span class="text-right">LINK</span>
     </div>
     {projects.map((p) => <ProjectRow project={p} />)}
-    <p class="px-3 py-4 text-dim text-xs">
+    <p class="py-4 text-dim text-xs md:px-3">
       total {projects.length} · also: <a href="https://rubygems.org/profiles/svyatov">gems on rubygems.org</a> ·
       <a href="https://www.npmjs.com/~svyatov">packages on npm</a>
     </p>

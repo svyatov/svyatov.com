@@ -39,7 +39,7 @@ const contacts = [
   </section>
 
   <SectionRule title="WORK EXPERIENCE">{cv.span}</SectionRule>
-  <div class="flex flex-col px-4 pt-2 pb-10 md:px-20 md:pb-14">
+  <div class="flex flex-col px-4 pb-10 md:px-20 md:pb-14">
     {
       cv.experience.map((job) => (
         <article class="flex flex-col gap-3 border-line border-b py-7 md:grid md:grid-cols-[12.5rem_minmax(0,1fr)] md:items-baseline md:gap-8">
@@ -62,7 +62,7 @@ const contacts = [
   </div>
 
   <SectionRule title="CORE SKILLS" />
-  <ul class="grid gap-x-10 gap-y-2.5 px-4 pt-7 pb-10 sm:grid-cols-2 md:px-20 md:pb-14 xl:grid-cols-3">
+  <ul class="grid gap-x-10 gap-y-2.5 px-4 pt-5 pb-10 sm:grid-cols-2 md:px-20 md:pb-14 xl:grid-cols-3">
     {
       cv.skills.map((s) => (
         <li class="flex gap-2.5 text-sm">
