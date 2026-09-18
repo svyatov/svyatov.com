@@ -55,12 +55,13 @@ const props = Astro.props;
 
       // Lead headings: type the text in front of the cursor once per section (home, projects, blog) per tab session.
       // The full text stays in the DOM (invisible) so nothing reflows.
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const section = `typed:${location.pathname.split('/')[1]}`;
       let store: Storage | undefined;
       try {
         store = sessionStorage; // throws when cookies are blocked, then the animation never plays
       } catch {}
-      if (store && !store.getItem(section) && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (store && !store.getItem(section) && !reduced) {
         for (const h1 of document.querySelectorAll<HTMLElement>('h1[data-type]')) {
           store.setItem(section, '1');
           const text = h1.firstChild?.textContent ?? '';
@@ -76,6 +77,32 @@ const props = Astro.props;
           };
           step();
         }
+      }
+
+      // Click burst: a ring of ascii sparks drifts out from the pointer and fades.
+      if (!reduced) {
+        document.addEventListener('click', ({ clientX, clientY, target }) => {
+          if ((target as Element).closest?.('a')) return; // navigation would cut the burst mid-flight
+          for (let k = 0; k < 12; k++) {
+            const angle = (k / 12) * Math.PI * 2;
+            const reach = 2.5 + Math.random() * 1.5;
+            const spark = document.body.appendChild(document.createElement('span'));
+            spark.className = 'pointer-events-none fixed z-30 select-none text-accent text-lg';
+            spark.textContent = '.*+*'[Math.floor(Math.random() * 4)];
+            spark.style.left = `${clientX}px`;
+            spark.style.top = `${clientY}px`;
+            spark.animate(
+              [
+                { translate: '-50% -50%', opacity: 1 },
+                {
+                  translate: `calc(-50% + ${(Math.cos(angle) * reach).toFixed(2)}rem) calc(-50% + ${(Math.sin(angle) * reach).toFixed(2)}rem)`,
+                  opacity: 0,
+                },
+              ],
+              { duration: 700, easing: 'cubic-bezier(0.1, 0.7, 0.3, 1)' },
+            ).onfinish = () => spark.remove();
+          }
+        });
       }
     </script>
   </body>
