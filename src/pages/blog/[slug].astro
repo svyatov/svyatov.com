@@ -84,6 +84,14 @@ const jsonLd = {
       <hr class="border-line border-t" />
       <div class="prose"><Content /></div>
       <hr class="border-line border-t" />
+      <div class="flex flex-wrap justify-center gap-2.5 text-sm print:hidden lg:hidden">
+        <span class="text-dim">share:</span>
+        {share.map((s) => <a href={s.href} rel="noopener">[ {s.label} ]</a>)}
+        <button type="button" data-copy={url} class="cursor-pointer text-accent hover:text-accent-hover hover:underline">
+          [ copy link ]
+        </button>
+      </div>
+      <hr class="border-line border-t lg:hidden" />
       <AuthorCard />
       <nav aria-label="Older and next posts" class="grid grid-cols-2 gap-4 text-sm">
         {
@@ -109,7 +117,7 @@ const jsonLd = {
         }
       </nav>
     </article>
-    <aside class="flex flex-col gap-8 text-sm print:hidden lg:order-first lg:sticky lg:top-8 lg:self-start lg:pt-32">
+    <aside class="hidden flex-col gap-8 text-sm print:hidden lg:order-first lg:flex lg:sticky lg:top-8 lg:self-start lg:pt-32">
       {
         toc.length > 0 && (
           <nav aria-label="On this page" class="flex flex-col gap-2.5" data-toc>
@@ -152,11 +160,12 @@ const jsonLd = {
     );
     for (const h of headings) if (h) observer.observe(h);
 
-    document.querySelector<HTMLButtonElement>('[data-copy]')?.addEventListener('click', async (e) => {
-      const btn = e.currentTarget as HTMLButtonElement;
-      await navigator.clipboard.writeText(btn.dataset.copy ?? location.href);
-      btn.textContent = '[ copied ]';
-    });
+    for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
+      btn.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(btn.dataset.copy ?? location.href);
+        btn.textContent = '[ copied ]';
+      });
+    }
 
     for (const pre of document.querySelectorAll('.prose pre')) {
       const btn = document.createElement('button');
