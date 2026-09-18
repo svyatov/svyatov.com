@@ -9,6 +9,7 @@ interface Props {
 
 const { project, class: className } = Astro.props;
 const { name, description, language, url } = project.data;
+const label = new URL(url).hostname === 'github.com' ? 'github' : 'site';
 ---
 
 <a
@@ -26,6 +27,6 @@ const { name, description, language, url } = project.data;
   <span class="flex items-center gap-2 text-xs">
     <LangDot language={language} />
     <span class="text-dim md:hidden">{language}</span>
-    <span class="ml-auto hidden text-dim md:inline">github →</span>
+    <span class="ml-auto hidden text-dim md:inline">{label} →</span>
   </span>
 </a>
