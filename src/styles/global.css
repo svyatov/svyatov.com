@@ -112,9 +112,6 @@
   }
   & h2,
   & h3 {
-    display: flex;
-    align-items: center;
-    gap: --spacing(3);
     margin-top: --spacing(3);
     font-size: var(--text-2xl);
     font-weight: 600;
@@ -122,14 +119,6 @@
   }
   & h3 {
     font-size: var(--text-xl);
-  }
-  & h2::before {
-    content: "##";
-    color: var(--color-dim);
-  }
-  & h3::before {
-    content: "###";
-    color: var(--color-dim);
   }
   & ul,
   & ol {
