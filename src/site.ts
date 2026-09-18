@@ -4,7 +4,6 @@ export const site = {
   jobTitle: 'Lead Software Engineer',
   description:
     "I'm Leonid, a software engineer. For 15+ years, I've worked with founders to figure out what they need, build it, and keep it running. I like asking questions before writing code and helping other developers grow. These days, I build with coding agents and share much of my work as open source.",
-  bio: 'Software engineer. Ships end-to-end features with agentic AI in the loop. Open to senior / lead roles.',
   url: 'https://svyatov.com',
   email: 'leonid@svyatov.com',
   repo: 'https://github.com/svyatov/svyatov.com',

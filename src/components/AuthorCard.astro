@@ -7,13 +7,11 @@ const links = [
 ];
 ---
 
-<div class="flex items-center gap-5 border border-line bg-surface p-5">
-  <div class="flex size-14 shrink-0 items-center justify-center border border-accent font-semibold text-accent text-xl">&gt;_</div>
-  <div class="flex flex-col gap-1 text-sm">
-    <span class="font-semibold">{site.name}</span>
-    <span class="text-dim">{site.bio}</span>
-    <div class="mt-1 flex flex-wrap gap-3">
-      {links.map((l) => <a href={l.href} rel={l.label === 'email' ? undefined : 'me'}>[ {l.label} ]</a>)}
-    </div>
-  </div>
+<div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm">
+  <span class="inline-flex items-center gap-1.5 font-semibold text-accent tracking-logo">
+    <span>&gt;</span><span>whoami</span><span class="inline-block h-[1.05em] w-[0.55em] bg-accent"></span>
+  </span>
+  <span class="font-semibold">{site.name}</span>
+  <span class="text-dim">·</span>
+  {links.map((l) => <a href={l.href} rel={l.label === 'email' ? undefined : 'me'}>[ {l.label} ]</a>)}
 </div>
