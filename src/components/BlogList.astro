@@ -32,7 +32,7 @@ const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Num
     </div>
   </section>
   <div class="flex flex-col gap-10 lg:grid lg:grid-cols-[18.75rem_minmax(0,1fr)] lg:gap-16">
-    <section class="flex flex-col lg:-mx-3 lg:max-w-list" data-vt="content">
+    <section class="flex flex-col lg:-mx-3 lg:max-w-list">
       <div class="flex flex-col max-lg:-mt-6">{posts.map((post) => <PostRow post={post} />)}</div>
       {
         page && (
@@ -44,7 +44,7 @@ const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Num
         )
       }
     </section>
-    <aside class="flex flex-col gap-8 text-sm lg:order-first lg:pt-6" data-vt="sidebar">
+    <aside class="flex flex-col gap-8 text-sm lg:order-first lg:pt-6">
       <div class="flex flex-col gap-3">
         <h2 class="font-semibold text-2xs text-accent tracking-label">TAGS</h2>
         <div class="flex flex-wrap gap-2">
