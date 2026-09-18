@@ -52,6 +52,31 @@ const props = Astro.props;
         const href = keys.get(e.key);
         if (href) location.assign(href);
       });
+
+      // Lead headings: type the text in front of the cursor once per section (home, projects, blog) per tab session.
+      // The full text stays in the DOM (invisible) so nothing reflows.
+      const section = `typed:${location.pathname.split('/')[1]}`;
+      let store: Storage | undefined;
+      try {
+        store = sessionStorage; // throws when cookies are blocked, then the animation never plays
+      } catch {}
+      if (store && !store.getItem(section) && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        for (const h1 of document.querySelectorAll<HTMLElement>('h1[data-type]')) {
+          store.setItem(section, '1');
+          const text = h1.firstChild?.textContent ?? '';
+          const typed = document.createTextNode('');
+          const rest = document.createElement('span');
+          rest.className = 'invisible';
+          h1.replaceChildren(typed, ...h1.querySelectorAll('.cursor-blink'), rest);
+          let i = 0;
+          const step = () => {
+            typed.data = text.slice(0, ++i);
+            rest.textContent = text.slice(i);
+            if (i < text.length) setTimeout(step, 10 + Math.random() * 30);
+          };
+          step();
+        }
+      }
     </script>
   </body>
 </html>
