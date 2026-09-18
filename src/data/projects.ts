@@ -1,5 +1,5 @@
 /** GitHub repos shown on the site, in display order. Overrides pin copy where the live text reads worse than the design. */
-export const projects: { name: string; description?: string; language?: string }[] = [
+export const projects: { name: string; description?: string; language?: string; url?: string }[] = [
   {
     name: 'sec_id',
     description:
@@ -11,7 +11,7 @@ export const projects: { name: string; description?: string; language?: string }
       'Chrome extension that sorts Hacker News by points, time, comments, velocity or heat.',
     language: 'TypeScript',
   },
-  { name: 'oss-kit', language: 'Skills' },
+  { name: 'oss-kit', language: 'Skills', url: 'https://oss-kit.svyatov.com/' },
   {
     name: 'clsx-rails',
     description:
@@ -38,7 +38,7 @@ export const projects: { name: string; description?: string; language?: string }
   { name: 'http_wrapper' },
   { name: 'smsru-ruby' },
   { name: 'candor' },
-  { name: 'database-transactions' },
+  { name: 'database-transactions', url: 'https://database-transactions.svyatov.com/' },
 ];
 
 export const languageColors: Record<string, string> = {

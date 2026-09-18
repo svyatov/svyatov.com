@@ -59,7 +59,7 @@ export function githubLoader(user: string): Loader {
             language: p.language ?? r.language ?? 'Other',
             stars: r.stargazers_count,
             pushedAt: r.pushed_at,
-            url: r.html_url,
+            url: p.url ?? r.html_url,
             order,
           },
         });
