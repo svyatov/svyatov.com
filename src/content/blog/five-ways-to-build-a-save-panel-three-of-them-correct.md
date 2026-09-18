@@ -230,7 +230,7 @@ So: not threads, and nothing runs at the same time. Two switches on one wall.
 
 Here is the panel with both ideas applied:
 
-```diagram
+```text
 draft
 │
 ├── open              two regions, both live at once
@@ -448,7 +448,7 @@ The specification was two volumes of structured English, around a thousand pages
 
 They answered it. They opened volume B, found the clause, and read it to him. So he added a condition, and they found a different clause in the other volume.
 
-```diagram
+```text
 Q1   what happens when you press this button?        volume B, clause 19.11.6.10
 Q2   ... even with an infra-red missile locked on a ground target?  volume A, clause 6.12.3.7
 Q5   ...                                             the engineers phone the customer
@@ -570,7 +570,7 @@ More costs, none of which the field prices:
 
 **What you learn expires.** XState has shipped three incompatible ways to write a machine in three majors.
 
-```diagram
+```text
 2018-10-29  v4         Machine(...)         cond:     interpret(...)
 2023-12-01  v5         createMachine(...)   guard:    createActor(...)   setup({ types })
 2026-06-20  v6 alpha   the v5 action and guard creators removed; schemas replace types
@@ -632,7 +632,7 @@ Write the typo into a free-standing literal type instead, with no tie back to `S
 
 The test is mechanical, and you can run it on your own code in about a minute: **count your nested states and your parallel regions. If both are zero, you have written a state machine and paid for a statechart.**
 
-```diagram
+```text
 nested states?      no  ─┐
 parallel regions?   no   ├─▶  you have a state machine. Write the switch.
 `after` timers?     no   │

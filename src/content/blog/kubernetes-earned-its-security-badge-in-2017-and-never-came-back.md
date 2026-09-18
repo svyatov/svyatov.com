@@ -22,7 +22,7 @@ It is free, it takes no review board, and it works for any project anywhere. The
 
 There are [two ladders](https://openssf.org/blog/2026/02/25/getting-an-openssf-baseline-badge-with-the-best-practices-badge-system/) now, which is the first confusing thing a newcomer meets:
 
-```diagram
+```text
   METAL (2016)                    BASELINE (2026)
 
   passing   67 criteria           baseline-1   24 controls  \
