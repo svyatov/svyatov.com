@@ -93,4 +93,24 @@ const contacts = [
       </div>
     </div>
   </div>
+
+  <SectionRule title="RECOMMENDATIONS">
+    <a href="https://www.linkedin.com/in/leonid-svyatov/details/recommendations/"><span class="hidden md:inline">originals on </span>linkedin <span class="relative -top-px">→</span></a>
+  </SectionRule>
+  <div class="flex flex-col divide-y divide-line px-4 pb-10 md:px-20 md:pb-14">
+    {
+      cv.recommendations.map((r) => (
+        <article class="flex flex-col gap-3 py-7 md:grid md:grid-cols-[18rem_minmax(0,1fr)] md:items-baseline md:gap-8">
+          <div class="flex flex-col gap-1 text-sm">
+            <p class="font-semibold text-accent">{r.name}</p>
+            <p class="text-dim">{r.title}</p>
+            <p class="text-dim text-xs">{r.date} · {r.relation}</p>
+          </div>
+          <blockquote class="flex flex-col gap-3 text-md leading-summary">
+            {r.quote.map((p) => <p>{p}</p>)}
+          </blockquote>
+        </article>
+      ))
+    }
+  </div>
 </Base>

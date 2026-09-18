@@ -144,4 +144,66 @@ export const cv = {
     degree: "Bachelor's in Missile and Space Systems Technology",
   },
   languages: ['English (fluent)', 'Russian (native)'],
+  recommendations: [
+    {
+      name: 'Tony Crosby',
+      title: 'Staff Engineer, TodayTix',
+      date: 'Feb 2024',
+      relation: 'senior colleague',
+      quote: [
+        "I had the pleasure of working directly with Leonid over the course of about a year on projects that spanned the TodayTix and Show Score websites. Leonid is a great communicator and excellent tech lead who is able to effectively work with all parts of the business including product, tech, design and other stakeholders and effectively implement complex technical solutions. He's also a quick learner - the TodayTix website codebase is written in Next JS / React JS / TypeScript which is a different tech stack to the Show Score website. In a short period of time Leonid was able to become very effective in this ecosystem and lead the effort to release major features on both websites. I highly recommend Leonid, he would be an asset on any team he joins",
+      ],
+    },
+    {
+      name: 'Anthony Galvin',
+      title: 'VP Engineering, TodayTix Group',
+      date: 'Jan 2024',
+      relation: 'senior colleague',
+      quote: [
+        "Leonid is an excellent engineering lead who brings a thoughtful and positive approach to shipping software. He's adept at problem solving, able to help cross-functional teams navigate complex problems - or where appropriate jump in and deliver the solution directly himself.",
+        "I've been particularly impressed with Leonid's ability to work on any part of our architecture, from consumer facing features to backend data challenges.",
+      ],
+    },
+    {
+      name: 'Rhianne Evans',
+      title: 'Product Operations, TodayTix Group',
+      date: 'Jan 2024',
+      relation: 'teammate',
+      quote: [
+        'I had the pleasure of working closely with Leonid over the past two years, and I can confidently say that he is a stellar developer and an absolute joy to work with.',
+        'Leonid possesses a rare combination of technical expertise and exceptional communication skills. His ability to break down complex technical issues into clear, understandable terms for non-technical stakeholders is particularly noteworthy.',
+        'What sets Leonid apart is not just his technical know-how, but also his positive and collaborative attitude. He consistently brought a can-do spirit to the team, contributing not only to the success of the projects but also to the overall positive atmosphere within the team. He is always ready to lend a helping hand, share knowledge, collaborate, and go the extra mile.',
+        "I wholeheartedly recommend Leonid to any team looking for a talented and personable developer. It was a pleasure working with him, and I'm confident that he will continue to make significant contributions wherever he goes.",
+      ],
+    },
+    {
+      name: 'Deeksha Gaur',
+      title: 'CEO, Show-Score · Executive Director, TDF',
+      date: 'Jul 2023',
+      relation: 'manager',
+      quote: [
+        'I have worked with Leonid for close to eight years, and have found him to be an invaluable thought partner. He is a strong and thoughtful developer who produces clean code. He is a great tech lead, helping his colleagues to play to their strengths, prioritizing workflow, teaching and training clearly and with care, and problem solving. He has a can-do attitude, and will always find a way to solve the problem, even if its outside his comfort zone. Whenever I\'ve posed an idea at the conceptual stage, he asks great questions to clarify the problem, proposes viable solutions, explains the work implications clearly, and then builds. As a "non-tech" business lead, I have found Leonid\'s insights invaluable and I have learned so much through our time working together. Leonid is a star and I feel very lucky to have worked and collaborated with him.',
+      ],
+    },
+    {
+      name: 'James Campion',
+      title: 'CEO and Founder, Ourea Systems',
+      date: 'Apr 2020',
+      relation: 'manager',
+      quote: [
+        "It's been a pleasure working together with Leonid. A broadminded Developer - his exceptional work flow, skills, ingenuity and comprehension of change requests made the project a dream. He's a strong communicator, energetic and broad-minded Developer! And a detail oriented team player.",
+      ],
+    },
+    {
+      name: 'Tom Melcher',
+      title: 'CEO, Show-Score',
+      date: 'Apr 2020',
+      relation: 'manager',
+      quote: [
+        'Leonid is a world-class software developer who I would happily hire again if the opportunity arose.',
+        'His written and spoken English is near-fluent, and he works very well with cross-functional teams. He has all the skill sets you want in a technical lead -- thoughtful architectures, excellent planning, truly full-stack coding skills, strong devops, commitment to high-quality tests and QA, and effective process manager.',
+        'Please contact me with any specific questions!',
+      ],
+    },
+  ],
 } as const;
