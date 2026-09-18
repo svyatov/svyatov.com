@@ -24,6 +24,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       site.nav.map((item) => (
         <a
           href={item.href}
+          data-key={item.key}
           aria-current={isActive(item.href) ? 'page' : undefined}
           class:list={['px-1 hover:text-accent hover:no-underline', isActive(item.href) ? 'text-accent' : 'text-fg']}
         >

@@ -14,6 +14,7 @@ const label = new URL(url).hostname === 'github.com' ? 'github' : 'site';
 
 <a
   href={url}
+  data-item
   class:list={[
     'flex flex-col gap-3 border border-line bg-surface p-5 text-fg hover:border-accent hover:no-underline md:min-h-50.5',
     className,

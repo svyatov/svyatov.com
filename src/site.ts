@@ -10,8 +10,8 @@ export const site = {
   openToWork: true,
   scanlines: true,
   socials: [
-    { label: 'github', href: 'https://github.com/svyatov' },
-    { label: 'linkedin', href: 'https://www.linkedin.com/in/leonid-svyatov' },
+    { label: 'github', key: 'g', href: 'https://github.com/svyatov' },
+    { label: 'linkedin', key: 'l', href: 'https://www.linkedin.com/in/leonid-svyatov' },
     { label: 'bluesky', href: 'https://bsky.app/profile/svyatov.bsky.social' },
   ],
   nav: [
@@ -43,5 +43,5 @@ export const site = {
       short: 'skills, harnesses, pipelines',
     },
   ],
-  blogTagline: 'Notes on shipping software with Rails, TypeScript and agents in the loop.',
+  blogTagline: 'What I learn building software, fixing bugs, and testing the tools I rely on.',
 } as const;

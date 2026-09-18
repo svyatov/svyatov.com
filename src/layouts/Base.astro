@@ -28,32 +28,74 @@ const props = Astro.props;
       <p class="mb-3 font-semibold text-2xs text-accent tracking-label">KEYS</p>
       <ul class="flex flex-col gap-1.5">
         {
-          site.nav.map((item) => (
-            <li>
-              <span class="text-accent">{item.key}</span> <span class="text-dim">{item.key}{item.rest}</span>
+          [
+            ...site.nav.map((item) => [item.key, item.key + item.rest]),
+            ['-', 'up one level'],
+            [',', 'prev', ', .'],
+            ['.', 'next', ', .'],
+            ['j', 'next item'],
+            ['k', 'prev item'],
+            ['[', 'prev heading'],
+            [']', 'next heading'],
+            ['u', 'top'],
+            ['d', 'bottom'],
+            ['y', 'copy url'],
+            ...site.socials.filter((s) => 'key' in s).map((s) => [s.key, s.label]),
+            ['m', 'email'],
+          ].map(([key, label, when = key]) => (
+            <li data-for={when}>
+              <span class="text-accent">{key}</span> <span class="text-dim">{label}</span>
             </li>
           ))
         }
-        <li data-keys-post><span class="text-accent">, .</span> <span class="text-dim">prev / next</span></li>
         <li><span class="text-accent">?</span> <span class="text-dim">this list</span></li>
         <li><span class="text-accent">esc</span> <span class="text-dim">close</span></li>
       </ul>
     </dialog>
+    <output data-toast class="fixed right-4 bottom-4 z-30 border border-line bg-surface px-3 py-1.5 text-xs opacity-0 transition-opacity">url copied</output>
     <script>
+      import { site } from '../site';
+
+      // Keys: a string navigates, a function runs. Help rows hide when none of their data-for keys are bound on this page.
       const dialog = document.querySelector<HTMLDialogElement>('#keys');
-      const keys = new Map<string, string>();
-      for (const a of document.querySelectorAll<HTMLAnchorElement>('header nav a')) {
-        keys.set(a.querySelector('u')?.textContent ?? '', a.href);
-      }
+      const keys = new Map<string, string | (() => void)>();
       for (const a of document.querySelectorAll<HTMLAnchorElement>('a[data-key]')) keys.set(a.dataset.key ?? '', a.href);
-      document.querySelector('[data-keys-post]')?.toggleAttribute('hidden', !keys.has(',') && !keys.has('.'));
+      for (const s of site.socials) if ('key' in s) keys.set(s.key, () => open(s.href, '_blank', 'noopener'));
+      keys.set('m', `mailto:${site.email}`);
+      const up = location.pathname.replace(/[^/]+\/$/, '');
+      if (up !== location.pathname) keys.set('-', up);
+      const items = [...document.querySelectorAll<HTMLElement>('main a[data-item]')];
+      const move = (d: number) => () => {
+        const i = items.indexOf(document.activeElement as HTMLElement) + d;
+        items[Math.max(0, Math.min(items.length - 1, i))]?.focus();
+      };
+      if (items.length) keys.set('j', move(1)).set('k', move(-1));
+      const heads = [...document.querySelectorAll<HTMLElement>('.prose h2')];
+      const top = (h: HTMLElement) => h.getBoundingClientRect().top;
+      if (heads.length) {
+        keys.set(']', () => heads.find((h) => top(h) > 2)?.scrollIntoView());
+        keys.set('[', () => heads.findLast((h) => top(h) < -2)?.scrollIntoView());
+      }
+      keys.set('u', () => scrollTo(0, 0)).set('d', () => scrollTo(0, document.body.scrollHeight));
+      keys.set('Escape', () => (document.activeElement as HTMLElement | null)?.blur());
+      const toast = document.querySelector<HTMLElement>('[data-toast]');
+      keys.set('y', () =>
+        navigator.clipboard.writeText(location.href).then(() => {
+          toast?.style.setProperty('opacity', '1');
+          setTimeout(() => toast?.style.removeProperty('opacity'), 1200);
+        }),
+      );
+      for (const li of dialog?.querySelectorAll<HTMLElement>('[data-for]') ?? []) {
+        li.hidden = !(li.dataset.for ?? '').split(' ').some((k) => keys.has(k));
+      }
       document.querySelector('[data-keys-open]')?.addEventListener('click', () => dialog?.showModal());
       document.addEventListener('keydown', (e) => {
         const target = e.target as Element;
         if (e.metaKey || e.ctrlKey || e.altKey || target.closest?.('input, textarea, [contenteditable]')) return;
         if (e.key === '?' || (e.key === '/' && e.shiftKey)) return dialog?.open ? dialog.close() : dialog?.showModal();
-        const href = keys.get(e.key);
-        if (href) location.assign(href);
+        const k = keys.get(e.key);
+        if (typeof k === 'function') k();
+        else if (k) location.assign(k);
       });
 
       // Lead headings: type the text in front of the cursor once per section (home, projects, blog) per tab session.
