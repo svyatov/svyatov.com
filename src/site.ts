@@ -3,7 +3,7 @@ export const site = {
   title: 'Leonid Svyatov',
   jobTitle: 'Lead Software Engineer',
   description:
-    'Leonid Svyatov. Full-Stack Software Engineer. I turn ideas into working software, from backend to browser to production. I build with AI agents and contribute to open source as a maintainer and developer.',
+    "I'm Leonid, a software engineer. For 15+ years, I've worked with founders to figure out what they need, build it, and keep it running. I like asking questions before writing code and helping other developers grow. These days, I build with coding agents and share much of my work as open source.",
   bio: 'Software engineer. Ships end-to-end features with agentic AI in the loop. Open to senior / lead roles.',
   url: 'https://svyatov.com',
   email: 'leonid@svyatov.com',
@@ -34,14 +34,14 @@ export const site = {
     },
     {
       name: 'python',
-      long: 'Backend services and LLM tooling.',
-      short: 'services, LLM tooling',
+      long: 'Data pipelines, LLMs and trading systems.',
+      short: 'data, LLMs, trading',
     },
-    { name: 'go', long: 'CLI tooling. See oz.', short: 'CLI tooling' },
+    { name: 'go', long: 'CLI tools and interactive developer workflows.', short: 'CLI tooling' },
     {
       name: 'agentic ai',
-      long: 'Agent skills, workflows and tooling for real delivery.',
-      short: 'skills, workflows',
+      long: 'Skills, harnesses, pipelines and tooling for real delivery.',
+      short: 'skills, harnesses, pipelines',
     },
   ],
   blogTagline: 'Notes on shipping software with Rails, TypeScript and agents in the loop.',
