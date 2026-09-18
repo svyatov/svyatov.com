@@ -17,7 +17,7 @@ const languages = [...countBy(projects, (p) => [p.data.language])].sort(
 
 <Base title="Projects" description="Open-source libraries and tools by Leonid Svyatov: Ruby gems, TypeScript, Go.">
   <section class="flex flex-col gap-5 px-4 pt-10 pb-8 md:px-20 md:pt-18 md:pb-10">
-    <Banner text={banners.projects} />
+    <Banner fonts={banners.projects} />
     <div class="text-lg">
       <p class="text-dim">$ ls -la ~/oss</p>
       <h1 data-type>Open-source libraries and tools I maintain. Descriptions and languages pulled from GitHub at build time.<span class="cursor-blink"></span></h1>

@@ -25,7 +25,7 @@ const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Num
 
 <div class="flex flex-col gap-10 px-4 pt-10 pb-10 md:px-20 md:pt-18 md:pb-14 lg:grid lg:grid-cols-[minmax(0,1fr)_18.75rem] lg:gap-16">
   <section class="flex flex-col gap-5">
-    <Banner text={banners.blog} />
+    <Banner fonts={banners.blog} />
     <div class="text-lg">
       <p class="text-dim">$ tail -f ~/blog{heading ? ` | grep ${heading}` : ''}</p>
       <h1 data-type>{heading ? `Posts filed under ${heading}.` : site.blogTagline}<span class="cursor-blink"></span></h1>
