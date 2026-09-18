@@ -4,10 +4,9 @@ import LangDot from './LangDot.astro';
 
 interface Props {
   project: CollectionEntry<'projects'>;
-  class?: string;
 }
 
-const { project, class: className } = Astro.props;
+const { project } = Astro.props;
 const { name, description, language, url } = project.data;
 const label = new URL(url).hostname === 'github.com' ? 'github' : 'site';
 ---
@@ -17,7 +16,6 @@ const label = new URL(url).hostname === 'github.com' ? 'github' : 'site';
   data-item
   class:list={[
     'flex flex-col gap-3 border border-line bg-surface p-5 text-fg hover:border-accent hover:no-underline md:min-h-50.5',
-    className,
   ]}
 >
   <span class="flex items-baseline justify-between gap-3">
