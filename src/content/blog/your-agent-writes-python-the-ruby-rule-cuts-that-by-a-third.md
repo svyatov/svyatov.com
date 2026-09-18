@@ -11,17 +11,11 @@ Lucian Ghinda [published a post](https://allaboutcoding.ghinda.com/write-agent-s
 ```markdown
 ## Scripts
 
-Write throwaway and utility scripts (data munging, one-off migrations,
-file renames, glue code) in Ruby, even in projects written in another
-language. If it needs a pipe, a loop, a conditional, or more than one
-line, it is a script: write it in Ruby, not Python, Node, or bash.
-Single self-contained commands (`grep`, `git status`) are fine as-is.
+Write throwaway and utility scripts (data munging, one-off migrations, file renames, glue code) in Ruby, even in projects written in another language. If it needs a pipe, a loop, a conditional, or more than one line, it is a script: write it in Ruby, not Python, Node, or bash. Single self-contained commands (`grep`, `git status`) are fine as-is.
 
-Use only the Ruby standard library. If a gem would clearly save
-significant effort, stop and ask before using it.
+Use only the Ruby standard library. If a gem would clearly save significant effort, stop and ask before using it.
 
-Put temporary scripts in a scratch or temp directory, not the repo
-root, and delete them when done unless asked to keep them.
+Put temporary scripts in a scratch or temp directory, not the repo root, and delete them when done unless asked to keep them.
 ```
 
 I pasted it into my global `CLAUDE.md` the same evening. His argument is about review: he reads Ruby daily, so when the agent writes Ruby he stays a reviewer instead of nodding at a diff. He gives three reasons and not one of them is cost. So I went looking for the number he left out.
