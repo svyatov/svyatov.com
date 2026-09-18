@@ -54,7 +54,7 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <div
-    class="flex flex-col gap-10 px-4 pt-10 pb-10 md:px-20 md:pt-14 md:pb-16 lg:grid lg:max-w-post lg:grid-cols-[minmax(0,1fr)_16.25rem] lg:gap-16"
+    class="flex flex-col gap-10 px-4 pt-10 pb-10 md:px-20 md:pt-14 md:pb-16 lg:grid lg:grid-cols-[18.75rem_minmax(0,1fr)] lg:gap-16"
   >
     <article class="flex min-w-0 max-w-article flex-col gap-7">
       <nav aria-label="Breadcrumb" class="flex gap-2 text-sm">
@@ -107,7 +107,7 @@ const jsonLd = {
         }
       </nav>
     </article>
-    <aside class="flex flex-col gap-8 text-sm print:hidden lg:sticky lg:top-8 lg:self-start lg:pt-32">
+    <aside class="flex flex-col gap-8 text-sm print:hidden lg:order-first lg:sticky lg:top-8 lg:self-start lg:pt-32">
       {
         toc.length > 0 && (
           <nav aria-label="On this page" class="flex flex-col gap-2.5" data-toc>

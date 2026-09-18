@@ -50,8 +50,8 @@
   --tracking-rule: 0.22em;
 
   --container-*: initial;
-  --container-article: 47.5rem;
-  --container-post: 80rem;
+  --container-article: 56.25rem;
+  --container-list: 68.5rem;
   --container-summary: 59.375rem;
 
   --shadow-glow: 0 0 0.5rem var(--color-teal);

@@ -31,11 +31,11 @@ const { title, description, date, tags } = post.data;
     <a
       href={postUrl(post)}
       class:list={[
-        'flex flex-col gap-3 border-line border-b px-3 py-6 text-fg hover:bg-surface hover:no-underline md:grid md:grid-cols-[8.75rem_minmax(0,1fr)] md:gap-8',
+        'flex flex-col gap-3 border-line border-b px-3 py-6 text-fg hover:bg-surface hover:no-underline md:grid md:grid-cols-[minmax(0,1fr)_8.75rem] md:gap-8',
         className,
       ]}
     >
-      <span class="flex gap-3 md:flex-col md:gap-1">
+      <span class="flex gap-3 md:order-last md:flex-col md:items-end md:gap-1">
         <span class="text-dim text-sm">[{formatDate(date)}]</span>
         <span class="text-2xs text-dim">{readingTime(post.body)} min read</span>
       </span>
