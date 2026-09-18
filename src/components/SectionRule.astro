@@ -14,6 +14,6 @@ const { title, short, padded = true } = Astro.props;
     {short ? <><span class="md:hidden">{short}</span><span class="hidden md:inline">{title}</span></> : title}
   </h2>
   <span class="text-dim">├──</span>
-  <span class="flex-1 overflow-hidden whitespace-nowrap text-line" aria-hidden="true">{"─".repeat(400)}</span>
+  <span class="w-0 flex-1 overflow-hidden whitespace-nowrap text-line" aria-hidden="true">{"─".repeat(400)}</span>
   <span class="text-dim"><slot /></span>
 </div>
