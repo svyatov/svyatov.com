@@ -31,6 +31,7 @@ Personal site of Leonid Svyatov. Astro 7 static site, Tailwind CSS 4, hosted on 
 
 - Tailwind utilities in templates, `@utility` for the two custom ones, `.prose` for markdown output. No arbitrary values except grid templates.
 - Every internal link ends with `/` (`trailingSlash: 'always'`); the dist test fails on anything else.
+- Fences: `markdown` and `text` soft-wrap, `plaintext` scrolls. Use `plaintext` for ASCII diagrams and aligned output, `text` for prose-like output.
 - Biome does not touch `src/content`. Everything else: single quotes, 100 columns, sorted imports and classes.
 - Throwaway scripts are Ruby stdlib in `tmp/` (gitignored) and get deleted.
 - Conventional Commits, no AI attribution footers.

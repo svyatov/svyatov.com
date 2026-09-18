@@ -230,7 +230,7 @@ So: not threads, and nothing runs at the same time. Two switches on one wall.
 
 Here is the panel with both ideas applied:
 
-```text
+```plaintext
 draft
 │
 ├── open              two regions, both live at once
@@ -632,7 +632,7 @@ Write the typo into a free-standing literal type instead, with no tie back to `S
 
 The test is mechanical, and you can run it on your own code in about a minute: **count your nested states and your parallel regions. If both are zero, you have written a state machine and paid for a statechart.**
 
-```text
+```plaintext
 nested states?      no  ─┐
 parallel regions?   no   ├─▶  you have a state machine. Write the switch.
 `after` timers?     no   │

@@ -186,6 +186,10 @@
     padding: --spacing(4) --spacing(5);
     overflow-x: auto;
   }
+  & pre[data-language="markdown"] > code,
+  & pre[data-language="text"] > code {
+    white-space: pre-wrap;
+  }
   & img {
     max-width: 100%;
     height: auto;
