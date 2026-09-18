@@ -2,12 +2,16 @@ export const cv = {
   title: 'Lead Software Engineer',
   location: 'Yerevan, Armenia',
   summary:
-    'Lead software engineer with extensive experience managing open-source projects and delivering scalable web applications using Ruby, TypeScript, and Go. Skilled in SDLC automation, API design, cloud infrastructure, and mentoring teams to enforce code quality and optimize performance.',
+    'Lead software engineer with extensive experience managing open-source projects and delivering scalable web applications using Ruby, TypeScript, Python and Go. Skilled in SDLC automation, API design, cloud infrastructure, and mentoring teams to enforce code quality and optimize performance. Uses an AI-first development approach, directing AI agents to write code while retaining ownership of architecture, review, and delivery.',
   span: '2015 – present',
   experience: [
     {
       period: 'Jan 2026 – Present',
       company: 'Independent Consultant',
+      story:
+        'I split my time between client products and open source. Recent work includes a timber marketplace built for weak rural connections and a Telegram matching bot with payments. I also maintain more than 20 open-source projects and build tools for working with coding agents.',
+      type: 'Freelance',
+      location: 'Remote',
       role: 'Lead Software Engineer',
       highlights: [
         'Managed the release and maintenance of over 20 open-source projects in Ruby, TypeScript, and Go, including oz (Go CLI wizard framework), handrail (zero-dependency Go guardrail engine with dual agent harness native hooks), botik (fully typed Ruby Telegram Bot API client), sec_id (ISIN, CUSIP, SEDOL, CIK, FIGI validation), clsx-rails, devto-client, and Hacker News Sorted (Chrome extension)',
@@ -19,6 +23,10 @@ export const cv = {
     {
       period: 'Aug 2024 – Jul 2025',
       company: 'Halo',
+      story:
+        'I built tools that turn academic papers and research data into researcher profiles, using AI to match authors and extract information. I also worked on the foundations: shared API rate limits and type checks that catch errors before release.',
+      type: 'Full-time',
+      location: 'Chicago, US · Remote',
       role: 'Senior Software Engineer',
       highlights: [
         'Designed and implemented an AI-powered data enrichment pipeline using OpenAlex academic data, incorporating LLM-assisted author disambiguation, profile creation, and automated keyword inference via the OpenAI API',
@@ -31,6 +39,10 @@ export const cv = {
     {
       period: 'Feb 2024 – Aug 2024',
       company: 'Ourea Systems',
+      story:
+        'I led an MVP from requirements through deployment, working directly with stakeholders. The work combined Rails, WhatsApp and SMS messaging, and AI-assisted customer service. I also handled the production setup and kept test coverage above 90%.',
+      type: 'Contract',
+      location: 'Dubai, UAE · Remote',
       role: 'Lead Software Engineer',
       highlights: [
         'Led the development and scaling of a pioneering MVP project, emphasizing innovative solutions and positioning for future growth',
@@ -46,6 +58,10 @@ export const cv = {
     {
       period: 'Mar 2021 – Jan 2024',
       company: 'TodayTix Group',
+      story:
+        'I returned to Show-Score to restore features and clear out years of technical debt. We redesigned the main pages, improved their performance by more than 37%, and brought Show-Score reviews to other TodayTix platforms. I also automated testing and releases.',
+      type: 'Full-time',
+      location: 'New York, US · Remote',
       role: 'Tech Lead',
       highlights: [
         'Revived and expanded the Show-Score project by restoring all key functionalities, significantly enhancing its utility and user engagement',
@@ -62,6 +78,10 @@ export const cv = {
     {
       period: 'May 2020 – Feb 2021',
       company: 'InputHealth',
+      story:
+        'I worked on healthcare software and the tools our team used to build it. One project used database snapshots to cut branch-switching time by 95%. Alongside product work, I helped other engineers through code reviews and pair programming.',
+      type: 'Full-time',
+      location: 'Vancouver, CA · Remote',
       role: 'Senior Software Engineer',
       highlights: [
         'Designed and launched a GitHub Branch Transition Tool using PostgreSQL snapshots, reducing developer branch management time by 95%',
@@ -76,6 +96,10 @@ export const cv = {
     {
       period: 'Oct 2015 – Mar 2020',
       company: 'Show-Score',
+      story:
+        'I wrote more than half of Show-Score, a community for Broadway fans, and helped build the engineering team. My work covered the architecture, ticketing and payment integrations, and AWS infrastructure. As the team grew, I hired and mentored engineers across New York and Southeast Asia.',
+      type: 'Full-time',
+      location: 'New York, US · Remote',
       role: 'Lead Software Engineer',
       highlights: [
         'Engineered and personally coded over 50% of Show-Score, a leading online community for Broadway fans, integrating real-time APIs from major ticketing systems, Stripe, and Mandrill',
@@ -94,26 +118,26 @@ export const cv = {
     },
   ],
   skills: [
+    'Software Development Life Cycle (SDLC) Management',
+    'Stakeholder Communication and Requirement Translation',
+    'Security Best Practices and Vulnerability Management',
     'Technical Roadmap Planning',
     'Open Source Project Leadership',
-    'Software Development Life Cycle (SDLC) Management',
+    'Mentorship and Team Development',
+    'Continuous Integration and Continuous Deployment (CI/CD)',
+    'Automated Testing and Test Coverage Management',
+    'Cloud Infrastructure Management (AWS)',
     'DevOps Practices and Tooling',
     'Incident Response and Monitoring',
     'API Rate Limiting and Throttling',
     'Scalable System Design',
-    'Continuous Integration and Continuous Deployment (CI/CD)',
-    'Cloud Infrastructure Management (AWS)',
-    'Legacy System Modernization',
-    'Automated Testing and Test Coverage Management',
     'Modular Software Architecture',
+    'Legacy System Modernization',
     'Code Quality and Standards Enforcement',
-    'Stakeholder Communication and Requirement Translation',
-    'Mentorship and Team Development',
     'AI Agents',
-    'Security Best Practices and Vulnerability Management',
-    'Agentic Frameworks',
-    'Large Language Models (LLMs)',
     'Performance Optimization and Tuning',
+    'Large Language Models (LLMs)',
+    'Agentic Frameworks',
   ],
   education: {
     school: 'Bauman Moscow State Technical University',
