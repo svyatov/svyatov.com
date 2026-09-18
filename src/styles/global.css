@@ -223,3 +223,23 @@
     color: var(--color-accent);
   }
 }
+
+@view-transition {
+  navigation: auto;
+}
+
+[data-vt="content"] {
+  view-transition-name: content;
+}
+
+[data-vt="sidebar"] {
+  view-transition-name: sidebar;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
