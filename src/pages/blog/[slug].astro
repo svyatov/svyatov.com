@@ -62,14 +62,16 @@ const jsonLd = {
         ><span class="text-dim">/</span><span class="truncate">{post.id}.md</span>
       </nav>
       <h1 class="font-semibold text-3xl text-accent leading-banner tracking-h1 md:text-4xl">{title}</h1>
-      <div class="flex flex-wrap items-center gap-4 text-sm">
-        <time datetime={date.toISOString()} class="text-dim">{formatDate(date)}</time>
-        <span class="text-dim">·</span>
-        <span class="text-dim">{readingTime(post.body)} min read</span>
+      <div class="flex flex-col gap-3 text-sm md:flex-row md:items-center md:gap-4">
+        <div class="flex items-center gap-4">
+          <time datetime={date.toISOString()} class="text-dim">{formatDate(date)}</time>
+          <span class="text-dim">·</span>
+          <span class="text-dim">{readingTime(post.body)} min read</span>
+        </div>
         {
           tags.length > 0 && (
             <>
-              <span class="text-dim">·</span>
+              <span class="hidden text-dim md:inline">·</span>
               <div class="flex flex-wrap gap-2">
                 {tags.map((tag) => (
                   <Tag href={tagUrl(tag)}>{tag}</Tag>
