@@ -11,11 +11,11 @@ export const getStaticPaths = (async () => {
   const posts = (await getCollection('blog')).sort(byDateDesc);
   return posts.map((post, i) => ({
     params: { slug: post.id },
-    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+    props: { post, next: posts[i - 1], prev: posts[i + 1] },
   }));
 }) satisfies GetStaticPaths;
 
-const { post, newer, older } = Astro.props;
+const { post, next, prev } = Astro.props;
 const { title, description, date, updated, tags } = post.data;
 const { Content, headings } = await render(post);
 const toc = headings.filter((h) => h.depth === 2);
@@ -83,25 +83,25 @@ const jsonLd = {
       <div class="prose"><Content /></div>
       <hr class="border-line border-t" />
       <AuthorCard />
-      <nav aria-label="Older and newer posts" class="grid grid-cols-2 gap-4 text-sm">
+      <nav aria-label="Older and next posts" class="grid grid-cols-2 gap-4 text-sm">
         {
-          older ? (
-            <a href={postUrl(older)} class="flex flex-col gap-1 border border-line p-4 text-fg hover:border-accent hover:no-underline">
-              <span class="text-dim">← older</span>
-              <span class="font-medium">{older.data.title}</span>
+          prev ? (
+            <a href={postUrl(prev)} rel="prev" data-key="," class="flex flex-col gap-1 border border-line p-4 text-fg hover:border-accent hover:no-underline">
+              <span class="text-dim">[<u class="text-accent no-underline">,</u>] prev</span>
+              <span class="font-medium">{prev.data.title}</span>
             </a>
           ) : (
             <span />
           )
         }
         {
-          newer && (
+          next && (
             <a
-              href={postUrl(newer)}
+              href={postUrl(next)} rel="next" data-key="."
               class="flex flex-col gap-1 border border-line p-4 text-right text-fg hover:border-accent hover:no-underline"
             >
-              <span class="text-dim">newer →</span>
-              <span class="font-medium">{newer.data.title}</span>
+              <span class="text-dim">next [<u class="text-accent no-underline">.</u>]</span>
+              <span class="font-medium">{next.data.title}</span>
             </a>
           )
         }

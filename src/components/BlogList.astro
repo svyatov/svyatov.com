@@ -37,9 +37,9 @@ const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Num
       {
         page && (
           <nav aria-label="Pagination" class="flex justify-between px-3 py-2 text-sm">
-            {next ? <a href={next}>← older</a> : <span class="text-dim">← older</span>}
+            {next ? <a href={next} rel="next" data-key="," class="text-fg hover:text-accent hover:no-underline">[<u class="text-accent no-underline">,</u>] older</a> : <span class="text-dim">[,] older</span>}
             <span class="text-dim">page {page.current} / {page.total}</span>
-            {prev ? <a href={prev}>newer →</a> : <span class="text-dim">newer →</span>}
+            {prev ? <a href={prev} rel="prev" data-key="." class="text-fg hover:text-accent hover:no-underline">newer [<u class="text-accent no-underline">.</u>]</a> : <span class="text-dim">newer [.]</span>}
           </nav>
         )
       }

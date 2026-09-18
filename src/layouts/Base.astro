@@ -34,6 +34,7 @@ const props = Astro.props;
             </li>
           ))
         }
+        <li data-keys-post><span class="text-accent">, .</span> <span class="text-dim">prev / next</span></li>
         <li><span class="text-accent">?</span> <span class="text-dim">this list</span></li>
         <li><span class="text-accent">esc</span> <span class="text-dim">close</span></li>
       </ul>
@@ -44,6 +45,8 @@ const props = Astro.props;
       for (const a of document.querySelectorAll<HTMLAnchorElement>('header nav a')) {
         keys.set(a.querySelector('u')?.textContent ?? '', a.href);
       }
+      for (const a of document.querySelectorAll<HTMLAnchorElement>('a[data-key]')) keys.set(a.dataset.key ?? '', a.href);
+      document.querySelector('[data-keys-post]')?.toggleAttribute('hidden', !keys.has(',') && !keys.has('.'));
       document.querySelector('[data-keys-open]')?.addEventListener('click', () => dialog?.showModal());
       document.addEventListener('keydown', (e) => {
         const target = e.target as Element;
