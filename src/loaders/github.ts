@@ -8,7 +8,7 @@ const repo = z.object({
   description: z.string().nullable(),
   language: z.string().nullable(),
   stargazers_count: z.number(),
-  pushed_at: z.string(),
+  created_at: z.string(),
   html_url: z.string(),
 });
 
@@ -17,7 +17,7 @@ export const schema = z.object({
   description: z.string(),
   language: z.string(),
   stars: z.number(),
-  pushedAt: z.coerce.date(),
+  createdAt: z.coerce.date(),
   url: z.url(),
   order: z.number(),
 });
@@ -58,7 +58,7 @@ export function githubLoader(user: string): Loader {
             description: p.description ?? r.description ?? '',
             language: p.language ?? r.language ?? 'Other',
             stars: r.stargazers_count,
-            pushedAt: r.pushed_at,
+            createdAt: r.created_at,
             url: p.url ?? r.html_url,
             order,
           },
