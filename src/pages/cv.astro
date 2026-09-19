@@ -30,7 +30,7 @@ const contacts = [
     <div class="flex flex-col items-start gap-6 md:flex-row md:justify-between">
       <p class="max-w-summary border border-line bg-surface px-4 py-4 leading-summary md:px-6 md:py-5">{cv.summary}</p>
       <a
-        href="/cv.pdf"
+        href="/CV.pdf"
         class="inline-flex h-9 shrink-0 items-center self-center border border-accent px-4 font-medium text-accent text-sm tracking-btn md:h-11.5 md:self-auto md:px-5 md:text-base print:hidden hover:bg-accent hover:text-bg hover:no-underline"
       >
         [ download pdf ]
@@ -44,7 +44,7 @@ const contacts = [
       cv.experience.map((job) => (
         <article class="flex flex-col gap-3 py-7 md:grid md:grid-cols-[18rem_minmax(0,1fr)] md:items-baseline md:gap-8">
           <div class="flex flex-col gap-1 text-dim text-sm">
-            <p>{job.period} · {duration(job.period)}</p>
+            <p>{[job.period, duration(job.period)].filter(Boolean).join(' · ')}</p>
             <p class="text-xs">{[job.location, job.type].filter(Boolean).join(' · ')}</p>
           </div>
           <div class="flex flex-col gap-3.5">
@@ -77,7 +77,6 @@ const contacts = [
       <SectionRule title="EDUCATION" padded={false} />
       <div class="flex flex-col gap-1 text-md">
         <span class="font-semibold">{cv.education.school}</span>
-        <span class="text-dim">{cv.education.where}</span>
         <span>{cv.education.degree}</span>
       </div>
     </div>

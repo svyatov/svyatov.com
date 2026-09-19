@@ -8,7 +8,8 @@ const monthIndex = (s: string, now: Date) => {
 
 /** LinkedIn-style length of a "Mon YYYY – Mon YYYY" period, inclusive of both months. */
 export function duration(period: string, now = new Date()): string {
-  const [from, to] = period.split(' – ').map((s) => monthIndex(s, now));
+  if (/^\d{4} [-–] \d{4}$/.test(period)) return '';
+  const [from, to] = period.split(/ [-–] /).map((s) => monthIndex(s, now));
   const months = to - from + 1;
   const years = Math.floor(months / 12);
   const rest = months % 12;

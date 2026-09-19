@@ -7,7 +7,10 @@ describe('duration', () => {
     expect(duration('Mar 2021 – Jan 2024')).toBe('2 yrs 11 mos');
     expect(duration('Feb 2024 – Aug 2024')).toBe('7 mos');
     expect(duration('Jun 2010 – Jun 2011')).toBe('1 yr 1 mo');
+    expect(duration('Jan 2015 - Jun 2015')).toBe('6 mos');
   });
   test('Present ends at the given date', () =>
     expect(duration('Jan 2026 – Present', new Date('2026-09-17T00:00:00Z'))).toBe('9 mos'));
+  test('does not infer months for a year-only period', () =>
+    expect(duration('2010 - 2014')).toBe(''));
 });

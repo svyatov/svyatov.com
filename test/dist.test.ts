@@ -25,11 +25,7 @@ beforeAll(() => {
   );
 });
 
-// Placeholder links that are allowed to 404 until the file is added.
-const placeholders = new Set(['/cv.pdf']);
-
 const resolves = (href: string) => {
-  if (placeholders.has(href)) return true;
   const path = href.replace(/[#?].*$/, '');
   return path.endsWith('/')
     ? existsSync(join(dist, path, 'index.html'))
