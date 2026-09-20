@@ -1,5 +1,15 @@
 import { describe, expect, test } from 'vitest';
-import { byCountDesc, countBy, formatDate, postUrl, readingTime, tagUrl, yearOf } from './posts';
+import {
+  byCountDesc,
+  countBy,
+  formatDate,
+  ogUrl,
+  postUrl,
+  readingTime,
+  tagUrl,
+  yearOf,
+  yearUrl,
+} from './posts';
 
 describe('readingTime', () => {
   test('rounds words at 200 wpm with a floor of one minute', () => {
@@ -21,7 +31,10 @@ describe('urls', () => {
   test('always end with a slash', () => {
     expect(postUrl({ id: 'hello-world' })).toBe('/blog/hello-world/');
     expect(tagUrl('rails')).toBe('/blog/tag/rails/');
+    expect(yearUrl(2026)).toBe('/blog/year/2026/');
   });
+  test('og image lives under /og/', () =>
+    expect(ogUrl({ id: 'hello-world' })).toBe('/og/hello-world.png'));
   test('tag urls are encoded', () => expect(tagUrl('agentic ai')).toBe('/blog/tag/agentic%20ai/'));
 });
 

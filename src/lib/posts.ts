@@ -8,6 +8,10 @@ export const postUrl = (post: Pick<Post, 'id'>) => `/blog/${post.id}/`;
 
 export const tagUrl = (tag: string) => `/blog/tag/${encodeURIComponent(tag)}/`;
 
+export const yearUrl = (year: number) => `/blog/year/${year}/`;
+
+export const ogUrl = (post: Pick<Post, 'id'>) => `/og/${post.id}.png`;
+
 /** ISO date, YYYY-MM-DD. */
 export const formatDate = (date: Date) => date.toISOString().slice(0, 10);
 

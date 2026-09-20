@@ -4,7 +4,7 @@ import type { GetStaticPaths } from 'astro';
 import AuthorCard from '../../components/AuthorCard.astro';
 import Tag from '../../components/Tag.astro';
 import Base from '../../layouts/Base.astro';
-import { byDateDesc, formatDate, postUrl, readingTime, tagUrl } from '../../lib/posts';
+import { byDateDesc, formatDate, ogUrl, postUrl, readingTime, tagUrl } from '../../lib/posts';
 import { site } from '../../site';
 
 export const getStaticPaths = (async () => {
@@ -27,7 +27,7 @@ const share = [
   { label: 'hn', href: `https://news.ycombinator.com/submitlink?u=${encodeURIComponent(url)}&t=${encodeURIComponent(title)}` },
 ];
 const editUrl = `${site.repo}/edit/main/${post.filePath}`;
-const image = `/og/${post.id}.png`;
+const image = ogUrl(post);
 
 const jsonLd = {
   '@context': 'https://schema.org',

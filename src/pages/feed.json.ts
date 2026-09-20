@@ -1,6 +1,7 @@
 import { getCollection } from 'astro:content';
 import type { APIRoute } from 'astro';
 import { feedItems } from '../lib/feeds';
+import { ogUrl } from '../lib/posts';
 import { site } from '../site';
 
 export const GET: APIRoute = async () => {
@@ -22,7 +23,7 @@ export const GET: APIRoute = async () => {
       date_published: i.published.toISOString(),
       date_modified: i.updated.toISOString(),
       tags: i.tags,
-      image: `${site.url}/og/${i.id}.png`,
+      image: `${site.url}${ogUrl(i)}`,
     })),
   };
   return new Response(JSON.stringify(feed, null, 2), {
