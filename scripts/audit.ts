@@ -27,7 +27,11 @@ for (const profile of ['mobile', 'desktop']) {
         url: routes,
         chromePath: chromium.executablePath(),
         numberOfRuns: runs,
-        settings: profile === 'desktop' ? { preset: 'desktop' } : {},
+        settings: {
+          ...(profile === 'desktop' ? { preset: 'desktop' } : {}),
+          // Ubuntu 24.04 runners block Chrome's user-namespace sandbox; the audit only loads dist/.
+          ...(process.env.CI ? { chromeFlags: '--no-sandbox' } : {}),
+        },
       },
       assert: {
         assertions: {
