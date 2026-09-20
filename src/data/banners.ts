@@ -4,7 +4,7 @@
  * Fonts: ANSI Shadow, Nancyj, Ghoulish, Bolger, Diet Cola, Fender, Varsity, Red Phoenix, Goofy, Shaded Blocky.
  */
 export const banners = {
-  connect: [
+  home: [
     ` ██████╗ ██████╗ ███╗   ██╗███╗   ██╗███████╗ ██████╗████████╗
 ██╔════╝██╔═══██╗████╗  ██║████╗  ██║██╔════╝██╔════╝╚══██╔══╝
 ██║     ██║   ██║██╔██╗ ██║██╔██╗ ██║█████╗  ██║        ██║
