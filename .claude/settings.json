@@ -1,0 +1,5 @@
+{
+  "enabledPlugins": {
+    "astro@leo-toolkit": true
+  }
+}
