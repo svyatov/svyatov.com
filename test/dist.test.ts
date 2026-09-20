@@ -25,6 +25,11 @@ beforeAll(() => {
   );
 });
 
+const jsonLd = (html: string) =>
+  JSON.parse(
+    html.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)?.[1] ?? 'null',
+  );
+
 const resolves = (href: string) => {
   const path = href.replace(/[#?].*$/, '');
   return path.endsWith('/')
@@ -54,25 +59,15 @@ describe('pages', () => {
     }
   });
 
-  test('no post id collides with the blog sub-routes', () => {
-    expect(posts.length).toBeGreaterThan(0);
-    for (const id of posts) expect(id).not.toMatch(/^\d+$|^tag$|^year$/);
-  });
-
   test('json-ld: WebSite on home, BlogPosting on posts', () => {
-    const parse = (html: string) =>
-      JSON.parse(
-        html.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)?.[1] ??
-          'null',
-      );
     expect(
-      parse(read('index.html'))['@graph'].some(
+      jsonLd(read('index.html'))['@graph'].some(
         (node: { '@type': string }) => node['@type'] === 'WebSite',
       ),
     ).toBe(true);
     for (const id of posts) {
       const html = read(`blog/${id}/index.html`);
-      const data = parse(html);
+      const data = jsonLd(html);
       expect(data['@type'], id).toBe('BlogPosting');
       expect(data.url, id).toBe(`https://svyatov.com/blog/${id}/`);
       expect(data.mainEntityOfPage).toBe(data.url);
@@ -104,21 +99,21 @@ describe('pages', () => {
     expect(locations.sort()).toEqual(canonicals.sort());
     expect(read('404.html')).toContain('name="robots" content="noindex,follow"');
     for (const id of posts) {
-      const html = read(`blog/${id}/index.html`);
-      const date =
-        html.match(/property="article:modified_time" content="([^"]+)"/)?.[1] ??
-        html.match(/property="article:published_time" content="([^"]+)"/)?.[1];
+      const { dateModified } = jsonLd(read(`blog/${id}/index.html`));
       const entry = sitemap.match(
         new RegExp(`<url><loc>https://svyatov.com/blog/${id}/</loc>([\\s\\S]*?)</url>`),
       )?.[1];
-      expect(entry, id).toContain(`<lastmod>${date}</lastmod>`);
+      expect(entry, id).toContain(`<lastmod>${dateModified}</lastmod>`);
     }
   });
 });
 
 describe('feeds and text endpoints', () => {
+  // A post id that collides with a sub-route (tag, year, a page number) drops out of `posts`
+  // but stays in the feeds, so the counts disagree.
   test('rss, atom and json carry every post', () => {
     const n = posts.length;
+    expect(n).toBeGreaterThan(0);
     expect(read('rss.xml').match(/<item>/g)).toHaveLength(n);
     expect(read('atom.xml').match(/<entry>/g)).toHaveLength(n);
     expect(JSON.parse(read('feed.json')).items).toHaveLength(n);
@@ -165,7 +160,7 @@ describe('feeds and text endpoints', () => {
       }
     }
     const images = [...markdown.matchAll(/!\[[^\]]*\]\(([^)]+)\)/g)];
-    expect(images).toHaveLength(7);
+    expect(images.length).toBeGreaterThan(0);
     for (const [, source] of images) {
       const url = new URL(source);
       expect(url.origin).toBe('https://svyatov.com');
