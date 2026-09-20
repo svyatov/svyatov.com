@@ -14,9 +14,9 @@ const label = new URL(url).hostname === 'github.com' ? 'github' : 'site';
   href={url}
   data-item
   data-language={language}
-  class="flex flex-col gap-2 border-line border-b py-4 text-fg md:px-3 hover:bg-surface hover:no-underline md:grid md:grid-cols-[13.75rem_9.375rem_minmax(0,1fr)_5.625rem] md:items-center md:gap-6"
+  class="group flex flex-col gap-2 border-line border-b py-4 text-fg md:px-3 hover:bg-surface hover:no-underline md:grid md:grid-cols-[13.75rem_9.375rem_minmax(0,1fr)_5.625rem] md:items-center md:gap-6"
 >
-  <span class="font-semibold text-accent">{name}/</span>
+  <span class="font-semibold text-accent group-hover:underline">{name}/</span>
   <span class="flex items-center gap-2 text-sm"><LangDot language={language} /><span class="text-dim">{language}</span></span>
   <span class="text-md">{description}</span>
   <span class="text-dim text-xs md:text-right">{label} →</span>

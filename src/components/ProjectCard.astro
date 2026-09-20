@@ -14,10 +14,10 @@ const label = new URL(url).hostname === 'github.com' ? 'github' : 'site';
 <a
   href={url}
   data-item
-  class="flex flex-col gap-3 border border-line bg-surface p-5 text-fg hover:border-accent hover:no-underline md:min-h-50.5"
+  class="group flex flex-col gap-3 border border-line bg-surface p-5 text-fg hover:border-accent hover:no-underline md:min-h-50.5"
 >
   <span class="flex items-baseline justify-between gap-3">
-    <span class="font-semibold text-accent md:text-prose">{name}/</span>
+    <span class="font-semibold text-accent group-hover:underline md:text-prose">{name}/</span>
     <span class="hidden text-dim text-xs md:inline">{language}</span>
   </span>
   <span class="grow text-sm leading-card">{description}</span>

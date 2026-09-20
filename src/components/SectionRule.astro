@@ -10,7 +10,7 @@ const { title, short, padded = true } = Astro.props;
 
 <div class:list={['flex flex-wrap items-center gap-3.5 text-sm', padded && 'px-4 md:px-20']}>
   <span class="text-dim">──┤</span>
-  <h2 class="font-semibold text-accent tracking-rule">
+  <h2 class="font-semibold text-fg tracking-rule">
     {short ? <><span class="md:hidden">{short}</span><span class="hidden md:inline">{title}</span></> : title}
   </h2>
   <span class="text-dim">├──</span>

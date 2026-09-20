@@ -122,7 +122,7 @@ const jsonLd = {
       {
         toc.length > 0 && (
           <nav aria-label="On this page" class="flex flex-col gap-2.5" data-toc>
-            <h2 class="font-semibold text-2xs text-accent tracking-label">ON THIS PAGE</h2>
+            <h2 class="font-semibold text-2xs text-fg tracking-label">ON THIS PAGE</h2>
             {toc.map((h) => (
               <a href={`#${h.slug}`} class="text-dim aria-[current=true]:text-fg">
                 {h.text}
@@ -132,7 +132,7 @@ const jsonLd = {
         )
       }
       <div class="flex flex-col gap-2.5">
-        <h2 class="font-semibold text-2xs text-accent tracking-label">SHARE</h2>
+        <h2 class="font-semibold text-2xs text-fg tracking-label">SHARE</h2>
         <div class="flex flex-wrap gap-2.5">
           {share.map((s) => <a href={s.href} rel="noopener">[ {s.label} ]</a>)}
           <button type="button" data-copy={url} class="cursor-pointer text-accent hover:text-accent-hover hover:underline">
@@ -141,7 +141,7 @@ const jsonLd = {
         </div>
       </div>
       <div class="flex flex-col gap-2.5">
-        <h2 class="font-semibold text-2xs text-accent tracking-label">SOURCE</h2>
+        <h2 class="font-semibold text-2xs text-fg tracking-label">SOURCE</h2>
         <a href={editUrl} class="text-dim">edit this post on github →</a>
       </div>
     </aside>

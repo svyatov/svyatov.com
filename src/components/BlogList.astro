@@ -45,22 +45,22 @@ const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Num
     </section>
     <aside class="flex flex-col gap-8 text-sm lg:order-first lg:pt-6">
       <div class="flex flex-col gap-3">
-        <h2 class="font-semibold text-2xs text-accent tracking-label">TAGS</h2>
+        <h2 class="font-semibold text-2xs text-fg tracking-label">TAGS</h2>
         <div class="flex flex-wrap gap-2">
           {tags.map(([tag]) => <Tag href={tagUrl(String(tag))} active={tag === activeTag}>{tag}</Tag>)}
         </div>
       </div>
       <div class="flex flex-col gap-3 border border-line bg-surface p-5">
-        <h2 class="font-semibold text-2xs text-accent tracking-label">SUBSCRIBE</h2>
+        <h2 class="font-semibold text-2xs text-fg tracking-label">SUBSCRIBE</h2>
         <p>No newsletter. Just a feed.</p>
         <div class="flex gap-3">{feeds.map((f) => <a href={f.href}>[ {f.label} ]</a>)}</div>
       </div>
       <div class="flex flex-col gap-3">
-        <h2 class="font-semibold text-2xs text-accent tracking-label">ARCHIVE</h2>
+        <h2 class="font-semibold text-2xs text-fg tracking-label">ARCHIVE</h2>
         <div class="flex flex-col gap-1.5">
           {
             years.map(([year, n]) => (
-              <a href={`/blog/year/${year}/`} class="text-fg">
+              <a href={`/blog/year/${year}/`}>
                 {year} <span class="text-dim">·· {n}</span>
               </a>
             ))

@@ -72,10 +72,8 @@
   }
   a {
     color: var(--color-accent);
-  }
-  :where(p, footer) a {
-    text-decoration-line: underline;
-    text-underline-offset: 0.15em;
+    text-decoration-thickness: 0.0625rem;
+    text-underline-offset: 0.22em;
   }
   a:hover {
     color: var(--color-accent-hover);
@@ -135,10 +133,6 @@
   & > * {
     min-width: 0;
     margin: 0;
-  }
-  & a {
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
   }
   & h2,
   & h3 {
@@ -244,7 +238,7 @@
     overflow-wrap: normal;
   }
   & th {
-    color: var(--color-accent);
+    color: var(--color-fg);
     white-space: nowrap;
   }
 }

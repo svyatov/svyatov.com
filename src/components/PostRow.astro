@@ -15,11 +15,11 @@ const { title, description, date, tags } = post.data;
     <a
       href={postUrl(post)}
       data-item
-      class="flex flex-col gap-0.5 border-line border-b py-3 text-fg hover:bg-surface hover:no-underline md:grid md:grid-cols-[8.75rem_minmax(0,1fr)_7.5rem] md:items-baseline md:gap-6 md:px-3 md:py-3.5"
+      class="group flex flex-col gap-0.5 border-line border-b py-3 text-fg hover:bg-surface hover:no-underline md:grid md:grid-cols-[8.75rem_minmax(0,1fr)_7.5rem] md:items-baseline md:gap-6 md:px-3 md:py-3.5"
     >
       <span class="text-dim text-xs md:text-sm">{formatDate(date)}</span>
       <span class="flex flex-col gap-0.5">
-        <span class="font-medium">{title}</span>
+        <span class="font-medium text-accent group-hover:underline">{title}</span>
         <span class="hidden truncate text-dim text-sm md:inline">{description}</span>
       </span>
       <span class="hidden text-right text-dim text-xs md:inline">read →</span>
@@ -28,14 +28,14 @@ const { title, description, date, tags } = post.data;
     <a
       href={postUrl(post)}
       data-item
-      class="flex flex-col gap-3 border-line border-b py-6 text-fg hover:bg-surface hover:no-underline md:grid md:grid-cols-[minmax(0,1fr)_8.75rem] md:gap-8 lg:px-3"
+      class="group flex flex-col gap-3 border-line border-b py-6 text-fg hover:bg-surface hover:no-underline md:grid md:grid-cols-[minmax(0,1fr)_8.75rem] md:gap-8 lg:px-3"
     >
       <span class="flex items-baseline gap-3 md:order-last md:flex-col md:items-end md:gap-1">
         <span class="text-dim text-sm">{formatDate(date)}</span> <span class="text-dim text-sm md:hidden">·</span>
         <span class="text-2xs text-dim">{readingTime(post.body)} min read</span>
       </span>
       <span class="flex flex-col gap-2">
-        <span class="font-semibold text-accent text-xl">{title}</span>
+        <span class="font-semibold text-accent text-xl group-hover:underline">{title}</span>
         <span class="line-clamp-2 text-md leading-body">{description}</span>
         {tags.length > 0 && <span class="text-dim text-xs"># {tags.join(' · ')}</span>}
       </span>
