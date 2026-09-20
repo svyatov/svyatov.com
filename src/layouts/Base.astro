@@ -126,11 +126,8 @@ const props = Astro.props;
         else if (k) location.assign(k);
       });
 
-      // Headings stay visible during loading and with reduced motion.
-      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
       // Click burst: a ring of ascii sparks drifts out from the pointer and fades.
-      if (!reduced) {
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.addEventListener('click', ({ clientX, clientY, target }) => {
           if ((target as Element).closest?.('a')) return; // navigation would cut the burst mid-flight
           for (let k = 0; k < 12; k++) {
