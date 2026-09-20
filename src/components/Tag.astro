@@ -2,10 +2,9 @@
 interface Props {
   href: string;
   active?: boolean;
-  [key: string]: unknown;
 }
 
-const { href, active = false, ...rest } = Astro.props;
+const { href, active = false } = Astro.props;
 ---
 
 <a
@@ -13,5 +12,4 @@ const { href, active = false, ...rest } = Astro.props;
   class:list={[
     'border px-2 py-0.5 text-xs hover:no-underline',
     active ? 'border-accent text-accent' : 'border-line text-dim hover:border-accent hover:text-accent',
-  ]}
-  {...rest}><slot /></a>
+  ]}><slot /></a>
