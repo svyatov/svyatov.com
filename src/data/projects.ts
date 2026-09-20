@@ -40,12 +40,3 @@ export const projects: { name: string; description?: string; language?: string; 
   { name: 'candor' },
   { name: 'database-transactions', url: 'https://database-transactions.svyatov.com/' },
 ];
-
-export const languageColors: Record<string, string> = {
-  Ruby: 'bg-lang-ruby',
-  JavaScript: 'bg-lang-javascript',
-  TypeScript: 'bg-lang-typescript',
-  Go: 'bg-lang-go',
-  HTML: 'bg-lang-html',
-  Skills: 'bg-lang-skills',
-};
