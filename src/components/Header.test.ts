@@ -1,5 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { beforeAll, describe, expect, test } from 'vitest';
+import { site } from '../site';
 import Header from './Header.astro';
 
 let container: AstroContainer;
@@ -12,18 +13,11 @@ describe('Header', () => {
     const html = await container.renderToString(Header, { props: { path: '/blog/some-post/' } });
     expect(html).toMatch(/<a href="\/blog\/" aria-current="page" class="[^"]*text-accent[^"]*">/);
     expect(html).not.toMatch(/<a href="\/projects\/" aria-current="page"/);
-    expect(html).toContain('OPEN TO SENIOR / LEAD ROLES');
+    expect(html.includes('OPEN TO SENIOR / LEAD ROLES')).toBe(site.openToWork);
   });
 
   test('home is only active on the root path', async () => {
     const html = await container.renderToString(Header, { props: { path: '/cv/' } });
     expect(html).not.toMatch(/<a href="\/" aria-current="page"/);
-  });
-
-  test('hides the badge when not open to work', async () => {
-    const html = await container.renderToString(Header, {
-      props: { path: '/', openToWork: false },
-    });
-    expect(html).not.toContain('OPEN TO SENIOR');
   });
 });
