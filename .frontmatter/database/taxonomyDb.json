@@ -1,1 +1,42 @@
-{}
+{
+  "taxonomy": {
+    "categories": [],
+    "tags": [
+      "ai",
+      "algorithms",
+      "beginners",
+      "cli",
+      "css",
+      "debugging",
+      "devops",
+      "javascript",
+      "learning",
+      "linux",
+      "macos",
+      "monitoring",
+      "mysql",
+      "opensource",
+      "performance",
+      "perl",
+      "productivity",
+      "programming",
+      "python",
+      "rails",
+      "rbenv",
+      "ruby",
+      "security",
+      "showdev",
+      "sideprojects",
+      "tailwindcss",
+      "terminal",
+      "testing",
+      "tips",
+      "todayilearned",
+      "tutorial",
+      "typescript",
+      "webdev",
+      "webpack",
+      "wordpress"
+    ]
+  }
+}

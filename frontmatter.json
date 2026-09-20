@@ -2,45 +2,45 @@
   "$schema": "https://frontmatter.codes/frontmatter.schema.json",
   "frontMatter.framework.id": "astro",
   "frontMatter.preview.host": "http://localhost:4321",
-  "frontMatter.content.publicFolder": "public",
+  "frontMatter.preview.trailingSlash": true,
+  "frontMatter.content.publicFolder": { "path": "src/content/blog", "relative": true },
+  "frontMatter.content.supportedFileTypes": ["md"],
+  "frontMatter.content.defaultSorting": "PublishedDesc",
+  "frontMatter.content.filters": ["tags"],
   "frontMatter.content.pageFolders": [
     {
       "title": "blog",
-      "path": "[[workspace]]/src/content/blog"
+      "path": "[[workspace]]/src/content/blog",
+      "previewPath": "/blog",
+      "filePrefix": null
     }
   ],
   "frontMatter.taxonomy.contentTypes": [
     {
       "name": "default",
       "pageBundle": false,
-      "previewPath": "'blog'",
-      "filePrefix": null,
+      "allowAsSubContent": false,
       "clearEmpty": true,
       "fields": [
+        { "title": "Title", "name": "title", "type": "string", "single": true, "required": true },
+        { "title": "Description", "name": "description", "type": "string", "required": true },
         {
-          "title": "Title",
-          "name": "title",
-          "type": "string",
-          "single": true
-        },
-        {
-          "title": "Description",
-          "name": "description",
-          "type": "string"
-        },
-        {
-          "title": "Publishing date",
-          "name": "pubDate",
+          "title": "Published",
+          "name": "date",
           "type": "datetime",
+          "dateFormat": "yyyy-MM-dd",
           "default": "{{now}}",
           "isPublishDate": true
         },
         {
-          "title": "Content preview",
-          "name": "heroImage",
-          "type": "image",
-          "isPreviewImage": true
-        }
+          "title": "Updated",
+          "name": "updated",
+          "type": "datetime",
+          "dateFormat": "yyyy-MM-dd",
+          "isModifiedDate": true
+        },
+        { "title": "Tags", "name": "tags", "type": "tags" },
+        { "title": "dev.to URL", "name": "devto", "type": "string", "single": true }
       ]
     }
   ]
