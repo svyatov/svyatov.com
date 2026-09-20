@@ -1,5 +1,4 @@
 export const cv = {
-  title: 'Lead Software Engineer',
   location: 'Yerevan, Armenia',
   summary:
     'Lead software engineer with 15+ years in Ruby, Python, TypeScript and Go. Largest contributor to Show-Score across its startup and TodayTix years. Builds AI-powered products and developer tools; owns architecture, delivery and operations. Hires and mentors distributed teams. Based in Yerevan, Armenia; available for remote roles.',
