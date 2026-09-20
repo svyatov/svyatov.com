@@ -1,14 +1,11 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-export function htmlRoutes(directory = 'dist', includeNoindex = false): string[] {
+export function htmlRoutes(directory = 'dist'): string[] {
   return readdirSync(directory, { recursive: true, encoding: 'utf8' })
     .filter((file) => file.endsWith('.html'))
     .filter(
-      (file) =>
-        includeNoindex ||
-        (file !== '404.html' &&
-          !/name="robots"[^>]*noindex/.test(readFileSync(join(directory, file), 'utf8'))),
+      (file) => !/name="robots"[^>]*noindex/.test(readFileSync(join(directory, file), 'utf8')),
     )
     .map((file) => `/${file.replace(/index\.html$/, '')}`)
     .sort();
