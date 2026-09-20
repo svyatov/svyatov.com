@@ -7,16 +7,14 @@ const repo = z.object({
   name: z.string(),
   description: z.string().nullable(),
   language: z.string().nullable(),
-  stargazers_count: z.number(),
   created_at: z.string(),
   html_url: z.string(),
 });
 
-export const schema = z.object({
+const schema = z.object({
   name: z.string(),
   description: z.string(),
   language: z.string(),
-  stars: z.number(),
   createdAt: z.coerce.date(),
   url: z.url(),
   order: z.number(),
@@ -57,7 +55,6 @@ export function githubLoader(user: string): Loader {
             name: r.name,
             description: p.description ?? r.description ?? '',
             language: p.language ?? r.language ?? 'Other',
-            stars: r.stargazers_count,
             createdAt: r.created_at,
             url: p.url ?? r.html_url,
             order,
