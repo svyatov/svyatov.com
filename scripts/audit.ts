@@ -5,15 +5,14 @@ import { chromium } from '@playwright/test';
 import { htmlRoutes, sampleRoutes } from './routes';
 
 // Default: one cold run of one route per page type. --full: three runs of every route.
-const baseline = process.argv.includes('--baseline');
 const full = process.argv.includes('--full');
 const runs = full ? 3 : 1;
 const stamp = new Date().toISOString().replaceAll(':', '-');
-const output = resolve('audit-results', `${baseline ? 'baseline' : 'audit'}-${stamp}`);
+const output = resolve('audit-results', `audit-${stamp}`);
 mkdirSync(output, { recursive: true });
 const directory = `${output}/site`;
 cpSync('dist', directory, { recursive: true });
-const routes = full || baseline ? htmlRoutes(directory) : sampleRoutes(directory);
+const routes = full ? htmlRoutes(directory) : sampleRoutes(directory);
 if (!routes.length) throw new Error('No indexable HTML routes found. Build the site first.');
 writeFileSync(`${output}/routes.json`, JSON.stringify(routes, null, 2));
 const rows: string[] = [];
@@ -49,8 +48,7 @@ for (const profile of ['mobile', 'desktop']) {
       { stdio: 'inherit' },
     ).status === 0;
   const collected = run('collect');
-  const passed = collected && (baseline || run('assert'));
-  failed ||= !passed;
+  failed ||= !(collected && run('assert'));
   mkdirSync(`${folder}/reports`);
   if (existsSync('.lighthouseci'))
     cpSync('.lighthouseci', `${folder}/reports`, { recursive: true });

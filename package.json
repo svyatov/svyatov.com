@@ -16,7 +16,6 @@
     "test:e2e": "playwright test",
     "audit": "bun scripts/audit.ts",
     "audit:full": "bun scripts/audit.ts --full",
-    "audit:baseline": "bun scripts/audit.ts --baseline",
     "verify": "bun run lint && bun run check && bun run build && bun run test"
   },
   "dependencies": {
