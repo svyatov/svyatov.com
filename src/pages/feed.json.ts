@@ -4,7 +4,7 @@ import { feedItems } from '../lib/feeds';
 import { site } from '../site';
 
 export const GET: APIRoute = async () => {
-  const items = feedItems(await getCollection('blog'));
+  const items = await feedItems(await getCollection('blog'));
   const feed = {
     version: 'https://jsonfeed.org/version/1.1',
     title: site.title,

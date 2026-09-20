@@ -4,7 +4,7 @@ import { escapeXml, feedItems, feedUpdated } from '../lib/feeds';
 import { site } from '../site';
 
 export const GET: APIRoute = async () => {
-  const items = feedItems(await getCollection('blog'));
+  const items = await feedItems(await getCollection('blog'));
   const entries = items
     .map(
       (i) => `  <entry>

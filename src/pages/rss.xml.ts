@@ -5,7 +5,7 @@ import { feedItems } from '../lib/feeds';
 import { site } from '../site';
 
 export const GET: APIRoute = async (context) => {
-  const items = feedItems(await getCollection('blog'));
+  const items = await feedItems(await getCollection('blog'));
   return rss({
     title: site.title,
     description: site.blogTagline,
