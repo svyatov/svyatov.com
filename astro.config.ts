@@ -6,10 +6,27 @@ export default defineConfig({
   site: 'https://svyatov.com',
   trailingSlash: 'always',
   compressHTML: true,
+  image: { layout: 'constrained' },
   vite: { plugins: [tailwindcss()] },
   integrations: [sitemap()],
   prefetch: { prefetchAll: true },
-  markdown: { shikiConfig: { theme: 'vitesse-dark' } },
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark',
+      transformers: [
+        {
+          tokens(lines) {
+            for (const line of lines) {
+              for (const token of line) {
+                // GitHub's muted comments are only 3.77:1 on the terminal surface.
+                if (token.color?.toLowerCase() === '#6a737d') token.color = '#8f8d84';
+              }
+            }
+          },
+        },
+      ],
+    },
+  },
   fonts: [
     {
       provider: fontProviders.google(),

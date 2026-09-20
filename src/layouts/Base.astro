@@ -17,15 +17,19 @@ const props = Astro.props;
     <Head {...props} />
   </head>
   <body class="flex min-h-dvh flex-col">
+    <a href="#main" class="skip-link">Skip to content</a>
     <Header path={Astro.url.pathname} />
-    <main class="flex flex-col"><slot /></main>
+    <main id="main" tabindex="-1" class="flex flex-col"><slot /></main>
     <Footer />
     {site.scanlines && <div aria-hidden="true" class="scanlines fixed inset-0 z-20 print:hidden" />}
     <dialog
       id="keys"
+      aria-labelledby="keys-title"
       class="m-auto min-w-64 border border-line bg-surface p-5 text-fg text-sm backdrop:bg-bg/70"
     >
-      <p class="mb-3 font-semibold text-2xs text-accent tracking-label">KEYS</p>
+      <h2 id="keys-title" class="mb-3 font-semibold text-accent">Hotkeys</h2>
+      <button type="button" data-keys-close autofocus aria-label="Close" class="absolute top-2 right-2 flex size-7 cursor-pointer items-center justify-center text-dim text-lg leading-none hover:text-accent focus-visible:text-accent focus-visible:outline-offset-0">×</button>
+      <label class="mb-3 flex items-center gap-2"><input type="checkbox" data-shortcuts checked /> Enable single-key shortcuts</label>
       <ul class="flex flex-col gap-1.5">
         {
           [
@@ -52,8 +56,9 @@ const props = Astro.props;
         <li><span class="text-accent">esc</span> <span class="text-dim">close</span></li>
       </ul>
     </dialog>
-    <output data-toast class="fixed right-4 bottom-4 z-30 border border-line bg-surface px-3 py-1.5 text-xs opacity-0 transition-opacity">url copied</output>
+    <output data-toast aria-live="polite" aria-atomic="true" class="fixed right-4 bottom-4 z-30 border border-line bg-surface px-3 py-1.5 text-xs opacity-0 transition-opacity"></output>
     <script>
+      import { copyText } from '../lib/clipboard';
       import { site } from '../site';
 
       // Keys: a string navigates, a function runs. Help rows hide when none of their data-for keys are bound on this page.
@@ -66,8 +71,9 @@ const props = Astro.props;
       if (up !== location.pathname) keys.set('-', up);
       const items = [...document.querySelectorAll<HTMLElement>('main a[data-item]')];
       const move = (d: number) => () => {
-        const i = items.indexOf(document.activeElement as HTMLElement) + d;
-        items[Math.max(0, Math.min(items.length - 1, i))]?.focus();
+        const visible = items.filter((item) => item.getClientRects().length > 0);
+        const i = visible.indexOf(document.activeElement as HTMLElement) + d;
+        visible[Math.max(0, Math.min(visible.length - 1, i))]?.focus();
       };
       if (items.length) keys.set('j', move(1)).set('k', move(-1));
       const heads = [...document.querySelectorAll<HTMLElement>('.prose h2')];
@@ -77,52 +83,51 @@ const props = Astro.props;
         keys.set('[', () => heads.findLast((h) => top(h) < -2)?.scrollIntoView());
       }
       keys.set('u', () => scrollTo(0, 0)).set('d', () => scrollTo(0, document.body.scrollHeight));
-      keys.set('Escape', () => (document.activeElement as HTMLElement | null)?.blur());
-      const toast = document.querySelector<HTMLElement>('[data-toast]');
-      keys.set('y', () =>
-        navigator.clipboard.writeText(location.href).then(() => {
-          toast?.style.setProperty('opacity', '1');
-          setTimeout(() => toast?.style.removeProperty('opacity'), 1200);
-        }),
-      );
+      keys.set('y', () => { void copyText(location.href, 'URL'); });
       for (const li of dialog?.querySelectorAll<HTMLElement>('[data-for]') ?? []) {
         li.hidden = !(li.dataset.for ?? '').split(' ').some((k) => keys.has(k));
       }
-      document.querySelector('[data-keys-open]')?.addEventListener('click', () => dialog?.showModal());
+      const toggle = document.querySelector<HTMLInputElement>('[data-shortcuts]');
+      let shortcuts = true;
+      try { shortcuts = localStorage.getItem('shortcuts') !== 'off'; } catch {}
+      if (toggle) toggle.checked = shortcuts;
+      toggle?.addEventListener('change', () => {
+        shortcuts = toggle.checked;
+        try { localStorage.setItem('shortcuts', shortcuts ? 'on' : 'off'); } catch {}
+      });
+      let returnFocus: HTMLElement | null = null;
+      const showHelp = () => {
+        returnFocus = document.activeElement as HTMLElement | null;
+        dialog?.showModal();
+      };
+      document.querySelector('[data-keys-open]')?.addEventListener('click', showHelp);
+      document.querySelector('[data-keys-close]')?.addEventListener('click', () => dialog?.close());
+      dialog?.addEventListener('close', () => returnFocus?.focus());
+      dialog?.addEventListener('keydown', (event) => {
+        if (event.key !== 'Tab') return;
+        const controls = [...dialog.querySelectorAll<HTMLElement>('button, input')];
+        const first = controls[0];
+        const last = controls.at(-1);
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      });
       document.addEventListener('keydown', (e) => {
         const target = e.target as Element;
-        if (e.metaKey || e.ctrlKey || e.altKey || target.closest?.('input, textarea, [contenteditable]')) return;
-        if (e.key === '?' || (e.key === '/' && e.shiftKey)) return dialog?.open ? dialog.close() : dialog?.showModal();
+        if (dialog?.open || !shortcuts || e.defaultPrevented || e.repeat || e.isComposing || e.metaKey || e.ctrlKey || e.altKey || target.closest?.('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return;
+        if (e.key === '?') { e.preventDefault(); showHelp(); return; }
         const k = keys.get(e.key);
+        if (k) e.preventDefault();
         if (typeof k === 'function') k();
         else if (k) location.assign(k);
       });
 
-      // Lead headings: type the text in front of the cursor once per section (home, projects, blog) per tab session.
-      // The full text stays in the DOM (invisible) so nothing reflows.
+      // Headings stay visible during loading and with reduced motion.
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const section = `typed:${location.pathname.split('/')[1]}`;
-      let store: Storage | undefined;
-      try {
-        store = sessionStorage; // throws when cookies are blocked, then the animation never plays
-      } catch {}
-      if (store && !store.getItem(section) && !reduced) {
-        for (const h1 of document.querySelectorAll<HTMLElement>('h1[data-type]')) {
-          store.setItem(section, '1');
-          const text = h1.firstChild?.textContent ?? '';
-          const typed = document.createTextNode('');
-          const rest = document.createElement('span');
-          rest.className = 'invisible';
-          h1.replaceChildren(typed, ...h1.querySelectorAll('.cursor-blink'), rest);
-          let i = 0;
-          const step = () => {
-            typed.data = text.slice(0, ++i);
-            rest.textContent = text.slice(i);
-            if (i < text.length) setTimeout(step, 10 + Math.random() * 30);
-          };
-          step();
-        }
-      }
 
       // Click burst: a ring of ascii sparks drifts out from the pointer and fades.
       if (!reduced) {

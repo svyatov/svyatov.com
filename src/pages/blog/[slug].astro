@@ -146,6 +146,8 @@ const jsonLd = {
     </aside>
   </div>
   <script>
+    import { copyText } from '../../lib/clipboard';
+
     const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-toc] a')];
     const headings = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))));
     const observer = new IntersectionObserver(
@@ -162,8 +164,7 @@ const jsonLd = {
 
     for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
       btn.addEventListener('click', async () => {
-        await navigator.clipboard.writeText(btn.dataset.copy ?? location.href);
-        btn.textContent = '[ copied ]';
+        await copyText(btn.dataset.copy ?? location.href, 'URL');
       });
     }
 
@@ -171,12 +172,12 @@ const jsonLd = {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.textContent = 'copy';
+      btn.setAttribute('aria-label', 'Copy code');
       btn.className = 'absolute top-2 right-4 cursor-pointer text-dim text-2xs tracking-code hover:text-accent';
       pre.classList.add('relative');
       pre.append(btn);
       btn.addEventListener('click', async () => {
-        await navigator.clipboard.writeText(pre.querySelector('code')?.textContent ?? '');
-        btn.textContent = 'copied';
+        await copyText(pre.querySelector('code')?.textContent ?? '', 'Code');
       });
     }
   </script>

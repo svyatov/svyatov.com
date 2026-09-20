@@ -18,7 +18,6 @@
   --color-lang-skills: #a78bfa;
 
   --text-*: initial;
-  --text-3xs: 0.35rem;
   --text-2xs: 0.75rem;
   --text-xs: 0.8125rem;
   --text-sm: 0.875rem;
@@ -56,7 +55,7 @@
 
   --shadow-glow: 0 0 0.5rem var(--color-teal);
 
-  --animate-blink: blink 1s steps(2) infinite;
+  --animate-blink: blink 1s steps(2) 4;
   @keyframes blink {
     50% {
       opacity: 0;
@@ -75,9 +74,37 @@
   a {
     color: var(--color-accent);
   }
+  :where(p, footer) a {
+    text-decoration-line: underline;
+    text-underline-offset: 0.15em;
+  }
   a:hover {
     color: var(--color-accent-hover);
     text-decoration-line: underline;
+  }
+  :focus-visible {
+    outline: 0.125rem solid var(--color-accent);
+    outline-offset: 0.25rem;
+  }
+  button,
+  input,
+  a {
+    touch-action: manipulation;
+  }
+  button {
+    min-height: 1.5rem;
+  }
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 40;
+    padding: 0.5rem 1rem;
+    background: var(--color-bg);
+    transform: translateY(-200%);
+  }
+  .skip-link:focus {
+    transform: none;
   }
 }
 
@@ -92,7 +119,7 @@
 
 @utility scanlines {
   pointer-events: none;
-  background-image: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.16) 0 1px, transparent 1px 3px);
+  background-image: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.08) 0 1px, transparent 1px 3px);
 }
 
 /* Markdown output: font sizes and spacing from the post board. */
@@ -109,6 +136,10 @@
   & > * {
     min-width: 0;
     margin: 0;
+  }
+  & a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
   & h2,
   & h3 {
@@ -224,9 +255,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .cursor-blink {
+    animation: none;
+  }
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*) {
+    /* biome-ignore lint/complexity/noImportantStyles: override the browser transition animation */
     animation: none !important;
   }
 }

@@ -7,7 +7,9 @@ describe('Banner', () => {
   test('shows the first font and ships every font for the click swap', async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Banner, { props: { fonts: ['AAA', 'BBB'] } });
-    expect(html).toMatch(/<pre[^>]*aria-hidden="true"[^>]*>\nAAA<\/pre>/);
+    expect(html).toContain('aria-label="Change banner font"');
+    expect(html).toMatch(/<svg[^>]*aria-hidden="true"/);
+    expect(html).toMatch(/<text[^>]*>AAA<\/text>/);
     const [, json] = html.match(/data-fonts="([^"]*)"/) ?? [];
     expect(JSON.parse(json.replaceAll('&quot;', '"'))).toEqual(['AAA', 'BBB']);
   });

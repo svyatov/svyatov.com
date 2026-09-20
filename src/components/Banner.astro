@@ -4,12 +4,14 @@ interface Props {
 }
 
 const { fonts } = Astro.props;
+const columns = Math.max(...fonts.flatMap((font) => font.split('\n').map((row) => row.length)));
 ---
 
-<pre
-  aria-hidden="true"
-  class="cursor-pointer select-none font-mono text-3xs text-accent leading-banner md:text-md md:leading-none"
-  data-fonts={JSON.stringify(fonts)}>{`\n${fonts[0]}`}</pre>
+<button type="button" aria-label="Change banner font" class="block max-w-full cursor-pointer text-left" style={{ width: `${columns * 0.5625}rem` }} data-banner>
+  <svg aria-hidden="true" focusable="false" viewBox={`0 0 ${columns * 9.6} 106`} class="block h-auto w-full fill-accent font-mono" data-fonts={JSON.stringify(fonts)}>
+    {fonts[0].split('\n').map((row, index) => <text x="0" y={16 + index * 17.6} font-size="16" style="white-space: pre">{row}</text>)}
+  </svg>
+</button>
 
 <script>
   // Click the banner: it morphs into the next font in the list, cells scrambling in a random sweep direction.
@@ -25,15 +27,20 @@ const { fonts } = Astro.props;
   const DURATION = 700;
   const rand = <T,>(list: readonly T[]) => list[Math.floor(Math.random() * list.length)];
 
-  for (const pre of document.querySelectorAll<HTMLPreElement>('pre[data-fonts]')) {
-    const fonts: string[] = JSON.parse(pre.dataset.fonts ?? '[]');
+  for (const graphic of document.querySelectorAll<SVGElement>('svg[data-fonts]')) {
+    const fonts: string[] = JSON.parse(graphic.dataset.fonts ?? '[]');
+    const lines = [...graphic.querySelectorAll('text')];
+    const draw = (art: string) => art.split('\n').forEach((row, index) => { if (lines[index]) lines[index].textContent = row; });
     let busy = false;
-    pre.addEventListener('click', () => {
-      const from = pre.textContent ?? '';
-      const to = fonts[(fonts.indexOf(from) + 1) % fonts.length];
-      if (busy || to === from) return;
+    let index = 0;
+    graphic.closest('button')?.addEventListener('click', () => {
+      if (busy) return;
+      const from = fonts[index];
+      index = (index + 1) % fonts.length;
+      const to = fonts[index];
+      if (to === from) return;
       if (reduced) {
-        pre.textContent = to;
+        draw(to);
         return;
       }
       const a = from.split('\n');
@@ -50,11 +57,11 @@ const { fonts } = Astro.props;
       const frame = (now: number) => {
         const p = (now - start) / DURATION;
         if (p >= 1) {
-          pre.textContent = to;
+          draw(to);
           busy = false;
           return;
         }
-        pre.textContent = settle
+        draw(settle
           .map((row, r) =>
             row
               .map((t, c) => {
@@ -66,7 +73,7 @@ const { fonts } = Astro.props;
               })
               .join(''),
           )
-          .join('\n');
+          .join('\n'));
         requestAnimationFrame(frame);
       };
       requestAnimationFrame(frame);
