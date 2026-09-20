@@ -1,12 +1,16 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import { describe, expect, test } from 'vitest';
+import { beforeAll, describe, expect, test } from 'vitest';
 import Head from './Head.astro';
+
+let container: AstroContainer;
+beforeAll(async () => {
+  container = await AstroContainer.create({
+    astroConfig: { site: 'https://svyatov.com', trailingSlash: 'always' },
+  });
+});
 
 describe('Head', () => {
   test('emits one canonical with a trailing slash, the three feeds and article meta', async () => {
-    const container = await AstroContainer.create({
-      astroConfig: { site: 'https://svyatov.com', trailingSlash: 'always' },
-    });
     const html = await container.renderToString(Head, {
       request: new Request('https://svyatov.com/blog/hello/'),
       props: {
@@ -31,9 +35,6 @@ describe('Head', () => {
   });
 
   test('defaults to the site title and the website type', async () => {
-    const container = await AstroContainer.create({
-      astroConfig: { site: 'https://svyatov.com', trailingSlash: 'always' },
-    });
     const html = await container.renderToString(Head, {
       request: new Request('https://svyatov.com/'),
     });
