@@ -3,3 +3,7 @@ dist/
 .astro/
 tmp/
 .DS_Store
+audit-results/
+.lighthouseci/
+playwright-report/
+test-results/

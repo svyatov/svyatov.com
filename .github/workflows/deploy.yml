@@ -5,6 +5,11 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+    inputs:
+      full-audit:
+        description: Three Lighthouse runs of every page instead of one run per page type
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -18,14 +23,34 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: ${{ inputs.full-audit && 180 || 30 }}
     steps:
       - uses: actions/checkout@v7
       - name: Lint, type-check, build, test
         uses: withastro/action@v6
         with:
           build-cmd: bun run verify
+          package-manager: bun@1.4.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install fixed browser revision
+        run: bunx --no-install playwright install --with-deps chromium
+      - name: Browser behavior and accessibility checks
+        run: bun run test:e2e
+      - name: Lighthouse
+        run: bun run ${{ inputs.full-audit && 'audit:full' || 'audit' }}
+      - name: Preserve browser and audit reports
+        if: always()
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: prepublication-reports
+          path: |
+            audit-results/
+            playwright-report/
+            test-results/
+            .lighthouseci/
+          include-hidden-files: true
+          retention-days: 30
 
   deploy:
     needs: build

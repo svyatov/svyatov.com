@@ -13,6 +13,10 @@
     "format": "biome check --write .",
     "check": "astro check",
     "test": "vitest run",
+    "test:e2e": "playwright test",
+    "audit": "bun scripts/audit.ts",
+    "audit:full": "bun scripts/audit.ts --full",
+    "audit:baseline": "bun scripts/audit.ts --baseline",
     "verify": "bun run lint && bun run check && bun run build && bun run test"
   },
   "dependencies": {
@@ -27,6 +31,8 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@biomejs/biome": "2.5.13",
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.63.0",
     "typescript": "^6",
     "vitest": "^5.0.0"
   }
