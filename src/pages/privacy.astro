@@ -3,24 +3,82 @@ import Base from '../layouts/Base.astro';
 import { site } from '../site';
 ---
 
-<Base title="Privacy" description="What this site collects about its visitors: cookieless analytics and nothing else.">
+<Base title="Privacy" description="How this site uses Google Analytics, hosting logs, browser storage, and contact email.">
   <section class="flex flex-col gap-5 px-4 pt-10 pb-10 md:px-20 md:pt-18 md:pb-18">
     <div class="text-lg">
       <p class="text-dim">$ cat ~/privacy.md</p>
       <h1 class="font-semibold text-3xl">Privacy</h1>
     </div>
     <div class="prose max-w-prose">
+      <p>Last updated: <time datetime="2026-09-20">20 September 2026</time>.</p>
       <p>
-        This site uses Google Analytics to count visits and see which posts get read. It runs with analytics
-        storage denied, so it sets no cookies and keeps no identifier on your device. Google receives the page
-        URL, referrer, and coarse device and location data, and models the counts from that.
+        I’m {site.name}, the owner of this personal site, based in Armenia. This page explains how information is handled
+        when you visit {new URL(site.url).hostname} or contact me. The site has no ads, forms, or accounts.
       </p>
-      <p>No ads, no other trackers, no forms, no accounts.</p>
+      <h2>Analytics</h2>
       <p>
-        The site is hosted on GitHub Pages. GitHub logs requests, including IP addresses, under the
+        This site uses Google Analytics to understand visits and which pages people read. The Google tag
+        loads when you visit. It is configured with <code>analytics_storage</code> set to
+        <code>denied</code>, which prevents it from reading or writing first-party analytics cookies.
+        This setting does not stop data from being sent to Google.
+      </p>
+      <p>
+        Google receives measurements without analytics cookies. These can include the page URL
+        (including query parameters), referrer, time of the visit, browser and device information,
+        consent settings, and a random number generated for each page load. Google also receives your
+        IP address as part of the connection and can use it to estimate your location, including your
+        city. Collection of detailed device information is enabled.
+      </p>
+      <p>
+        Google signals and user-provided data collection are disabled, and the site does not use
+        User-ID. No advertising products are linked to this Analytics property. Search Console is
+        linked to show how people find the site through Google Search.
+      </p>
+      <p>
+        Optional sharing for Google products and services is disabled. Sharing for modeling
+        contributions and business insights is enabled, which allows Google to combine data into
+        statistics with data from other sites and apps. Google also has permission to access account
+        data for technical support and business recommendations.
+      </p>
+      <p>
+        The Google Analytics property’s data retention setting is 14 months. This setting applies to
+        the user and event data covered by Google’s retention controls. It does not set a deletion
+        deadline for standard aggregated reports.
+      </p>
+      <p>
+        See <a href="https://policies.google.com/technologies/partner-sites">how Google uses information from sites that use its services</a>
+        and <a href="https://policies.google.com/privacy">Google’s privacy policy</a> for details about
+        its processing, retention, and international data transfers. You can prevent this site’s
+        analytics script from running by disabling JavaScript for this site in your browser.
+      </p>
+      <h2>Browser storage</h2>
+      <p>
+        If you change the single-key shortcuts setting in the keyboard help, the site saves your
+        choice in your browser’s local storage under <code>shortcuts</code>. The value is
+        <code>on</code> or <code>off</code>. The site does not send this value to a server. It has no
+        expiry set by the site. You can remove it by clearing this site’s data in your browser.
+      </p>
+      <h2>Hosting</h2>
+      <p>
+        GitHub Pages hosts this site. GitHub collects visitors’ IP addresses in logs for security.
+        Its handling of this information is described in the
         <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub privacy statement</a>.
       </p>
-      <p>Questions: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      <h2>Email and privacy requests</h2>
+      <p>
+        The email links open your email app. If you send me a message, I receive your email address,
+        the message, and any information you include. Your email provider and mine process the email
+        to deliver it. I keep correspondence for as long as needed for the purpose of the exchange.
+      </p>
+      <p>
+        For questions about this page or requests about your personal information, contact
+        <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+      <h2>Links to other sites</h2>
+      <p>
+        External links, including social and sharing links, take you to other sites. Their privacy
+        policies apply when you visit them.
+      </p>
     </div>
   </section>
 </Base>
