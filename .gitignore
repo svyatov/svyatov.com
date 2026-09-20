@@ -7,3 +7,4 @@ audit-results/
 .lighthouseci/
 playwright-report/
 test-results/
+oss-audit-report.md
