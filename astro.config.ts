@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, envField, fontProviders } from 'astro/config';
@@ -8,7 +9,19 @@ export default defineConfig({
   compressHTML: true,
   image: { layout: 'constrained' },
   vite: { plugins: [tailwindcss()] },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      serialize(item) {
+        const path = new URL(item.url).pathname;
+        if (!/^\/blog\/[^/]+\/$/.test(path)) return item;
+        const html = readFileSync(new URL(`./dist${path}index.html`, import.meta.url), 'utf8');
+        const date =
+          html.match(/property="article:modified_time" content="([^"]+)"/)?.[1] ??
+          html.match(/property="article:published_time" content="([^"]+)"/)?.[1];
+        return date ? { ...item, lastmod: date } : item;
+      },
+    }),
+  ],
   prefetch: { prefetchAll: true },
   markdown: {
     shikiConfig: {

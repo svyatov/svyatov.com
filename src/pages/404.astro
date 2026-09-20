@@ -4,7 +4,7 @@ import { banners } from '../data/banners';
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="404" description="Page not found.">
+<Base title="404" description="Page not found." noindex>
   <section class="flex flex-col gap-5 px-4 pt-10 pb-10 md:px-20 md:pt-18 md:pb-18">
     <Banner fonts={banners.notFound} />
     <div class="flex flex-col gap-1.5 text-prose md:text-2xl md:leading-hero">

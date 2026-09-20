@@ -1,6 +1,6 @@
 ---
 title: "Keeping code alive on a DOM you don't own: 12-year Chrome extension story"
-description: "In April 2014 I wanted to sort posts on the Hacker News front page by points, by time, or by comments. Nothing I found did it without cluttering the page, so I wrote a tiny Chrome extension over a..."
+description: "Lessons from maintaining Hacker News Sorted: resilient DOM selectors, failure reporting, daily compatibility checks, timestamps, and extension design."
 date: "2026-07-17"
 tags: ["webdev", "showdev", "javascript", "sideprojects"]
 devto: "https://dev.to/svyatov/keeping-code-alive-on-a-dom-you-dont-own-12-year-chrome-extension-story-2g3o"

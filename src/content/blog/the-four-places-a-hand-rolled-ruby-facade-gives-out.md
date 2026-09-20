@@ -1,6 +1,6 @@
 ---
 title: "The four places a hand-rolled Ruby facade gives out"
-description: "You don't need a gem to build a facade. This is a perfectly good one:"
+description: "When a plain Ruby facade needs more: memoization, namespaces, reusable packs, and error handling, with examples from the briefly gem."
 date: "2026-07-16"
 tags: ["ruby", "rails", "showdev", "opensource"]
 devto: "https://dev.to/svyatov/the-four-places-a-hand-rolled-ruby-facade-gives-out-3n77"

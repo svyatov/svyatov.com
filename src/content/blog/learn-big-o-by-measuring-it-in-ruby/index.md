@@ -1,6 +1,6 @@
 ---
 title: "Learn Big O by measuring it, in Ruby"
-description: "A very common way Ruby code gets slow at scale hides in a line that looks harmless:"
+description: "Measure algorithm growth in Ruby by doubling inputs, compare Big O classes, and learn where timing estimates fail and how to check complexity in CI."
 date: "2026-07-20"
 tags: ["ruby", "performance", "algorithms", "testing"]
 devto: "https://dev.to/svyatov/learn-big-o-by-measuring-it-in-ruby-217m"

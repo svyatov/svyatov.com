@@ -1,6 +1,6 @@
 ---
 title: "Your agent writes Python. The Ruby rule cuts that by a third."
-description: "Lucian Ghinda published a post arguing you should tell your coding agent to write its throwaway scripts in Ruby. Here is the block he tells you to paste into your agent's instruction file, in full:"
+description: "A controlled comparison of Ruby, Python, and shell scripts written by a coding agent, measuring output size, correctness, and the effect of instructions."
 date: "2026-08-06"
 tags: ["ruby", "ai", "python", "productivity"]
 devto: "https://dev.to/svyatov/your-agent-writes-python-the-ruby-rule-cuts-that-by-a-third-476"

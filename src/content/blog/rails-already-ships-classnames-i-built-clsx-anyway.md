@@ -1,6 +1,6 @@
 ---
 title: "Rails already ships class_names. I built clsx anyway."
-description: "When I published a little gem for conditional CSS classes two years ago, the first comment was Adrien Poly asking the obvious thing: \"What is the main difference with rails classnames helper?\" My..."
+description: "Compare Rails class_names with clsx: standalone Ruby use, empty values, accepted inputs, performance measurements, and optional Tailwind class merging."
 date: "2026-07-21"
 tags: ["rails", "ruby", "tailwindcss", "webdev"]
 devto: "https://dev.to/svyatov/rails-already-ships-classnames-i-built-clsx-anyway-5h4h"

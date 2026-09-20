@@ -1,6 +1,6 @@
 ---
 title: "clsx for Rails views"
-description: "Hey, fellow Rubyists!"
+description: "Build conditional CSS class strings in Rails views with clsx-rails, using strings, arrays, hashes, deduplication, and the shorter cn helper."
 date: "2024-03-03"
 tags: ["rails", "ruby", "css", "opensource"]
 devto: "https://dev.to/svyatov/clsx-for-rails-views-i3"

@@ -1,6 +1,6 @@
 ---
 title: "The complete guide to `rails new` in Rails 8.1"
-description: "rails new --help prints 30+ options. Most tutorials stop at rails new myapp -d postgresql and move on. This post covers every Rails 8.1 option - what it does, when to use it, and what most people..."
+description: "A guide to Rails 8.1 rails new options, covering databases, frontend tools, deployment, testing, skipped frameworks, and common application recipes."
 date: "2026-03-03"
 tags: ["ruby", "rails", "tutorial", "beginners"]
 devto: "https://dev.to/svyatov/the-complete-guide-to-rails-new-in-rails-81-346c"

@@ -1,6 +1,6 @@
 ---
 title: "Ruby shipped the fix for SleeperGem 45 days before it happened"
-description: "On June 3rd, Bundler 4.0.13 shipped a feature called cooldown. The release post described the problem it solves like this: \"an account is compromised, a malicious version ships, and any bundle..."
+description: "How Bundler cooldown could have blocked the SleeperGem releases, what the published download figures mean, and where delayed updates cannot protect you."
 date: "2026-07-21"
 tags: ["ruby", "security", "opensource", "devops"]
 devto: "https://dev.to/svyatov/ruby-shipped-the-fix-for-sleepergem-45-days-before-it-happened-19dh"
@@ -22,7 +22,7 @@ Most of the coverage stopped at "supply chain attack, be careful out there," the
 
 The scale number has the same shape. Aikido's "574,661 total downloads" is honest in context (it says all versions), but downstream it sits next to the attack and reads like blast radius. Here is where they live:
 
-| `fastlane-plugin-run_tests_firebase_testlab` | published | downloads | |
+| `fastlane-plugin-run_tests_firebase_testlab` | published | downloads | relative downloads |
 |---|---|---|---|
 | 0.3.1 | 2019-03-04 | **531,859** | `################################` |
 | 0.2.0 | 2018-07-17 | 16,509 | `#` |

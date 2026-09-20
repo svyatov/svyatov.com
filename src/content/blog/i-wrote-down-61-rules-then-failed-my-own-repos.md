@@ -1,6 +1,6 @@
 ---
 title: "I wrote down 61 rules, then failed my own repos"
-description: "Nobody starts a library because they wanted to write a SECURITY.md."
+description: "How oss-kit uses 61 repository maintenance rules and nine agent skills to audit documentation, security, CI, releases, and community files."
 date: "2026-08-04"
 tags: ["opensource", "ai", "devops", "showdev"]
 devto: "https://dev.to/svyatov/i-wrote-down-61-rules-then-failed-my-own-repos-5351"

@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes earned its security badge in 2017 and never came back"
-description: "Kubernetes has an OpenSSF Best Practices badge. It earned that badge on 16 August 2017 at 14:52:28 UTC, and nobody has touched the entry since. The save that earned it is still the last anyone..."
+description: "An examination of OpenSSF Best Practices badges: their criteria, verification, stale entries, and what a badge can tell you about project security."
 date: "2026-07-31"
 tags: ["opensource", "security", "devops", "ruby"]
 devto: "https://dev.to/svyatov/kubernetes-earned-its-security-badge-in-2017-and-never-came-back-58eh"

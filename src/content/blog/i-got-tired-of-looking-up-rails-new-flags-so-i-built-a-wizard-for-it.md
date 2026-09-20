@@ -1,6 +1,6 @@
 ---
 title: "I got tired of looking up `rails new` flags, so I built a wizard for it"
-description: "Every time I start a new Rails project, the same thing happens. I open the terminal, type rails new, and then... pause. What was the flag for PostgreSQL? Is it --skip-test or --skip-tests? Do I..."
+description: "Create Rails applications with an interactive CLI wizard that explains rails new options, remembers choices, saves presets, and shows the final command."
 date: "2026-02-27"
 tags: ["ruby", "rails", "cli", "productivity"]
 devto: "https://dev.to/svyatov/i-got-tired-of-looking-up-rails-new-flags-so-i-built-a-wizard-for-it-1adl"

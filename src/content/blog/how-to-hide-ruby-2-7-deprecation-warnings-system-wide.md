@@ -22,6 +22,6 @@ fi
 
 Done.
 
-How exactly does it work can be found [here](https://github.com/rbenv/rbenv/wiki/Authoring-plugins#rbenv-hooks).
+The [rbenv hooks documentation](https://github.com/rbenv/rbenv/wiki/Authoring-plugins#rbenv-hooks) explains how this works.
 
 I've tested it in Zsh. It should work in Bash, but I can't guarantee it.

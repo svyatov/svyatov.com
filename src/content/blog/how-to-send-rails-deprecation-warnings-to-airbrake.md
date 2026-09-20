@@ -1,6 +1,6 @@
 ---
 title: "How to send Rails deprecation warnings to Airbrake"
-description: "We’re upgrading our Ruby on Rails version from 4.2 to 5.2 this week. A long-awaited change for us. Of course, there are a lot of deprecation warnings that was thrown at us during this process...."
+description: "Send Rails production deprecation warnings to Airbrake with an ActiveSupport::Notifications subscriber that preserves the message and call stack."
 date: "2019-02-18"
 tags: ["ruby", "rails", "todayilearned", "tutorial"]
 devto: "https://dev.to/svyatov/how-to-send-rails-deprecation-warnings-to-airbrake-51bh"
