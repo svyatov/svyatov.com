@@ -26,7 +26,8 @@ const share = [
   { label: 'bluesky', href: `https://bsky.app/intent/compose?text=${encoded}` },
   { label: 'hn', href: `https://news.ycombinator.com/submitlink?u=${encodeURIComponent(url)}&t=${encodeURIComponent(title)}` },
 ];
-const editUrl = `${site.repo}/edit/main/src/content/blog/${post.filePath?.replace(/^src\/content\/blog\//, '')}`;
+const editUrl = `${site.repo}/edit/main/${post.filePath}`;
+const image = `/og/${post.id}.png`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -34,7 +35,7 @@ const jsonLd = {
   '@id': url,
   headline: title,
   description,
-  image: new URL(`/og/${post.id}.png`, Astro.site).href,
+  image: new URL(image, Astro.site).href,
   datePublished: date.toISOString(),
   dateModified: (updated ?? date).toISOString(),
   author: { '@type': 'Person', '@id': `${site.url}/#person`, name: site.name, url: `${site.url}/` },
@@ -49,7 +50,7 @@ const jsonLd = {
 <Base
   title={title}
   description={description}
-  image={`/og/${post.id}.png`}
+  image={image}
   article={{ published: date, updated, tags }}
   jsonLd={jsonLd}
 >
