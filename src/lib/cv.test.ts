@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+import { cv } from '../data/cv';
 import { duration } from './cv';
 
 describe('duration', () => {
@@ -13,4 +14,7 @@ describe('duration', () => {
     expect(duration('Jan 2026 – Present', new Date('2026-09-17T00:00:00Z'))).toBe('9 mos'));
   test('does not infer months for a year-only period', () =>
     expect(duration('2010 - 2014')).toBe(''));
+  test('every period in the CV data parses', () => {
+    for (const { period } of cv.experience) expect(duration(period), period).not.toMatch(/NaN/);
+  });
 });
