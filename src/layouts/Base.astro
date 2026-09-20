@@ -9,6 +9,7 @@ import { site } from '../site';
 type Props = ComponentProps<typeof Head>;
 
 const props = Astro.props;
+const pager = `${site.keys.older} ${site.keys.newer}`;
 ---
 
 <!doctype html>
@@ -35,8 +36,8 @@ const props = Astro.props;
           [
             ...site.nav.map((item) => [item.key, item.key + item.rest]),
             ['-', 'up one level'],
-            [',', 'prev', ', .'],
-            ['.', 'next', ', .'],
+            [site.keys.older, 'prev', pager],
+            [site.keys.newer, 'next', pager],
             ['j', 'next item'],
             ['k', 'prev item'],
             ['[', 'prev heading'],

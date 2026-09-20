@@ -19,6 +19,8 @@ export const site = {
     { key: 'b', rest: 'log', href: '/blog/' },
     { key: 'c', rest: 'v', href: '/cv/' },
   ],
+  /** Keys for the older/newer post or page links. */
+  keys: { older: ',', newer: '.' },
   stack: [
     {
       name: 'ruby / rails',

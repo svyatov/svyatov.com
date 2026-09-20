@@ -28,6 +28,7 @@ const share = [
 ];
 const editUrl = `${site.repo}/edit/main/${post.filePath}`;
 const image = ogUrl(post);
+const { older, newer } = site.keys;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -97,8 +98,8 @@ const jsonLd = {
       <nav aria-label="Older and next posts" class="grid grid-cols-2 gap-4 text-sm">
         {
           prev ? (
-            <a href={postUrl(prev)} rel="prev" data-key="," class="flex flex-col gap-1 border border-line p-4 text-fg hover:border-accent hover:no-underline">
-              <span class="text-dim">[<u class="text-accent no-underline">,</u>] prev</span>
+            <a href={postUrl(prev)} rel="prev" data-key={older} class="flex flex-col gap-1 border border-line p-4 text-fg hover:border-accent hover:no-underline">
+              <span class="text-dim">[<u class="text-accent no-underline">{older}</u>] prev</span>
               <span class="font-medium">{prev.data.title}</span>
             </a>
           ) : (
@@ -108,10 +109,10 @@ const jsonLd = {
         {
           next && (
             <a
-              href={postUrl(next)} rel="next" data-key="."
+              href={postUrl(next)} rel="next" data-key={newer}
               class="flex flex-col gap-1 border border-line p-4 text-right text-fg hover:border-accent hover:no-underline"
             >
-              <span class="text-dim">next [<u class="text-accent no-underline">.</u>]</span>
+              <span class="text-dim">next [<u class="text-accent no-underline">{newer}</u>]</span>
               <span class="font-medium">{next.data.title}</span>
             </a>
           )
