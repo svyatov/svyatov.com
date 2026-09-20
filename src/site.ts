@@ -7,6 +7,7 @@ export const site = {
   url: 'https://svyatov.com',
   email: 'leonid@svyatov.com',
   repo: 'https://github.com/svyatov/svyatov.com',
+  analyticsId: 'G-CC82JVJ8N1',
   openToWork: true,
   socials: [
     { label: 'github', key: 'g', href: 'https://github.com/svyatov' },

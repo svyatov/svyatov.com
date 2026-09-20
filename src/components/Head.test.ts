@@ -42,4 +42,13 @@ describe('Head', () => {
     expect(html).toContain('property="og:type" content="website"');
     expect(html).toContain('/og/default.png');
   });
+
+  test('loads the analytics tag only on the production host', async () => {
+    const html = await container.renderToString(Head, {
+      request: new Request('https://svyatov.com/'),
+    });
+    expect(html).toContain('location.hostname === host');
+    expect(html).toContain('"G-CC82JVJ8N1"');
+    expect(html).toContain('"svyatov.com"');
+  });
 });

@@ -60,3 +60,14 @@ const imageUrl = new URL(image, Astro.site);
 <meta name="twitter:image" content={imageUrl} />
 <meta name="twitter:image:alt" content={fullTitle} />
 {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+<script is:inline define:vars={{ id: site.analyticsId, host: new URL(site.url).hostname }}>
+  // Only the live host reports, so dev, preview, e2e and Lighthouse runs stay out of Analytics.
+  if (location.hostname === host) {
+    window.dataLayer = window.dataLayer || [];
+    // biome-ignore lint/complexity/noArguments: gtag.js expects the Arguments object, not an array
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', id);
+    document.head.append(Object.assign(document.createElement('script'), { async: true, src: `https://www.googletagmanager.com/gtag/js?id=${id}` }));
+  }
+</script>
