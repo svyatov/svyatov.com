@@ -50,5 +50,9 @@ describe('Head', () => {
     expect(html).toContain('location.hostname === host');
     expect(html).toContain('"G-CC82JVJ8N1"');
     expect(html).toContain('"svyatov.com"');
+    // Consent is denied before config so gtag never sets an analytics cookie.
+    expect(
+      html.indexOf("gtag('consent', 'default', { analytics_storage: 'denied' })"),
+    ).toBeLessThan(html.indexOf("gtag('config', id)"));
   });
 });
