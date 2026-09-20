@@ -61,6 +61,9 @@ export function absoluteMarkdown(body: string, base: string, assets: Record<stri
     }
     return result + rewrite(text.slice(start));
   };
+  // A fence closes on the same character, at least as long, with nothing after it.
+  const closes = (marker: RegExpMatchArray, fence: string) =>
+    marker[1][0] === fence[0] && marker[1].length >= fence.length && !marker[2].trim();
   let fence = '';
   let pending = '';
   let output = '';
@@ -70,13 +73,7 @@ export function absoluteMarkdown(body: string, base: string, assets: Record<stri
       output += prose(pending) + line;
       pending = '';
       if (fence) {
-        if (
-          marker &&
-          marker[1][0] === fence[0] &&
-          marker[1].length >= fence.length &&
-          !marker[2].trim()
-        )
-          fence = '';
+        if (marker && closes(marker, fence)) fence = '';
       } else if (marker) fence = marker[1];
     } else pending += line;
   }
