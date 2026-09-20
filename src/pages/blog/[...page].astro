@@ -15,10 +15,5 @@ const { page } = Astro.props;
 ---
 
 <Base title={page.currentPage > 1 ? `Blog · page ${page.currentPage}` : 'Blog'} description={site.blogTagline}>
-  <BlogList
-    posts={page.data}
-    prev={page.url.prev}
-    next={page.url.next}
-    page={{ current: page.currentPage, total: page.lastPage }}
-  />
+  <BlogList posts={page.data} page={page} />
 </Base>

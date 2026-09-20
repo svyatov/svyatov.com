@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import type { Page } from 'astro';
 import { banners } from '../data/banners';
 import { feeds } from '../lib/feeds';
 import { byCountDesc, countBy, type Post, tagUrl, yearOf } from '../lib/posts';
@@ -11,13 +12,11 @@ import Tag from './Tag.astro';
 interface Props {
   posts: Post[];
   heading?: string;
-  prev?: string;
-  next?: string;
-  page?: { current: number; total: number };
+  page?: Page<Post>;
   activeTag?: string;
 }
 
-const { posts, heading, prev, next, page, activeTag } = Astro.props;
+const { posts, heading, page, activeTag } = Astro.props;
 const all = await getCollection('blog');
 const tags = [...countBy(all, (p) => p.data.tags)].sort(byCountDesc);
 const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Number(b[0]) - Number(a[0]));
@@ -37,9 +36,9 @@ const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Num
       {
         page && (
           <nav aria-label="Pagination" class="flex justify-between py-2 text-sm lg:px-3">
-            {next ? <a href={next} rel="next" data-key="," class="text-fg hover:text-accent hover:no-underline">[<u class="text-accent no-underline">,</u>] older</a> : <span class="text-dim">[,] older</span>}
-            <span class="text-dim">page {page.current} / {page.total}</span>
-            {prev ? <a href={prev} rel="prev" data-key="." class="text-fg hover:text-accent hover:no-underline">newer [<u class="text-accent no-underline">.</u>]</a> : <span class="text-dim">newer [.]</span>}
+            {page.url.next ? <a href={page.url.next} rel="next" data-key="," class="text-fg hover:text-accent hover:no-underline">[<u class="text-accent no-underline">,</u>] older</a> : <span class="text-dim">[,] older</span>}
+            <span class="text-dim">page {page.currentPage} / {page.lastPage}</span>
+            {page.url.prev ? <a href={page.url.prev} rel="prev" data-key="." class="text-fg hover:text-accent hover:no-underline">newer [<u class="text-accent no-underline">.</u>]</a> : <span class="text-dim">newer [.]</span>}
           </nav>
         )
       }
