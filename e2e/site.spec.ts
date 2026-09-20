@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
-import { htmlRoutes } from '../scripts/routes';
+import { htmlRoutes, sampleRoutes } from '../scripts/routes';
 
+// A post with images and code fences, for the clipboard and reflow checks.
 const article = '/blog/learn-big-o-by-measuring-it-in-ruby/';
 
 test('help has a name, traps focus, isolates shortcuts, and restores focus', async ({
@@ -140,17 +141,7 @@ test('cursor motion ends within five seconds', async ({ page }) => {
   ).toBe(0);
 });
 
-for (const route of [
-  '/',
-  '/projects/',
-  '/blog/',
-  '/blog/2/',
-  '/blog/tag/ruby/',
-  '/blog/year/2026/',
-  article,
-  '/cv/',
-  '/404.html',
-]) {
+for (const route of new Set([...sampleRoutes(), article, '/404.html'])) {
   test(`reflow and visual evidence: ${route}`, async ({ page }, testInfo) => {
     await page.goto(route);
     await page.evaluate(() => document.fonts.ready);
