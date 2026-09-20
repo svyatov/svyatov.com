@@ -4,14 +4,12 @@ import Banner from '../components/Banner.astro';
 import ProjectRow from '../components/ProjectRow.astro';
 import { banners } from '../data/banners';
 import Base from '../layouts/Base.astro';
-import { countBy } from '../lib/posts';
+import { byCountDesc, countBy } from '../lib/posts';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime(),
 );
-const languages = [...countBy(projects, (p) => [p.data.language])].sort(
-  (a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0])),
-);
+const languages = [...countBy(projects, (p) => [p.data.language])].sort(byCountDesc);
 ---
 
 <Base title="Projects" description="Open-source libraries and tools by Leonid Svyatov: Ruby gems, TypeScript, Go.">

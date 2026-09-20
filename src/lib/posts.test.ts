@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { countBy, formatDate, postUrl, readingTime, tagUrl, yearOf } from './posts';
+import { byCountDesc, countBy, formatDate, postUrl, readingTime, tagUrl, yearOf } from './posts';
 
 describe('readingTime', () => {
   test('rounds words at 200 wpm with a floor of one minute', () => {
@@ -30,6 +30,14 @@ describe('countBy', () => {
     const counts = countBy([{ t: ['a', 'b'] }, { t: ['a'] }], (i) => i.t);
     expect([...counts]).toEqual([
       ['a', 2],
+      ['b', 1],
+    ]);
+  });
+  test('byCountDesc orders by count, then by key', () => {
+    const counts = countBy([{ t: ['b', 'c'] }, { t: ['c', 'a'] }], (i) => i.t);
+    expect([...counts].sort(byCountDesc)).toEqual([
+      ['c', 2],
+      ['a', 1],
       ['b', 1],
     ]);
   });

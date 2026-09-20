@@ -24,3 +24,7 @@ export function countBy<T>(items: T[], key: (item: T) => Iterable<string | numbe
   for (const item of items) for (const k of key(item)) counts.set(k, (counts.get(k) ?? 0) + 1);
   return counts;
 }
+
+/** Sorts `countBy` entries by count, descending, then by key. */
+export const byCountDesc = (a: [string | number, number], b: [string | number, number]) =>
+  b[1] - a[1] || String(a[0]).localeCompare(String(b[0]));

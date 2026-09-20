@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import { banners } from '../data/banners';
 import { feeds } from '../lib/feeds';
-import { countBy, type Post, tagUrl, yearOf } from '../lib/posts';
+import { byCountDesc, countBy, type Post, tagUrl, yearOf } from '../lib/posts';
 import { site } from '../site';
 import Banner from './Banner.astro';
 import PostRow from './PostRow.astro';
@@ -19,7 +19,7 @@ interface Props {
 
 const { posts, heading, prev, next, page, activeTag } = Astro.props;
 const all = await getCollection('blog');
-const tags = [...countBy(all, (p) => p.data.tags)].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0])));
+const tags = [...countBy(all, (p) => p.data.tags)].sort(byCountDesc);
 const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Number(b[0]) - Number(a[0]));
 ---
 
