@@ -21,7 +21,7 @@ const props = Astro.props;
     <Header path={Astro.url.pathname} />
     <main id="main" tabindex="-1" class="flex flex-col"><slot /></main>
     <Footer />
-    {site.scanlines && <div aria-hidden="true" class="scanlines fixed inset-0 z-20 print:hidden" />}
+    <div aria-hidden="true" class="scanlines fixed inset-0 z-20 print:hidden"></div>
     <dialog
       id="keys"
       aria-labelledby="keys-title"
