@@ -8,3 +8,6 @@ audit-results/
 playwright-report/
 test-results/
 oss-audit-report.md
+.agents/skills/
+.claude/skills
+
