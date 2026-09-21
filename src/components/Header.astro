@@ -16,7 +16,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     <span class="inline-flex items-center gap-1.5 font-semibold text-accent text-lg tracking-logo">
       <span>&gt;</span><span>ls</span><span class="inline-block h-[1.05em] w-[0.55em] bg-accent"></span>
     </span>
-    <span class="text-dim text-sm">{site.title}</span>
+    <span class="whitespace-nowrap text-dim text-sm">{site.title}</span>
   </a>
   <nav aria-label="Main" class="hidden items-center gap-6 md:flex">
     {
@@ -34,7 +34,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   </nav>
   {
     site.openToWork && (
-      <div class="hidden items-center gap-2 text-teal text-xs tracking-badge md:flex">
+      <div class="hidden items-center gap-2 whitespace-nowrap text-teal text-xs tracking-badge lg:flex">
         <span class="size-2 rounded-full bg-teal shadow-glow" />
         OPEN TO SENIOR / LEAD ROLES
       </div>

@@ -33,12 +33,12 @@ const languages = [...countBy(projects, (p) => [p.data.language])].sort(byCountD
   </section>
   <div class="flex flex-col px-4 pb-10 md:px-20 md:pb-14">
     <div
-      class="hidden grid-cols-[13.75rem_9.375rem_minmax(0,1fr)_5.625rem] gap-6 border-accent border-b px-3 py-2 text-2xs text-dim tracking-label md:grid"
+      class="hidden grid-cols-[13.75rem_9.375rem_minmax(0,1fr)_5.625rem] gap-6 border-accent border-b px-3 py-2 text-2xs text-dim tracking-label lg:grid"
     >
       <span>NAME</span><span>LANG</span><span>DESCRIPTION</span><span class="text-right">LINK</span>
     </div>
     {projects.map((p) => <ProjectRow project={p} />)}
-    <p class="py-4 text-dim text-xs md:px-3">
+    <p class="py-4 text-dim text-xs lg:px-3">
       total {projects.length} · also: <a href="https://rubygems.org/profiles/svyatov">gems on rubygems.org</a> ·
       <a href="https://www.npmjs.com/~svyatov">packages on npm</a>
     </p>
