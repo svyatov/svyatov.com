@@ -29,12 +29,11 @@ const toc = [
       <h2 id="analytics">Analytics</h2>
       <p>
         This site uses Google Analytics to understand visits and which pages people read. The Google tag
-        loads when you visit. It is configured with <code>analytics_storage</code> set to
-        <code>denied</code>, which prevents it from reading or writing first-party analytics cookies.
-        This setting does not stop data from being sent to Google.
+        loads when you visit and sets first-party cookies (<code>_ga</code> and <code>_ga_*</code>)
+        that identify your browser across visits. They expire after 2 years.
       </p>
       <p>
-        Google receives measurements without analytics cookies. These can include the page URL
+        Google receives measurements tied to those cookies. These can include the page URL
         (including query parameters), referrer, time of the visit, browser and device information,
         consent settings, and a random number generated for each page load. Google also receives your
         IP address as part of the connection and can use it to estimate your location, including your
@@ -60,7 +59,8 @@ const toc = [
         See <a href="https://policies.google.com/technologies/partner-sites">how Google uses information from sites that use its services</a>
         and <a href="https://policies.google.com/privacy">Google’s privacy policy</a> for details about
         its processing, retention, and international data transfers. You can prevent this site’s
-        analytics script from running by disabling JavaScript for this site in your browser.
+        analytics script from running by disabling JavaScript for this site in your browser, or
+        install <a href="https://tools.google.com/dlpage/gaoptout">Google’s opt-out browser add-on</a>.
       </p>
       <h2 id="browser-storage">Browser storage</h2>
       <p>
