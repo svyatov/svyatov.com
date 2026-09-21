@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: '0 6 * * 1'
   workflow_dispatch:
     inputs:
       full-audit:
@@ -26,6 +28,13 @@ jobs:
     timeout-minutes: ${{ inputs.full-audit && 180 || 30 }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+      - name: Detect a content-only change
+        id: changes
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
+        run: |
+          if git diff --quiet HEAD^ HEAD -- . ':!src/content/blog'; then echo content-only=true; else echo content-only=false; fi >> "$GITHUB_OUTPUT"
       - name: Lint, type-check, build, test
         uses: withastro/action@v6
         with:
@@ -34,13 +43,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install fixed browser revision
+        if: steps.changes.outputs.content-only != 'true'
         run: bunx --no-install playwright install --with-deps chromium
       - name: Browser behavior and accessibility checks
+        if: steps.changes.outputs.content-only != 'true'
         run: bun run test:e2e
       - name: Lighthouse
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: bun run ${{ inputs.full-audit && 'audit:full' || 'audit' }}
       - name: Preserve browser and audit reports
-        if: always()
+        if: always() && steps.changes.outputs.content-only != 'true'
         uses: actions/upload-artifact@v7.0.1
         with:
           name: prepublication-reports
@@ -54,7 +66,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

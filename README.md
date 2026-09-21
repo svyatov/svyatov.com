@@ -6,7 +6,7 @@ Source of [svyatov.com](https://svyatov.com), Leonid Svyatov's personal site and
 
 - **Astro 7 and Tailwind CSS 4.** A static site, deployed to GitHub Pages on every push to `main`.
 - **Keyboard first.** Every page has single-key shortcuts for navigation, `j`/`k` to move through rows, and a help dialog listing what is bound.
-- **Lighthouse 100, enforced.** Every pull request runs Lighthouse on every page type, mobile and desktop, and fails unless Performance, Accessibility, Best Practices, and SEO all score 100 (`scripts/audit.ts`).
+- **Lighthouse 100, enforced.** A weekly run and every manual run audit every page type, mobile and desktop, and fail unless Performance, Accessibility, Best Practices, and SEO all score 100 (`scripts/audit.ts`).
 - **Browser tests.** Playwright checks keyboard navigation, focus, dialogs, reduced motion, and reflow on desktop and mobile Chromium (`e2e/site.spec.ts`).
 - **Bun.** Node 22.12 or later and Bun; CI runs Bun 1.4.2.
 
