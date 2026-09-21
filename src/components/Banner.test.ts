@@ -14,6 +14,17 @@ describe('Banner', () => {
     expect(JSON.parse(json.replaceAll('&quot;', '"'))).toEqual(['AAA', 'BBB']);
   });
 
+  test('scales every banner by the widest one so glyphs match across pages at any viewport', async () => {
+    const container = await AstroContainer.create();
+    const widest = Math.max(
+      ...Object.values(banners)
+        .flat()
+        .flatMap((art) => art.split('\n').map((row) => row.length)),
+    );
+    const html = await container.renderToString(Banner, { props: { fonts: ['AAAA'] } });
+    expect(html).toContain(`width:min(2.25rem, ${(4 / widest) * 100}%)`);
+  });
+
   test('every banner is exactly six rows so the swap never reflows', () => {
     for (const fonts of Object.values(banners)) {
       expect(fonts.length).toBeGreaterThan(1);
