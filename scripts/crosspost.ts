@@ -1,7 +1,9 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { DevToClient } from 'devto-client';
-import { devtoBody, devtoTags } from '../src/lib/crosspost';
+import { devtoTags } from '../src/lib/crosspost';
+import { postBody } from '../src/lib/llms';
+import { markdownUrl, postUrl } from '../src/lib/posts';
 import { site } from '../src/site';
 
 // Usage: bun scripts/crosspost.ts devto <slug> [--dry-run]
@@ -16,7 +18,7 @@ const [target, slug] = process.argv.slice(2);
 if (!slug || !['devto', 'bluesky'].includes(target)) {
   throw new Error('Usage: bun scripts/crosspost.ts devto|bluesky <slug> [--dry-run]');
 }
-const url = `${site.url}/blog/${slug}/`;
+const url = site.url + postUrl({ id: slug });
 
 function secret(ref: string) {
   const { status, stdout, stderr } = spawnSync('op', ['read', '--account', 'my', ref], {
@@ -52,7 +54,7 @@ if (target === 'devto') {
   if (/^devto:/m.test(readFileSync(file, 'utf8'))) throw new Error(`${file} already has devto`);
   const article = {
     title: post.title,
-    body_markdown: devtoBody(await fetchText(`${site.url}/llms-full.txt`), url),
+    body_markdown: postBody(await fetchText(site.url + markdownUrl({ id: slug }))),
     published: true,
     canonical_url: url,
     description: post.description,

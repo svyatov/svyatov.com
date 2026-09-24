@@ -91,6 +91,13 @@ export const postMarkdown = (p: Post, assets: Record<string, string> = {}) => `#
 ${absoluteMarkdown(p.body?.trim() ?? '', `${site.url}${postUrl(p)}`, assets)}
 `;
 
+/** Inverse of postMarkdown: the body, links already absolute. */
+export function postBody(markdown: string) {
+  const header = markdown.match(/^# .*\n\n- URL: .*\n- Date: .*\n- Tags: .*\n\n/);
+  if (!header) throw new Error('Not a post Markdown copy');
+  return markdown.slice(header[0].length).trim();
+}
+
 export function llmsFull(posts: Post[], assets: Record<string, Record<string, string>> = {}) {
   const bodies = [...posts]
     .sort(byDateDesc)
