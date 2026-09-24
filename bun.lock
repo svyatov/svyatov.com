@@ -18,6 +18,7 @@
         "@biomejs/biome": "2.5.13",
         "@lhci/cli": "0.15.1",
         "@playwright/test": "1.63.0",
+        "devto-client": "^2.2.0",
         "typescript": "^6",
         "vitest": "^5.0.0",
       },
@@ -633,6 +634,8 @@
     "devalue": ["devalue@5.9.2", "", {}, "sha512-po4PAY5c53tw5XMocSnf8A/5OHhbbUftpr93aEN6BBoAdntUmK7vu7wOATqvt7cXO7m1Cl4gMVn6p7n6n4mj0w=="],
 
     "devlop": ["devlop@1.1.0", "", { "dependencies": { "dequal": "^2.0.0" } }, "sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA=="],
+
+    "devto-client": ["devto-client@2.2.0", "", {}, "sha512-fkmDlETmn6gFfXb4AhonYSBkIOWnm53/W+0qrwDPzkzfr8k1BJX9xnK8uP9gT9YmrR+zHffpobH+gjjv4s/MbA=="],
 
     "devtools-protocol": ["devtools-protocol@0.0.1467305", "", {}, "sha512-LxwMLqBoPPGpMdRL4NkLFRNy3QLp6Uqa7GNp1v6JaBheop2QrB9Q7q0A/q/CYYP9sBfZdHOyszVx4gc9zyk7ow=="],
 
