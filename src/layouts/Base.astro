@@ -97,14 +97,9 @@ const pager = `${site.keys.older} ${site.keys.newer}`;
         shortcuts = toggle.checked;
         try { localStorage.setItem('shortcuts', shortcuts ? 'on' : 'off'); } catch {}
       });
-      let returnFocus: HTMLElement | null = null;
-      const showHelp = () => {
-        returnFocus = document.activeElement as HTMLElement | null;
-        dialog?.showModal();
-      };
+      const showHelp = () => dialog?.showModal();
       document.querySelector('[data-keys-open]')?.addEventListener('click', showHelp);
       document.querySelector('[data-keys-close]')?.addEventListener('click', () => dialog?.close());
-      dialog?.addEventListener('close', () => returnFocus?.focus());
       dialog?.addEventListener('keydown', (event) => {
         if (event.key !== 'Tab') return;
         const controls = [...dialog.querySelectorAll<HTMLElement>('button, input')];

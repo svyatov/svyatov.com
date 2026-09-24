@@ -12,7 +12,7 @@ const columns = widest(fonts);
 const share = (columns / widest(Object.values(banners).flat())) * 100;
 ---
 
-<button type="button" aria-label="Change banner font" class="block cursor-pointer text-left" style={{ width: `min(${columns * 0.5625}rem, ${share}%)` }} data-banner>
+<button type="button" aria-label="Change banner font" class="block cursor-pointer text-left" style={{ width: `min(${columns * 0.5625}rem, ${share}%)` }}>
   <svg aria-hidden="true" focusable="false" viewBox={`0 0 ${columns * 9.6} 106`} class="block h-auto w-full fill-accent font-mono" data-fonts={JSON.stringify(fonts)}>
     {fonts[0].split('\n').map((row, index) => <text x="0" y={16 + index * 17.6} font-size="16" style="white-space: pre">{row}</text>)}
   </svg>

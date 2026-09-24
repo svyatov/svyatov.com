@@ -7,10 +7,11 @@ import Base from '../layouts/Base.astro';
 import { duration } from '../lib/cv';
 import { site } from '../site';
 
+const social = (label: string) => site.socials.find((s) => s.label === label)?.href;
 const contacts = [
   { label: site.email, href: `mailto:${site.email}` },
-  { label: 'linkedin.com/in/leonid-svyatov', href: 'https://www.linkedin.com/in/leonid-svyatov' },
-  { label: 'github.com/svyatov', href: 'https://github.com/svyatov' },
+  { label: 'linkedin.com/in/leonid-svyatov', href: social('linkedin') },
+  { label: 'github.com/svyatov', href: social('github') },
 ];
 ---
 

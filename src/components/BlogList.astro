@@ -20,7 +20,7 @@ const { posts, heading, page, activeTag } = Astro.props;
 const { older, newer } = site.keys;
 const all = await getCollection('blog');
 const tags = [...countBy(all, (p) => p.data.tags)].sort(byCountDesc);
-const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Number(b[0]) - Number(a[0]));
+const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => b[0] - a[0]);
 ---
 
 <div class="flex flex-col gap-8 px-4 pt-10 pb-10 md:px-20 md:pt-18 md:pb-14">
@@ -48,7 +48,7 @@ const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Num
       <div class="flex flex-col gap-3">
         <h2 class="font-semibold text-2xs text-fg tracking-label">TAGS</h2>
         <div class="flex flex-wrap gap-2">
-          {tags.map(([tag]) => <Tag href={tagUrl(String(tag))} active={tag === activeTag}>{tag}</Tag>)}
+          {tags.map(([tag]) => <Tag href={tagUrl(tag)} active={tag === activeTag}>{tag}</Tag>)}
         </div>
       </div>
       <div class="flex flex-col gap-3 border border-line bg-surface p-5">
@@ -61,7 +61,7 @@ const years = [...countBy(all, (p) => [yearOf(p.data.date)])].sort((a, b) => Num
         <div class="flex flex-col gap-1.5">
           {
             years.map(([year, n]) => (
-              <a href={yearUrl(Number(year))}>
+              <a href={yearUrl(year)}>
                 {year} <span class="text-dim">·· {n}</span>
               </a>
             ))

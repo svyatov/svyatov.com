@@ -4,6 +4,7 @@ import type { GetStaticPaths } from 'astro';
 import BlogList from '../../../components/BlogList.astro';
 import Base from '../../../layouts/Base.astro';
 import { byDateDesc } from '../../../lib/posts';
+import { site } from '../../../site';
 
 export const getStaticPaths = (async () => {
   const posts = (await getCollection('blog')).sort(byDateDesc);
@@ -17,6 +18,6 @@ export const getStaticPaths = (async () => {
 const { tag, posts } = Astro.props;
 ---
 
-<Base title={`#${tag}`} description={`Posts tagged ${tag} by Leonid Svyatov.`}>
+<Base title={`#${tag}`} description={`Posts tagged ${tag} by ${site.name}.`}>
   <BlogList posts={posts} heading={`#${tag}`} activeTag={tag} />
 </Base>
