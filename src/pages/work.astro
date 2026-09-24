@@ -56,7 +56,7 @@ const tracks = [
       <p class="text-dim">$ cat ~/work.md</p>
       <h1>{headline}</h1>
     </div>
-    <p class="text-dim text-sm">{site.status.toLowerCase()} · {cv.location} (UTC+4) · remote</p>
+    <p class="text-dim text-sm">available now · {cv.location} (UTC+4)</p>
   </section>
 
   {
@@ -82,9 +82,11 @@ const tracks = [
             </a>
           </div>
           <figure class="flex flex-col gap-3 self-start border border-line bg-surface px-4 py-4 md:px-6 md:py-5">
-            <blockquote class="text-md leading-summary">"{t.quote}"</blockquote>
-            <figcaption class="text-dim text-sm">
-              {t.by.name}, {t.by.title} · <a href="/cv/">all recommendations</a>
+            <blockquote class="text-md leading-summary">{t.quote}</blockquote>
+            <figcaption class="flex flex-col gap-1 text-sm">
+              <span class="font-semibold">{t.by.name}</span>
+              <span class="text-dim">{t.by.title}</span>
+              <a href="/cv/" class="mt-2">all recommendations <span class="relative -top-px">→</span></a>
             </figcaption>
           </figure>
         </div>
