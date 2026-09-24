@@ -25,8 +25,8 @@ export function readingTime(body: string | undefined): number {
   return Math.max(1, Math.round(words / 200));
 }
 
-export function countBy<T>(items: T[], key: (item: T) => Iterable<string | number>) {
-  const counts = new Map<string | number, number>();
+export function countBy<T, K>(items: T[], key: (item: T) => Iterable<K>) {
+  const counts = new Map<K, number>();
   for (const item of items) for (const k of key(item)) counts.set(k, (counts.get(k) ?? 0) + 1);
   return counts;
 }
