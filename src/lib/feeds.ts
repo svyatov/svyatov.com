@@ -3,17 +3,6 @@ import { byDateDesc, type Post, postUrl } from './posts';
 
 export const escapeXml = (s: string) => s.replace(/[<>&'"]/g, (c) => `&#${c.charCodeAt(0)};`);
 
-export interface FeedItem {
-  id: string;
-  url: string;
-  title: string;
-  summary: string;
-  html: string;
-  published: Date;
-  updated: Date;
-  tags: string[];
-}
-
 export function absoluteHtml(html: string, base: string): string {
   return html.replace(/<(?:a|img|source)\b[^>]*>/gi, (tag) =>
     tag.replace(/\b(href|src|srcset)="([^"]*)"/gi, (_attribute, name: string, value: string) => {
@@ -42,7 +31,7 @@ async function renderHtml(post: Post): Promise<string> {
   return container.renderToString(Content);
 }
 
-export async function feedItems(posts: Post[], renderPost = renderHtml): Promise<FeedItem[]> {
+export async function feedItems(posts: Post[], renderPost = renderHtml) {
   return Promise.all(
     [...posts].sort(byDateDesc).map(async (post) => ({
       id: post.id,
@@ -57,7 +46,7 @@ export async function feedItems(posts: Post[], renderPost = renderHtml): Promise
   );
 }
 
-export const feedUpdated = (items: FeedItem[]) =>
+export const feedUpdated = (items: { updated: Date }[]) =>
   new Date(Math.max(...items.map((i) => i.updated.getTime())));
 
 export const feeds = [
