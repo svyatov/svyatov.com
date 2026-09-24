@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { absoluteMarkdown, llmsFull, llmsIndex, postMarkdown } from './llms';
+import { absoluteMarkdown, llmsFull, llmsIndex, postBody, postMarkdown } from './llms';
 import type { Post } from './posts';
 
 test('exports resolve images and links but preserve fenced and inline examples', () => {
@@ -41,4 +41,19 @@ test('a post exports as a standalone document and nests one level down in the fu
   expect(markdown).toMatch(/^# Hello\n\n- URL: https:\/\/svyatov\.com\/blog\/hello\/\n/);
   expect(markdown).toContain('Body [up](https://svyatov.com/blog/)');
   expect(llmsFull([post])).toContain(`\n\n#${markdown}`);
+});
+
+test('postBody reads back what postMarkdown wrote, rules and headings included', () => {
+  const post = {
+    id: 'hello',
+    body: 'One [up](../)\n\n---\n\n## Two\n\n- URL: not a header',
+    data: { title: 'Hello', date: new Date('2026-01-02'), tags: [] },
+  } as unknown as Post;
+  expect(postBody(postMarkdown(post))).toBe(
+    'One [up](https://svyatov.com/blog/)\n\n---\n\n## Two\n\n- URL: not a header',
+  );
+});
+
+test('postBody rejects text that is not a post copy', () => {
+  expect(() => postBody('<!doctype html>')).toThrow(/Not a post/);
 });

@@ -12,6 +12,8 @@ export const yearUrl = (year: number) => `/blog/year/${year}/`;
 
 export const ogUrl = (post: Pick<Post, 'id'>) => `/og/${post.id}.png`;
 
+export const markdownUrl = (post: Pick<Post, 'id'>) => `/blog/${post.id}.md`;
+
 /** ISO date, YYYY-MM-DD. */
 export const formatDate = (date: Date) => date.toISOString().slice(0, 10);
 
