@@ -8,7 +8,11 @@ import { site } from '../site';
 
 const headline =
   'I build software with founders as a consultant. Open to lead engineering roles too.';
-const recommender = (name: string) => cv.recommendations.find((r) => r.name === name);
+const recommender = (name: string) => {
+  const found = cv.recommendations.find((r) => r.name === name);
+  if (!found) throw new Error(`No recommendation from ${name} in src/data/cv.ts`);
+  return found;
+};
 const tracks = [
   {
     title: 'CONSULTING',
@@ -80,7 +84,7 @@ const tracks = [
           <figure class="flex flex-col gap-3 self-start border border-line bg-surface px-4 py-4 md:px-6 md:py-5">
             <blockquote class="text-md leading-summary">"{t.quote}"</blockquote>
             <figcaption class="text-dim text-sm">
-              {t.by?.name}, {t.by?.title} · <a href="/cv/">all recommendations</a>
+              {t.by.name}, {t.by.title} · <a href="/cv/">all recommendations</a>
             </figcaption>
           </figure>
         </div>

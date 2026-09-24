@@ -18,7 +18,8 @@ describe('Header', () => {
   test('the status badge links to the work page', async () => {
     const html = await container.renderToString(Header, { props: { path: '/' } });
     expect(html).toMatch(
-      new RegExp(`<a href="/work/"[^>]*>[\\s\\S]*?${site.status}[\\s\\S]*?</a>`),
+      // The status must sit inside the /work/ anchor itself, not after the nav's [w]ork link.
+      new RegExp(`<a href="/work/"[^>]*>(?:(?!</a>)[\\s\\S])*${site.status}`),
     );
   });
 
