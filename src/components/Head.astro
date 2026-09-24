@@ -10,9 +10,10 @@ interface Props {
   article?: { published: Date; updated?: Date; tags: string[] };
   jsonLd?: object;
   noindex?: boolean;
+  markdown?: string;
 }
 
-const { title, description = site.description, image = '/og/default.png', article, jsonLd, noindex = false } = Astro.props;
+const { title, description = site.description, image = '/og/default.png', article, jsonLd, noindex = false, markdown } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : `${site.name} · Software engineer`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = new URL(image, Astro.site);
@@ -31,6 +32,7 @@ const imageUrl = new URL(image, Astro.site);
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/manifest.webmanifest" />
 <link rel="sitemap" href="/sitemap-index.xml" />
+{markdown && <link rel="alternate" type="text/markdown" href={markdown} />}
 {feeds.map((f) => <link rel="alternate" type={f.type} title={`${site.title} (${f.label})`} href={new URL(f.href, Astro.site)} />)}
 <Font cssVariable="--font-plex" preload={[{ weight: 400, style: 'normal', subset: 'latin' }]} />
 

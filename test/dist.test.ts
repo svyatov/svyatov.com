@@ -22,7 +22,7 @@ beforeAll(() => {
     .filter((f) => f.endsWith('.html'))
     .map((f) => ({ path: relative(dist, f), html: readFileSync(f, 'utf8') }));
   posts = readdirSync(join(dist, 'blog')).filter(
-    (name) => !['index.html', 'tag', 'year'].includes(name) && !/^\d+$/.test(name),
+    (name) => !['index.html', 'tag', 'year'].includes(name) && !/^\d+$|\.md$/.test(name),
   );
 });
 
@@ -135,6 +135,19 @@ describe('feeds and text endpoints', () => {
       expect(existsSync(join(dist, f)), f).toBe(true);
     }
     expect(read('sitemap-0.xml')).toContain('https://svyatov.com/blog/');
+  });
+
+  test('every post and the home page have a linked Markdown copy', () => {
+    expect(read('robots.txt')).toContain('Content-Signal: search=yes, ai-input=yes, ai-train=yes');
+    for (const [page, markdown] of [
+      ['index.html', '/index.md'],
+      ...posts.map((id) => [`blog/${id}/index.html`, `/blog/${id}.md`]),
+    ]) {
+      const html = read(page);
+      expect(html, page).toContain(`rel="alternate" type="text/markdown" href="${markdown}"`);
+      expect(html, page).toContain(`available at https://svyatov.com${markdown}`);
+      expect(read(markdown), markdown).toMatch(/^# /);
+    }
   });
 
   test('og images exist for the default card and every post', () => {

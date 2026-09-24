@@ -13,7 +13,7 @@ export function llmsIndex(posts: Post[]) {
 
 > ${site.description}
 
-Personal site of ${site.name}, ${site.jobTitle}. Built with Astro, hosted on GitHub Pages. Full post bodies: ${site.url}/llms-full.txt
+Personal site of ${site.name}, ${site.jobTitle}. Built with Astro, hosted on GitHub Pages. Full post bodies: ${site.url}/llms-full.txt. Each post is also Markdown at its URL with the trailing slash replaced by \`.md\`, for example ${site.url}/blog/<id>.md
 
 ## Pages
 
@@ -82,19 +82,19 @@ export function absoluteMarkdown(body: string, base: string, assets: Record<stri
   return output + prose(pending);
 }
 
-export function llmsFull(posts: Post[], assets: Record<string, Record<string, string>> = {}) {
-  const bodies = [...posts]
-    .sort(byDateDesc)
-    .map(
-      (p) => `## ${p.data.title}
+export const postMarkdown = (p: Post, assets: Record<string, string> = {}) => `# ${p.data.title}
 
 - URL: ${site.url}${postUrl(p)}
 - Date: ${formatDate(p.data.date)}
 - Tags: ${p.data.tags.join(', ')}
 
-${absoluteMarkdown(p.body?.trim() ?? '', `${site.url}${postUrl(p)}`, assets[p.id])}
-`,
-    )
+${absoluteMarkdown(p.body?.trim() ?? '', `${site.url}${postUrl(p)}`, assets)}
+`;
+
+export function llmsFull(posts: Post[], assets: Record<string, Record<string, string>> = {}) {
+  const bodies = [...posts]
+    .sort(byDateDesc)
+    .map((p) => `#${postMarkdown(p, assets[p.id])}`)
     .join('\n---\n\n');
   return `# ${site.name}: all posts\n\n> ${site.description}\n\n${bodies}`;
 }
