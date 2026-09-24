@@ -32,3 +32,7 @@ export function countBy<T>(items: T[], key: (item: T) => Iterable<string | numbe
 /** Sorts `countBy` entries by count, descending, then by key. */
 export const byCountDesc = (a: [string | number, number], b: [string | number, number]) =>
   b[1] - a[1] || String(a[0]).localeCompare(String(b[0]));
+
+/** Older than three years: the post gets a note pointing at current work. */
+export const isLegacy = (date: Date, now = new Date()) =>
+  date < new Date(Date.UTC(now.getUTCFullYear() - 3, now.getUTCMonth(), now.getUTCDate()));

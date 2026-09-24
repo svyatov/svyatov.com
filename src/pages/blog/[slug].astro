@@ -5,7 +5,16 @@ import AuthorCard from '../../components/AuthorCard.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import Tag from '../../components/Tag.astro';
 import Base from '../../layouts/Base.astro';
-import { byDateDesc, formatDate, ogUrl, postUrl, readingTime, tagUrl } from '../../lib/posts';
+import {
+  byDateDesc,
+  formatDate,
+  isLegacy,
+  ogUrl,
+  postUrl,
+  readingTime,
+  tagUrl,
+  yearOf,
+} from '../../lib/posts';
 import { site } from '../../site';
 
 export const getStaticPaths = (async () => {
@@ -95,6 +104,13 @@ const jsonLd = {
         </button>
       </div>
       <hr class="border-line border-t lg:hidden" />
+      {
+        isLegacy(date) && (
+          <p data-legacy-note class="border border-line bg-surface px-4 py-3 text-dim text-sm">
+            I wrote this in {yearOf(date)}. These days I work on coding agents, Ruby and Rails tooling, and open source: see <a href="/blog/">recent posts</a> or <a href="/work/">work with me</a>.
+          </p>
+        )
+      }
       <AuthorCard />
       <nav aria-label="Older and next posts" class="grid grid-cols-2 gap-4 text-sm">
         {

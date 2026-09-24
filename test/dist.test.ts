@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { beforeAll, describe, expect, test } from 'vitest';
+import { isLegacy } from '../src/lib/posts';
 
 const dist = join(import.meta.dirname, '../dist');
 const read = (file: string) => readFileSync(join(dist, file), 'utf8');
@@ -165,6 +166,25 @@ describe('feeds and text endpoints', () => {
       const url = new URL(source);
       expect(url.origin).toBe('https://svyatov.com');
       expect(resolves(url.pathname), source).toBe(true);
+    }
+  });
+});
+
+describe('hire path', () => {
+  test('the work page offers consulting first, then roles, each with a tagged mailto', () => {
+    const subjects = [
+      ...read('work/index.html').matchAll(/href="mailto:[^"?]+\?subject=([^"]+)"/g),
+    ].map((m) => decodeURIComponent(m[1]));
+    expect(subjects).toEqual(['[consulting]', '[role]']);
+  });
+
+  test('posts older than three years point readers at current work, newer ones do not', () => {
+    for (const id of posts) {
+      const html = read(`blog/${id}/index.html`);
+      const note = html.match(/<p data-legacy-note[^>]*>([\s\S]*?)<\/p>/)?.[1];
+      if (isLegacy(new Date(jsonLd(html).datePublished)))
+        expect(note, id).toContain('href="/work/"');
+      else expect(note, id).toBeUndefined();
     }
   });
 });

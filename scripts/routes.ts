@@ -16,6 +16,7 @@ const pageTypes = [
   /^\/$/,
   /^\/projects\/$/,
   /^\/cv\/$/,
+  /^\/work\/$/,
   /^\/privacy\/$/,
   /^\/blog\/$/,
   /^\/blog\/\d+\/$/,

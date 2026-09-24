@@ -21,6 +21,7 @@ Personal site of ${site.name}, ${site.jobTitle}. Built with Astro, hosted on Git
 - [Projects](${site.url}/projects/): open-source libraries and tools I maintain
 - [Blog](${site.url}/blog/): ${site.blogTagline}
 - [CV](${site.url}/cv/): work experience, skills, education
+- [Work](${site.url}/work/): consulting and lead roles, availability, how to get in touch
 - [Privacy](${site.url}/privacy/): what the site collects about visitors
 
 ## Blog posts

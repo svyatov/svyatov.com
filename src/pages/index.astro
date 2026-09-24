@@ -47,21 +47,15 @@ const jsonLd = {
       <h1>{site.description}<span class="cursor-blink"></span></h1>
     </div>
     {
-      site.openToWork && (
-        <div class="flex items-center gap-2 text-2xs text-teal tracking-badge md:hidden">
+      site.status && (
+        <a href="/work/" class="flex items-center gap-2 self-start text-2xs text-teal tracking-badge hover:no-underline md:text-xs xl:hidden">
           <span class="size-2 rounded-full bg-teal shadow-glow" />
-          OPEN TO SENIOR / LEAD ROLES
-        </div>
+          {site.status}
+        </a>
       )
     }
     <div class="flex flex-wrap gap-3 text-sm md:gap-5">
-      {
-        socials.map((s) => (
-          <a href={s.href} rel={s.label === 'email' ? undefined : 'me'} class:list={[s.label === 'email' && 'hidden md:inline']}>
-            [ {s.label} ]
-          </a>
-        ))
-      }
+      {socials.map((s) => <a href={s.href} rel={s.label === 'email' ? undefined : 'me'}>[ {s.label} ]</a>)}
     </div>
   </section>
 

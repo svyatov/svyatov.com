@@ -3,6 +3,7 @@ import {
   byCountDesc,
   countBy,
   formatDate,
+  isLegacy,
   ogUrl,
   postUrl,
   readingTime,
@@ -53,5 +54,17 @@ describe('countBy', () => {
       ['a', 1],
       ['b', 1],
     ]);
+  });
+});
+
+describe('isLegacy', () => {
+  const now = new Date('2026-09-24T00:00:00Z');
+  test('posts older than three years are legacy', () => {
+    expect(isLegacy(new Date('2019-02-24'), now)).toBe(true);
+    expect(isLegacy(new Date('2023-09-23'), now)).toBe(true);
+  });
+  test('posts from the last three years are not', () => {
+    expect(isLegacy(new Date('2024-03-03'), now)).toBe(false);
+    expect(isLegacy(new Date('2023-09-25'), now)).toBe(false);
   });
 });

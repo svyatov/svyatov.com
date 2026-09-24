@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { absoluteMarkdown } from './llms';
+import { absoluteMarkdown, llmsIndex } from './llms';
 
 test('exports resolve images and links but preserve fenced and inline examples', () => {
   const code =
@@ -24,4 +24,8 @@ test('nested, unclosed, indented, and multiline code remains unchanged', () => {
   ]) {
     expect(absoluteMarkdown(body, 'https://svyatov.com/')).toBe(body);
   }
+});
+
+test('the index lists the work page for agents screening candidates', () => {
+  expect(llmsIndex([])).toMatch(/^- \[Work\]\(https:\/\/svyatov\.com\/work\/\): .+$/m);
 });
