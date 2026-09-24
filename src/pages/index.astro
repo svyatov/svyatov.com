@@ -55,7 +55,13 @@ const jsonLd = {
       )
     }
     <div class="flex flex-wrap gap-3 text-sm md:gap-5">
-      {socials.map((s) => <a href={s.href} rel={s.label === 'email' ? undefined : 'me'}>[ {s.label} ]</a>)}
+      {
+        socials.map((s) => (
+          <a href={s.href} rel={s.label === 'email' ? undefined : 'me'} class:list={[s.label === 'bluesky' && 'hidden md:inline']}>
+            [ {s.label} ]
+          </a>
+        ))
+      }
     </div>
   </section>
 
