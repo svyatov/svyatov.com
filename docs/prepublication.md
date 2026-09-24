@@ -14,11 +14,9 @@ Lighthouse CI 0.15.1 and Playwright 1.63.0 are development dependencies with exa
 
 ## Audit contract
 
-The audit discovers every generated HTML file recursively, then excludes the 404 page and pages with explicit `noindex`. `bun run audit` takes the first route of each page type (home, projects, CV, blog index, blog page, tag archive, year archive, post) and gives it one cold load with the standard Lighthouse mobile settings and one with the desktop preset. A route that matches no page type in `scripts/routes.ts` fails the command. `bun run audit:full` gives every URL three loads per profile; in CI it runs on manual dispatch with the `full-audit` input. Scripts, animations, and prefetch remain enabled. No audits are disabled.
+The audit discovers every generated HTML file recursively, then excludes the 404 page and pages with explicit `noindex`. `bun run audit` takes the first route of each page type (home, projects, CV, work, privacy, blog index, blog page, tag archive, year archive, post) and gives it one cold load with the standard Lighthouse mobile settings and one with the desktop preset. A route that matches no page type in `scripts/routes.ts` fails the command. `bun run audit:full` gives every URL three loads per profile; in CI it runs on manual dispatch with the `full-audit` input. Scripts, animations, and prefetch remain enabled. No audits are disabled.
 
 For each URL and profile, the Performance median must be 100. Accessibility, Best Practices, and SEO must be 100 in every run. Missing runs fail the command. Individual HTML and JSON reports, assertion results, the route list, profile configuration, and the complete score table are retained under `audit-results/`. CI uploads these and the browser reports even when a check fails, with 30-day retention.
-
-`bun run audit:baseline` saves a copy of the current build and collects one run per URL and profile without score assertions. It is for before-and-after comparison, not the deployment gate. Baseline and final results must be labelled separately.
 
 The 404 page has `noindex`, no canonical link, and a real HTTP 404 response in the preview. Browser tests check its metadata and keyboard help. It is excluded from the ordinary Lighthouse score gate because its error status and indexing policy are intentional.
 
