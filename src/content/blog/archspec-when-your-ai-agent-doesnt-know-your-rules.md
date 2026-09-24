@@ -3,6 +3,7 @@ title: "ArchSpec: when your AI agent doesn't know your rules, make the rules unb
 description: "ArchSpec turns Rails architecture conventions into rules that CI enforces, so code from AI agents, new hires, and seniors alike has to respect your layer boundaries."
 date: "2026-09-23"
 tags: ["ruby", "rails", "ai", "architecture"]
+devto: "https://dev.to/svyatov/archspec-when-your-ai-agent-doesnt-know-your-rules-make-the-rules-unbreakable-4dpj"
 ---
 
 A thing is happening in Rails shops everywhere right now: AI coding assistants are writing large chunks of production code. Cursor. Claude. Copilot. Whatever your team has adopted, the output is real and it's landing in your codebase at a pace that code review alone can't fully absorb.
