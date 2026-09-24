@@ -33,11 +33,11 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     }
   </nav>
   {
-    site.openToWork && (
-      <div class="hidden items-center gap-2 whitespace-nowrap text-teal text-xs tracking-badge lg:flex">
+    site.status && (
+      <a href="/work/" class="hidden items-center gap-2 whitespace-nowrap text-teal text-xs tracking-badge hover:no-underline xl:flex">
         <span class="size-2 rounded-full bg-teal shadow-glow" />
-        OPEN TO SENIOR / LEAD ROLES
-      </div>
+        {site.status}
+      </a>
     )
   }
   <details class="group md:hidden">

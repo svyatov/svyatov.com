@@ -8,7 +8,8 @@ export const site = {
   email: 'leonid@svyatov.com',
   repo: 'https://github.com/svyatov/svyatov.com',
   analyticsId: 'G-CC82JVJ8N1',
-  openToWork: true,
+  /** Header and home badge, links to /work/. Empty hides it. */
+  status: 'AVAILABLE NOW · CONSULTING / LEAD ROLES',
   socials: [
     { label: 'github', key: 'g', href: 'https://github.com/svyatov' },
     { label: 'linkedin', key: 'l', href: 'https://www.linkedin.com/in/leonid-svyatov' },
@@ -19,6 +20,7 @@ export const site = {
     { key: 'p', rest: 'rojects', href: '/projects/' },
     { key: 'b', rest: 'log', href: '/blog/' },
     { key: 'c', rest: 'v', href: '/cv/' },
+    { key: 'w', rest: 'ork', href: '/work/' },
   ],
   /** Keys for the older/newer post or page links. */
   keys: { older: ',', newer: '.' },

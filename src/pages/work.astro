@@ -1,0 +1,96 @@
+---
+import Banner from '../components/Banner.astro';
+import SectionRule from '../components/SectionRule.astro';
+import { banners } from '../data/banners';
+import { cv } from '../data/cv';
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+
+const headline =
+  'I build software with founders as a consultant. Open to lead engineering roles too.';
+const recommender = (name: string) => {
+  const found = cv.recommendations.find((r) => r.name === name);
+  if (!found) throw new Error(`No recommendation from ${name} in src/data/cv.ts`);
+  return found;
+};
+const tracks = [
+  {
+    title: 'CONSULTING',
+    subject: '[consulting]',
+    cta: 'email about a project',
+    intro:
+      'I help founders figure out what they need, build it, and keep it running. Remote from Yerevan, available now.',
+    items: [
+      'Turned a crypto research prototype into a monitored Python trading platform in six weeks',
+      'Built a Rails marketplace for timber harvesting and a Telegram app with payments',
+      'Built Ouroboros, a self-improving software delivery system',
+      'Build agent skills, harnesses and tooling for coding agents',
+    ],
+    quote:
+      'Whenever I\'ve posed an idea at the conceptual stage, he asks great questions to clarify the problem, proposes viable solutions, explains the work implications clearly, and then builds.',
+    by: recommender('Deeksha Gaur'),
+  },
+  {
+    title: 'LEAD ROLES',
+    subject: '[role]',
+    cta: 'email about a role',
+    intro:
+      "I've led engineering teams since 2015, with 15+ years across Ruby, Python, TypeScript and Go. Available for distributed teams.",
+    items: [
+      'Tech lead at TodayTix (2021-2024)',
+      'Lead engineer at Show-Score (2015-2020), its largest contributor',
+      'Own architecture, delivery and operations',
+      'Hire and mentor distributed teams',
+    ],
+    quote:
+      'Leonid is a world-class software developer who I would happily hire again if the opportunity arose.',
+    by: recommender('Tom Melcher'),
+  },
+];
+---
+
+<Base title="Work with me" description={headline}>
+  <section class="flex flex-col gap-5 px-4 pt-10 pb-8 md:px-20 md:pt-18 md:pb-10">
+    <Banner fonts={banners.work} />
+    <div class="flex flex-col text-prose leading-card md:gap-1.5 md:text-2xl md:leading-hero">
+      <p class="text-dim">$ cat ~/work.md</p>
+      <h1>{headline}</h1>
+    </div>
+    <p class="text-dim text-sm">available now · {cv.location} · remote, any timezone</p>
+  </section>
+
+  {
+    tracks.map((t) => (
+      <>
+        <SectionRule title={t.title} />
+        <div class="flex flex-col gap-6 px-4 pt-5 pb-10 md:grid md:grid-cols-2 md:gap-10 md:px-20 md:pt-7 md:pb-14">
+          <div class="flex flex-col gap-5">
+            <p class="text-md leading-summary">{t.intro}</p>
+            <ul class="flex flex-col gap-2.5">
+              {t.items.map((item) => (
+                <li class="flex gap-2.5 text-sm">
+                  <span>+</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={`mailto:${site.email}?subject=${encodeURIComponent(t.subject)}`}
+              class="inline-flex h-9 items-center self-start border border-accent px-4 font-medium text-accent text-sm tracking-btn hover:bg-accent hover:text-bg hover:no-underline md:h-11.5 md:px-5 md:text-base"
+            >
+              [ {t.cta} ]
+            </a>
+          </div>
+          <figure class="flex flex-col gap-3 self-start border border-line bg-surface px-4 py-4 md:px-6 md:py-5">
+            <blockquote class="text-md leading-summary">{t.quote}</blockquote>
+            <figcaption class="flex flex-col gap-1 text-sm">
+              <span class="font-semibold">{t.by.name}</span>
+              <span class="text-dim">{t.by.title}</span>
+              <a href="/cv/" class="mt-2">all recommendations <span class="relative -top-px">→</span></a>
+            </figcaption>
+          </figure>
+        </div>
+      </>
+    ))
+  }
+</Base>

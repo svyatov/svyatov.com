@@ -68,6 +68,11 @@ const imageUrl = new URL(image, Astro.site);
     window.gtag = function () { dataLayer.push(arguments); };
     gtag('js', new Date());
     gtag('config', id);
+    // PDF downloads are collected automatically; email clicks are not.
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest?.('a[href^="mailto:"]');
+      if (a) gtag('event', 'generate_lead', { method: 'email', link_url: a.href });
+    });
     document.head.append(Object.assign(document.createElement('script'), { async: true, src: `https://www.googletagmanager.com/gtag/js?id=${id}` }));
   }
 </script>
