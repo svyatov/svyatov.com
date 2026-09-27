@@ -3,6 +3,7 @@ title: "Three agentic skills I wish I'd started using sooner"
 description: "improve-tests, debrief-skill, and retro: three agent skills that handle the maintenance work that always loses to something urgent, from slow test suites to friction in skills and tooling."
 date: "2026-09-26"
 tags: ["ai", "productivity", "testing"]
+devto: "https://dev.to/svyatov/three-agentic-skills-i-wish-id-started-using-sooner-33bj"
 ---
 
 Your test suite takes five minutes to run. You know at least half of those tests are not pulling their weight. And yet, you never fix it, because fixing it isn't the work – it's the meta-work, the thing you do after the real thing.
