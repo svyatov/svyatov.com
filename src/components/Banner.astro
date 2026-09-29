@@ -19,9 +19,14 @@ const share = (columns / widest(Object.values(banners).flat())) * 100;
 </button>
 
 <script>
+  import { ruins } from '../lib/ruins';
+
   // Click the banner: it morphs into the next font in the list, cells scrambling in a random sweep direction.
+  // The last font blows up into ruins, and the next click rebuilds the first font from the rubble.
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const NOISE = [...'░▒▓█▄▀╬╠╣═║/|_-=+*#%'];
+  const FIRE = [...'█▓@#▒%&*░+:·. ']; // hottest first: the blast front, then the cooling smoke behind it
+  const DEBRIS = [...'▓▒░#*%&.,:;\'`'];
   const SWEEPS = [
     (_r: number, c: number) => c,
     (_r: number, c: number) => 1 - c,
@@ -29,8 +34,56 @@ const share = (columns / widest(Object.values(banners).flat())) * 100;
     (_r: number, c: number) => Math.abs(c - 0.5) * 2,
     () => Math.random(),
   ];
-  const DURATION = 700;
   const rand = <T,>(list: readonly T[]) => list[Math.floor(Math.random() * list.length)];
+
+  // The whole banner jolts and punches out, then settles with a shrinking wobble.
+  const shake = (graphic: SVGElement) =>
+    graphic.animate(
+      [
+        [0, 0, 1],
+        [0.75, -0.5, 1.12],
+        [-0.75, 0.5, 1.08],
+        [0.5, 0.25, 1.04],
+        [-0.5, -0.375, 1.02],
+        [0.25, 0.125, 1],
+        [0, 0, 1],
+      ].map(([x, y, s]) => ({ transform: `translate(${x}rem, ${y}rem) scale(${s})` })),
+      { duration: 700, easing: 'ease-out' },
+    );
+
+  // A white-hot flash with a glow that fades back to the accent colour.
+  const flash = (graphic: SVGElement) =>
+    graphic.animate(
+      [
+        { filter: 'brightness(3) drop-shadow(0 0 1.5rem var(--color-accent))' },
+        { filter: 'brightness(1.5) drop-shadow(0 0 0.75rem var(--color-accent))', offset: 0.3 },
+        { filter: 'none' },
+      ],
+      { duration: 1400, easing: 'ease-out' },
+    );
+
+  // Chunks fly out of the banner, arc up and fall past it under gravity.
+  const debris = (graphic: SVGElement) => {
+    const box = graphic.getBoundingClientRect();
+    for (let k = 0; k < 40; k++) {
+      const chunk = document.body.appendChild(document.createElement('span'));
+      chunk.className = 'pointer-events-none fixed z-30 select-none text-accent text-lg';
+      chunk.textContent = rand(DEBRIS);
+      chunk.style.left = `${box.left + box.width * (0.2 + Math.random() * 0.6)}px`;
+      chunk.style.top = `${box.top + box.height * (0.3 + Math.random() * 0.4)}px`;
+      const x = (Math.random() - 0.5) * 24;
+      const up = 3 + Math.random() * 6;
+      const spin = (Math.random() - 0.5) * 720;
+      chunk.animate(
+        [
+          { translate: '-50% -50%', rotate: '0deg', opacity: 1 },
+          { translate: `calc(-50% + ${(x * 0.5).toFixed(2)}rem) calc(-50% - ${up.toFixed(2)}rem)`, opacity: 1, offset: 0.35 },
+          { translate: `calc(-50% + ${x.toFixed(2)}rem) calc(-50% + ${(up * 1.5).toFixed(2)}rem)`, rotate: `${spin}deg`, opacity: 0 },
+        ],
+        { duration: 1000 + Math.random() * 800, easing: 'cubic-bezier(0.2, 0.6, 0.4, 1)' },
+      ).onfinish = () => chunk.remove();
+    }
+  };
 
   for (const graphic of document.querySelectorAll<SVGElement>('svg[data-fonts]')) {
     const fonts: string[] = JSON.parse(graphic.dataset.fonts ?? '[]');
@@ -38,21 +91,19 @@ const share = (columns / widest(Object.values(banners).flat())) * 100;
     const draw = (art: string) => art.split('\n').forEach((row, index) => { if (lines[index]) lines[index].textContent = row; });
     let busy = false;
     let index = 0;
-    graphic.closest('button')?.addEventListener('click', () => {
-      if (busy) return;
-      const from = fonts[index];
-      index = (index + 1) % fonts.length;
-      const to = fonts[index];
-      if (to === from) return;
+    let shown = fonts[0];
+    let ruined = false;
+    // A blast burns through empty cells too, with a wider trail that cools from FIRE's hot end to its cold end.
+    const morph = (from: string, to: string, sweep: (r: number, c: number) => number, duration: number, blast = false) => {
       if (reduced) {
         draw(to);
         return;
       }
+      const trail = blast ? 0.45 : 0.25;
       const a = from.split('\n');
       const b = to.split('\n');
       const rows = Math.max(a.length, b.length);
       const cols = Math.max(...a.map((l) => l.length), ...b.map((l) => l.length));
-      const sweep = rand(SWEEPS);
       const settle = Array.from({ length: rows }, (_, r) =>
         Array.from({ length: cols }, (_, c) => sweep(r / (rows - 1), c / (cols - 1)) * 0.7 + Math.random() * 0.3),
       );
@@ -60,7 +111,7 @@ const share = (columns / widest(Object.values(banners).flat())) * 100;
       busy = true;
       const start = performance.now();
       const frame = (now: number) => {
-        const p = (now - start) / DURATION;
+        const p = (now - start) / duration;
         if (p >= 1) {
           draw(to);
           busy = false;
@@ -73,8 +124,10 @@ const share = (columns / widest(Object.values(banners).flat())) * 100;
                 const old = cell(a[r] ?? '', c);
                 const next = cell(b[r] ?? '', c);
                 if (p >= t) return next;
-                if (p < t - 0.25 || (old === ' ' && next === ' ')) return old;
-                return rand(NOISE);
+                if (p < t - trail) return old;
+                if (!blast) return old === ' ' && next === ' ' ? old : rand(NOISE);
+                const cooled = 1 - (t - p) / trail + Math.random() * 0.2;
+                return FIRE[Math.min(FIRE.length - 1, Math.floor(cooled * FIRE.length))];
               })
               .join(''),
           )
@@ -82,6 +135,28 @@ const share = (columns / widest(Object.values(banners).flat())) * 100;
         requestAnimationFrame(frame);
       };
       requestAnimationFrame(frame);
+    };
+    graphic.closest('button')?.addEventListener('click', () => {
+      if (busy) return;
+      const from = shown;
+      if (ruined) {
+        ruined = false;
+        index = 0;
+        shown = fonts[0];
+        morph(from, shown, (r) => 1 - r, 900);
+      } else if (index === fonts.length - 1) {
+        ruined = true;
+        shown = ruins(from);
+        if (!reduced) {
+          shake(graphic);
+          flash(graphic);
+          debris(graphic);
+        }
+        morph(from, shown, (r, c) => Math.hypot(r - 0.5, c - 0.5) / Math.SQRT1_2, 1600, true);
+      } else {
+        shown = fonts[++index];
+        morph(from, shown, rand(SWEEPS), 700);
+      }
     });
   }
 </script>
