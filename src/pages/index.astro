@@ -9,9 +9,9 @@ import Base from '../layouts/Base.astro';
 import { byDateDesc } from '../lib/posts';
 import { site } from '../site';
 
-const posts = (await getCollection('blog')).sort(byDateDesc).slice(0, 3);
+const posts = (await getCollection('blog')).sort(byDateDesc).slice(0, 5);
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-const selected = projects.slice(0, 3);
+const selected = projects.slice(0, 6);
 const socials = [...site.socials, { label: 'email', href: `mailto:${site.email}` }];
 
 const jsonLd = {

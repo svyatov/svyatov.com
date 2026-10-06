@@ -3,25 +3,31 @@ export const projects: { name: string; description?: string; language?: string; 
   {
     name: 'sec_id',
     description:
-      'Ruby toolkit for securities identifiers: ISIN, CUSIP, SEDOL, FIGI, LEI and 10 more schemes.',
+      'Ruby toolkit for securities identifiers: ISIN, CUSIP, SEDOL, FIGI, LEI and 11 more schemes.',
   },
+  { name: 'handrail' },
   {
     name: 'hacker_news_sorted',
     description:
       'Chrome extension that sorts Hacker News by points, time, comments, velocity or heat.',
     language: 'TypeScript',
   },
-  { name: 'oss-kit', language: 'Skills', url: 'https://oss-kit.svyatov.com/' },
+  { name: 'database-transactions', url: 'https://database-transactions.svyatov.com/' },
   {
     name: 'clsx-rails',
     description:
       'The fastest conditional CSS class builder for Rails. 2-4x faster than class_names.',
   },
+  {
+    name: 'supermatt',
+    description:
+      'AI coding-agent workflow covering planning through shipping, with built-in testing and code review verified by a second model when available.',
+    language: 'Skills',
+  },
+  { name: 'oss-kit', language: 'Skills', url: 'https://oss-kit.svyatov.com/' },
   { name: 'oz', description: 'Config-driven CLI wizard framework.' },
   { name: 'briefly' },
-  { name: 'handrail' },
   { name: 'equip' },
-  { name: 'supermatt', language: 'Skills' },
   {
     name: 'agent-toolkit',
     description: 'Reusable skills and plugins for Claude Code, Cursor, Codex and Gemini CLI.',
@@ -41,5 +47,4 @@ export const projects: { name: string; description?: string; language?: string; 
   { name: 'http_wrapper' },
   { name: 'smsru-ruby' },
   { name: 'candor' },
-  { name: 'database-transactions', url: 'https://database-transactions.svyatov.com/' },
 ];
