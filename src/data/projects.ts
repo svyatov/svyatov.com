@@ -24,6 +24,7 @@ export const projects: { name: string; description?: string; language?: string; 
       'AI coding-agent workflow covering planning through shipping, with built-in testing and code review verified by a second model when available.',
     language: 'Skills',
   },
+  { name: 'crap4ruby' },
   { name: 'oss-kit', language: 'Skills', url: 'https://oss-kit.svyatov.com/' },
   { name: 'oz', description: 'Config-driven CLI wizard framework.' },
   { name: 'briefly' },
