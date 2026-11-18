@@ -25,6 +25,7 @@ export const projects: { name: string; description?: string; language?: string; 
     language: 'Skills',
   },
   { name: 'crap4ruby' },
+  { name: 'xitdb-ruby' },
   { name: 'jmespath-ruby' },
   { name: 'hawk.ruby' },
   { name: 'unisender-ruby' },
