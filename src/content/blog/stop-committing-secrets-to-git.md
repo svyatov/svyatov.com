@@ -36,7 +36,7 @@ It scans the staged diff for potential secrets and exits nonzero on a detection.
 
 Coding agents can call `git commit --no-verify` or `git commit -n`, which [bypasses all pre-commit hooks](https://git-scm.com/docs/githooks#_pre_commit) by design. An agent that generates code and commits autonomously can skip Betterleaks without you noticing.
 
-[Handrail](https://github.com/svyatov/handrail) addresses this when configured as a Codex PreToolUse hook. My global rule, `no-skip-hooks`, blocks shell calls to `git commit --no-verify` and `git commit -n` that it sees going through that channel. I replayed `git commit --no-verify -m "test"` with that configuration and got the block. Handrail covers the Codex shell calls it intercepts (human commands and commits outside that channel are a different matter).
+[Handrail](https://github.com/svyatov/handrail) addresses this when configured to run before an agent executes a tool call. My global rule, `no-skip-hooks`, blocks shell calls to `git commit --no-verify` and `git commit -n` that it sees going through that channel. I replayed `git commit --no-verify -m "test"` with that configuration and got the block. Handrail covers the agent shell calls it intercepts (human commands and commits outside that channel are a different matter).
 
 ## The surrounding layers
 
